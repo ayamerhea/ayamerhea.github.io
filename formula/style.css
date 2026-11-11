@@ -530,3 +530,6 @@ html.pop-open{overflow:hidden}
 
 /* Medium-заголовки: letter-spacing -1% */
 .result h3,.pop__title,.review__name{letter-spacing:-.01em}
+.doc{cursor:pointer}
+.track.is-dragging .doc{cursor:grabbing}
+.doc:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
