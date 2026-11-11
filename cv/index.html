@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&amp;display=swap">
+<title>Регина Ахметова — CV</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Регина Ахметова — веб-дизайнер. Сайты полного цикла: от анализа задачи и структуры до дизайна и реализации на Tilda.">
+<style>
+/* layout: sticky profile column on the left, stacked content panels on the right; one column on phones */
+:root{
+  --bg:#141310;        /* page ground */
+  --panel:#1a1a18;     /* section panels */
+  --line:#3d3d3d;      /* dividers, frames */
+  --paper:#f5f5f5;     /* light bars + highlighted titles */
+  --ink:#1d1d1d;       /* text on paper */
+  --fg:#f5f5f5;        /* text on dark */
+  --muted:#8d8c88;     /* dates, notes */
+  --soft:#cfcfcc;      /* body copy on dark */
+  --accent:#fb5e2b;    /* link tags */
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --head:"Anonymous Pro","Courier New",ui-monospace,monospace;
+  --gap:16px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:14px;line-height:1.35;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased}
+button{font:inherit;letter-spacing:inherit;color:inherit}
+a{color:inherit}
+.bar,.ttl,.sub,.portrait .name,.bar *,.ttl *,.sub *{font-family:var(--head);font-weight:400;font-style:normal;letter-spacing:-1px;font-synthesis:none;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.wrap{display:grid;grid-template-columns:304px minmax(0,1fr);gap:var(--gap);align-items:start;
+  padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1600px;margin:0 auto}
+
+/* ---------- sidebar ---------- */
+.side{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));height:calc(100vh - 32px);height:calc(100dvh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow-y:auto;background:var(--panel);padding:16px;display:flex;flex-direction:column;gap:16px;text-align:center}
+.nav{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--paper);padding:0;gap:0}
+.nav button{background:none;border:0;cursor:pointer;font-size:13px;padding:13px 4px;transition:background .2s,color .2s}
+.nav button:hover,.nav button[aria-selected="true"]{background:var(--accent);color:var(--paper)}
+.view{display:flex;flex-direction:column;gap:var(--gap)}
+.view[hidden]{display:none!important}
+.portrait{display:flex;flex-direction:column;flex:1 1 auto;min-height:220px}
+.portrait .ph{aspect-ratio:272/367;max-width:100%}
+.portrait .name{background:var(--paper);color:var(--ink);font-size:19px;padding:2px}
+.role{font-size:14px}
+.dots{display:flex;justify-content:center;gap:3px;margin:2px 0}
+.dots i{width:3px;height:3px;border-radius:50%;background:var(--fg)}
+.about-short{font-size:14px;line-height:1.25;color:var(--fg);text-wrap:balance}
+.side .info{display:flex;flex-direction:column;gap:6px}
+.btn{display:block;border:1px solid var(--paper);padding:10px;text-decoration:none;font-size:13px;transition:background .2s,color .2s}
+.btn:hover{background:var(--paper);color:var(--ink)}
+.btn svg{width:15px;height:15px;vertical-align:-2px;margin-left:2px}
+.socials{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+.lang{display:flex;justify-content:flex-end;gap:10px;font-size:12px;margin:-4px 0 -6px}
+.lang a{text-decoration:none;color:var(--muted);transition:color .2s}
+.lang a:hover{color:var(--accent)}
+.lang a[aria-current]{color:var(--fg)}
+
+/* ---------- main ---------- */
+main{display:flex;flex-direction:column;gap:var(--gap);min-width:0}
+.bar{background:var(--paper);color:var(--ink);text-align:center;font-size:clamp(26px,2.6vw,34px);font-weight:400;margin:0;padding:1px 2px 2px;scroll-margin-top:16px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}
+
+.case{background:var(--panel);padding:16px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.media{position:relative}
+.media .year{position:absolute;top:16px;left:16px;background:var(--panel);color:var(--fg);font-size:13px;padding:2px 6px;z-index:1}
+.ph{background:repeating-linear-gradient(135deg,#252522 0 10px,#22221f 10px 20px);border:1px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:12px;width:100%}
+.media .ph{aspect-ratio:16/10.2}
+.case.wide .media .ph{aspect-ratio:16/6.2}
+.media img{display:block;width:100%;max-width:100%;aspect-ratio:16/10.2;object-fit:cover}
+.case.wide .media img{aspect-ratio:16/6.2}
+.portrait img{display:block;width:100%;flex:1 1 0;min-height:0;object-fit:cover;object-position:50% 30%}
+.case .media{overflow:hidden}
+.case .media img{transition:transform .6s ease}
+.case:hover .media img{transform:scale(1.025)}
+
+.ttl{font-size:19px;font-weight:400;margin:4px 0 0;line-height:1.2;display:flex;flex-direction:column;align-items:flex-start}
+.ttl span{display:block;max-width:100%;background:var(--paper);color:var(--ink);padding:2px}
+.ttl .l1{margin-left:94px}
+.desc{color:var(--soft);font-size:13px;line-height:1.2;margin:0;max-width:72ch}
+.links{display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
+.tag{background:var(--accent);color:var(--paper);transition:background .2s,color .2s;text-decoration:none;font-size:13px;padding:1px 5px;display:inline-flex;align-items:center;gap:5px}
+.tag:hover{background:var(--paper);color:var(--accent)}
+.tag svg{width:14px;height:14px;margin:-2px -3px -2px -2px}
+.note{color:var(--muted);font-size:12px;margin:0}
+
+/* skills */
+.panel{background:var(--panel);padding:16px}
+.sub{display:inline-flex;align-items:center;gap:4px;margin:0 0 18px;font-size:19px;font-weight:400}
+.sub .ico{width:28px;height:28px;border-radius:50%;background:var(--paper);display:grid;place-items:center;flex:none}
+.sub .ico svg{width:17px;height:17px}
+.sub .t{background:var(--paper);color:var(--ink);padding:1px 4px}
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+.skill{border-bottom:1px solid var(--line);padding:14px 0 12px;min-width:0}
+.skill b{display:block;font-size:14px;margin-bottom:5px}
+.skill p{margin:0;font-size:12px;color:var(--soft)}
+.skill p strong{color:var(--fg)}
+
+/* background */
+.aboutp{color:var(--soft);font-size:13px;line-height:1.2;max-width:none;display:flex;flex-direction:column;gap:14px;margin-top:20px}
+.aboutp p{margin:0}
+.job{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;row-gap:24px;padding-block:16px}
+.job + .job{border-top:1px solid var(--line)}
+.job .when{color:var(--muted);font-size:12px;margin:0 0 auto}
+.job .head{display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:100%}
+.job .ttl .l2{margin-left:32px}
+.job ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:13px;color:var(--soft);align-self:end}
+.panel.jobs{padding-block:0}
+
+footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0 8px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .wrap{grid-template-columns:260px minmax(0,1fr)}
+}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  .side{position:static;height:auto;overflow:visible}
+  .portrait{flex:none;min-height:0}
+  .portrait img{flex:none;aspect-ratio:272/367}
+  .portrait{width:min(272px,100%);margin:0 auto}
+  .grid2,.skills,.job{grid-template-columns:minmax(0,1fr)}
+  .job{row-gap:16px}
+  .job .head{gap:16px}
+}
+@media (max-width:480px){
+  .ttl .l1{margin-left:28px}
+  .case.wide .media .ph,.case.wide .media img{aspect-ratio:16/10.2}
+}
+
+/* ---------- autoscale (как в Tilda): макет 1440px масштабируется под ширину экрана от 1200px ---------- */
+html.scaled .wrap{width:1440px;max-width:none;margin:0;zoom:var(--s,1)}
+html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / var(--s,1) - 32px)}
+
+/* ---------- motion ---------- */
+.arr{display:inline-flex;overflow:hidden;vertical-align:middle}
+.tag .arr{margin:-2px -3px -2px -2px}
+.btn .arr{margin-left:3px;vertical-align:-2px}
+.tag svg,.btn svg{margin:0!important;vertical-align:0!important}
+@keyframes fly{0%{transform:translate(0,0)}45%{transform:translate(110%,-110%)}46%{transform:translate(-110%,110%)}100%{transform:translate(0,0)}}
+.tag:hover svg,.btn:hover svg{animation:fly .45s cubic-bezier(.5,0,.3,1)}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+.dots i{animation:blink 1.4s ease-in-out infinite}
+.dots i:nth-child(2){animation-delay:.2s}
+.dots i:nth-child(3){animation-delay:.4s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sub .ico svg{animation:spin 9s linear infinite}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.view.enter > *{animation:rise .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 70ms)}
+.bar .cur{display:inline-block;width:2px;height:.85em;margin-left:3px;background:var(--ink);vertical-align:-.08em;animation:caret 1s steps(1) infinite;transition:opacity .4s}
+@keyframes caret{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .tag:hover svg,.btn:hover svg,.dots i,.sub .ico svg,.view.enter > *,.bar .cur{animation:none}
+  .case .media img{transition:none}.case:hover .media img{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <aside class="side" aria-label="Профиль">
+    <div class="lang"><a href="/cv/" hreflang="ru" aria-current="page">RU</a><a href="/en/cv/" hreflang="en">EN</a></div>
+    <nav class="nav" role="tablist" aria-label="Разделы">
+      <button type="button" role="tab" id="tab-portfolio" aria-controls="portfolio" aria-selected="true" data-view="portfolio">портфолио</button>
+      <button type="button" role="tab" id="tab-skills" aria-controls="skills" aria-selected="false" data-view="skills">навыки</button>
+      <button type="button" role="tab" id="tab-background" aria-controls="background" aria-selected="false" data-view="background">бэкграунд</button>
+    </nav>
+
+    <div class="portrait">
+      <img src="/assets/photo.webp" alt="Фото Регины Ахметовой" decoding="async">
+      <div class="name">Регина Ахметова</div>
+    </div>
+
+    <div class="info">
+      <div class="role">web-designer</div>
+      <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="about-short">разрабатываю сайты полного цикла: от&nbsp;анализа задачи и&nbsp;структуры до&nbsp;дизайна и&nbsp;реализации на&nbsp;Tilda</div>
+      <div>3 года опыта</div>
+      <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+
+    <a class="btn" href="https://t.me/ayamerhea" target="_blank" rel="noopener">написать в&nbsp;тг</a>
+    <div class="socials">
+      <a class="btn" href="https://www.instagram.com/ayame.rhea/" target="_blank" rel="noopener">IG</a>
+      <a class="btn" href="https://wa.me/79852353305" target="_blank" rel="noopener">WA</a>
+      <a class="btn" href="https://vk.ru/bitchislol" target="_blank" rel="noopener">VK</a>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ===== portfolio ===== -->
+    <section class="view" id="portfolio" role="tabpanel" aria-labelledby="tab-portfolio">
+    <h2 class="bar">портфолио</h2>
+
+    <div class="grid2">
+      <article class="case">
+        <div class="media"><span class="year">2026</span><img src="/assets/formula.webp" alt="Сайт клиники эстетической медицины" decoding="async" loading="lazy"></div>
+        <h3 class="ttl"><span class="l1">одностраничный сайт</span><span>для&nbsp;клиники косметологии</span></h3>
+        <p class="desc">/разработала визуальную концепцию и&nbsp;структуру сайта для&nbsp;клиники эстетической медицины. Продумала подачу услуг, навигацию и&nbsp;пользовательские сценарии, разработала дизайн всех основных блоков и&nbsp;адаптивные версии. Сейчас занимаюсь реализацией проекта на&nbsp;Tilda</p>
+        <div class="links">
+          <a class="tag" href="https://www.figma.com/design/osX2CBZWx4L5DESmTu9G91/%D0%9E%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%BD%D1%8B%D0%B9-%D1%81%D0%B0%D0%B9%D1%82-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B8-%D1%8D%D1%81%D1%82%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9-%D0%BC%D0%B5%D0%B4%D0%B8%D1%86%D0%B8%D0%BD%D1%8B?node-id=79-2&amp;t=ESyr6tWKbb6D9Zww-1" target="_blank" rel="noopener">figma файл<span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.44924 8.77248L11.7797 3.44198L7.21074 3.44198L7.17157 2.82843L12.8284 2.82843L12.8284 8.48528L12.2149 8.44612L12.2149 3.87712L6.88438 9.20762L6.44924 8.77248Z" fill="currentColor" stroke="currentColor"/></svg></span></a>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="media"><span class="year">2026</span><img src="/assets/ember.webp" alt="Лендинг Ember Agency" decoding="async" loading="lazy"></div>
+        <h3 class="ttl"><span class="l1">лендинг для&nbsp;продакшена</span><span>полного цикла Ember Agency</span></h3>
+        <p class="desc">/разработала нестандартный лендинг для&nbsp;продакшен-компании с&nbsp;акцентом на&nbsp;креативность и&nbsp;визуальную выразительность. Продумала оригинальную концепцию и&nbsp;нестандартную подачу контента, сохранив при&nbsp;этом понятную структуру и&nbsp;удобную навигацию. Выполнила дизайн и&nbsp;адаптивную версию сайта</p>
+        <div class="links">
+          <a class="tag" href="https://www.figma.com/design/7toRCrCIhIcyyW97m7sBDt/%E2%9C%AE-EMBER-AGENCY-%7C-LANDING-PAGE-%E2%9C%AE?node-id=0-1&amp;t=M3epCyhVQ19gGrP2-1" target="_blank" rel="noopener">figma файл<span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.44924 8.77248L11.7797 3.44198L7.21074 3.44198L7.17157 2.82843L12.8284 2.82843L12.8284 8.48528L12.2149 8.44612L12.2149 3.87712L6.88438 9.20762L6.44924 8.77248Z" fill="currentColor" stroke="currentColor"/></svg></span></a>
+        </div>
+      </article>
+    </div>
+
+    <article class="case wide">
+      <div class="media"><span class="year">2025</span><img src="/assets/symp.webp" alt="Сайт рестобара SYMP" decoding="async" loading="lazy"></div>
+      <h3 class="ttl"><span class="l1">многостраничный сайт</span><span>для&nbsp;нового рестобара SYMP</span></h3>
+      <p class="desc">/провела анализ бренда и&nbsp;конкурентов, сформировала визуальное направление и&nbsp;спроектировала структуру сайта. Отвечала за&nbsp;дизайн страниц, адаптивную версию и&nbsp;последующую реализацию проекта на&nbsp;Tilda (совместная вёрстка с&nbsp;другим дизайнером)</p>
+      <div class="links">
+        <a class="tag" href="https://symp-rzn.ru/" target="_blank" rel="noopener">сайт<span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.44924 8.77248L11.7797 3.44198L7.21074 3.44198L7.17157 2.82843L12.8284 2.82843L12.8284 8.48528L12.2149 8.44612L12.2149 3.87712L6.88438 9.20762L6.44924 8.77248Z" fill="currentColor" stroke="currentColor"/></svg></span></a>
+        <a class="tag" href="https://www.behance.net/gallery/227522595/SYMP-ajdentika-i-mnogostranichnyj-sajt-na-Tilda" target="_blank" rel="noopener">биханс<span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.44924 8.77248L11.7797 3.44198L7.21074 3.44198L7.17157 2.82843L12.8284 2.82843L12.8284 8.48528L12.2149 8.44612L12.2149 3.87712L6.88438 9.20762L6.44924 8.77248Z" fill="currentColor" stroke="currentColor"/></svg></span></a>
+      </div>
+      <p class="note">*сайт разработан в&nbsp;рамках работы в&nbsp;студии Yoyo Agency</p>
+    </article>
+
+    <div class="grid2">
+      <article class="case">
+        <div class="media"><span class="year">2025</span><img src="/assets/miraga.webp" alt="Сайт девелопера вилл Miraga" decoding="async" loading="lazy"></div>
+        <h3 class="ttl"><span class="l1">многостраничный сайт</span><span>для&nbsp;девелопера вилл Miraga</span></h3>
+        <p class="desc">/на&nbsp;основе материалов проекта и&nbsp;анализа конкурентов сформировала визуальное направление, спроектировала структуру и&nbsp;интерфейс страниц. Выполнила дизайн и&nbsp;адаптивную версию сайта, а&nbsp;затем реализовала проект на&nbsp;Tilda (совместная вёрстка с&nbsp;другим дизайнером)</p>
+        <div class="links">
+          <a class="tag" href="https://miraga.id/" target="_blank" rel="noopener">сайт<span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.44924 8.77248L11.7797 3.44198L7.21074 3.44198L7.17157 2.82843L12.8284 2.82843L12.8284 8.48528L12.2149 8.44612L12.2149 3.87712L6.88438 9.20762L6.44924 8.77248Z" fill="currentColor" stroke="currentColor"/></svg></span></a>
+          <a class="tag" href="https://www.behance.net/gallery/236769743/MIRAGA-brending-i-veb-sajt-developera-na-bali" target="_blank" rel="noopener">биханс<span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.44924 8.77248L11.7797 3.44198L7.21074 3.44198L7.17157 2.82843L12.8284 2.82843L12.8284 8.48528L12.2149 8.44612L12.2149 3.87712L6.88438 9.20762L6.44924 8.77248Z" fill="currentColor" stroke="currentColor"/></svg></span></a>
+        </div>
+        <p class="note">*сайт разработан в&nbsp;рамках работы в&nbsp;студии Yoyo Agency</p>
+      </article>
+
+      <article class="case">
+        <div class="media"><span class="year">2025</span><img src="/assets/spirocap.webp" alt="Лендинг SpiroCap" decoding="async" loading="lazy"></div>
+        <h3 class="ttl"><span class="l1">лендинг для&nbsp;стартапа</span><span>медицинского оборудования</span></h3>
+        <p class="desc">/разработала дизайн лендинга для&nbsp;медицинского стартапа SpiroCap, а&nbsp;также помогала с&nbsp;отрисовкой экранов мобильного приложения. Продумала визуальную подачу продукта и&nbsp;структуру сайта. Реализовывали лендинг на&nbsp;Tilda совместно с&nbsp;другим дизайнером.</p>
+        <div class="links">
+          <a class="tag" href="https://air-motion.ru/" target="_blank" rel="noopener">сайт<span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.44924 8.77248L11.7797 3.44198L7.21074 3.44198L7.17157 2.82843L12.8284 2.82843L12.8284 8.48528L12.2149 8.44612L12.2149 3.87712L6.88438 9.20762L6.44924 8.77248Z" fill="currentColor" stroke="currentColor"/></svg></span></a>
+          <a class="tag" href="https://www.behance.net/gallery/233777805/AIR-MOTION-Identity-App-Webdite" target="_blank" rel="noopener">биханс<span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.44924 8.77248L11.7797 3.44198L7.21074 3.44198L7.17157 2.82843L12.8284 2.82843L12.8284 8.48528L12.2149 8.44612L12.2149 3.87712L6.88438 9.20762L6.44924 8.77248Z" fill="currentColor" stroke="currentColor"/></svg></span></a>
+        </div>
+        <p class="note">*сайт разработан в&nbsp;рамках работы в&nbsp;студии Yoyo Agency</p>
+      </article>
+    </div>
+
+    </section>
+
+    <section class="view" id="skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
+    <h2 class="bar">навыки</h2>
+
+    <section class="panel">
+      <h3 class="sub"><span class="ico"><svg viewBox="0 0 18 16" fill="none" aria-hidden="true">
+<path d="M9 0.5C11.4321 0.5 13.6101 0.939555 15.1611 1.62891C15.9371 1.97383 16.5344 2.37168 16.9307 2.78809C17.3244 3.20189 17.5 3.61049 17.5 4C17.5 4.38951 17.3244 4.79811 16.9307 5.21191C16.5344 5.62832 15.9371 6.02617 15.1611 6.37109C13.6101 7.06044 11.4321 7.5 9 7.5C6.56793 7.5 4.38991 7.06044 2.83887 6.37109C2.06289 6.02617 1.46562 5.62832 1.06934 5.21191C0.675617 4.79811 0.5 4.38951 0.5 4C0.5 3.61049 0.675617 3.20189 1.06934 2.78809C1.46562 2.37168 2.06289 1.97383 2.83887 1.62891C4.38991 0.939555 6.56793 0.5 9 0.5Z" stroke="#A7A7A7"/>
+<path d="M9 4.5C11.4321 4.5 13.6101 4.93956 15.1611 5.62891C15.9371 5.97383 16.5344 6.37168 16.9307 6.78809C17.3244 7.20189 17.5 7.61049 17.5 8C17.5 8.38951 17.3244 8.79811 16.9307 9.21191C16.5344 9.62832 15.9371 10.0262 15.1611 10.3711C13.6101 11.0604 11.4321 11.5 9 11.5C6.56793 11.5 4.38991 11.0604 2.83887 10.3711C2.06289 10.0262 1.46562 9.62832 1.06934 9.21191C0.675617 8.79811 0.5 8.38951 0.5 8C0.5 7.61049 0.675617 7.20189 1.06934 6.78809C1.46562 6.37168 2.06289 5.97383 2.83887 5.62891C4.38991 4.93956 6.56793 4.5 9 4.5Z" stroke="#3D3D3D"/>
+<path d="M9 8.5C11.4321 8.5 13.6101 8.93956 15.1611 9.62891C15.9371 9.97383 16.5344 10.3717 16.9307 10.7881C17.3244 11.2019 17.5 11.6105 17.5 12C17.5 12.3895 17.3244 12.7981 16.9307 13.2119C16.5344 13.6283 15.9371 14.0262 15.1611 14.3711C13.6101 15.0604 11.4321 15.5 9 15.5C6.56793 15.5 4.38991 15.0604 2.83887 14.3711C2.06289 14.0262 1.46562 13.6283 1.06934 13.2119C0.675617 12.7981 0.5 12.3895 0.5 12C0.5 11.6105 0.675617 11.2019 1.06934 10.7881C1.46562 10.3717 2.06289 9.97383 2.83887 9.62891C4.38991 8.93956 6.56793 8.5 9 8.5Z" stroke="#1D1D1D"/>
+</svg></span><span class="t">hard skills</span></h3>
+      <div class="skills">
+        <div class="skill"><b>/web-design:</b><p>многостраничные сайты, лендинги, интернет-магазины, адаптивный дизайн</p></div>
+        <div class="skill"><b>/UX-design:</b><p>прототипирование, структура, сценарии, анализ ЦА&nbsp;и&nbsp;конкурентов</p></div>
+        <div class="skill"><b>/tilda:</b><p>zero-block, HTML block, базовая и&nbsp;SBS-анимация, адаптивная вёрстка, кастомизация блоков</p></div>
+        <div class="skill"><b>/UI-design:</b><p>работа с&nbsp;сеткой и&nbsp;композицией, цветом и&nbsp;типографикой, <strong>создание UI-систем и&nbsp;компонентов</strong></p></div>
+        <div class="skill"><b>/дополнительные форматы:</b><p>баннеры, презентации, материалы для&nbsp;соцсетей</p></div>
+        <div class="skill"><b>/работа с&nbsp;текстом:</b><p>редактура, визуальное оформление</p></div>
+        <div class="skill"><b>/упаковка и&nbsp;оформление кейсов:</b><p>behance/dprofile/dribble, презентационные материалы</p></div>
+        <div class="skill"><b>/программы:</b><p>figma, photoshop, нейросети (GPT, claude, midjorney и&nbsp;т.п)</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h3 class="sub"><span class="ico"><svg viewBox="0 0 16 18" fill="none" aria-hidden="true">
+<path d="M15.5 9C15.5 11.4321 15.0604 13.6101 14.3711 15.1611C14.0262 15.9371 13.6283 16.5344 13.2119 16.9307C12.7981 17.3244 12.3895 17.5 12 17.5C11.6105 17.5 11.2019 17.3244 10.7881 16.9307C10.3717 16.5344 9.97383 15.9371 9.62891 15.1611C8.93956 13.6101 8.5 11.4321 8.5 9C8.5 6.56793 8.93956 4.38991 9.62891 2.83887C9.97383 2.06289 10.3717 1.46562 10.7881 1.06934C11.2019 0.675617 11.6105 0.500001 12 0.500001C12.3895 0.500001 12.7981 0.675617 13.2119 1.06934C13.6283 1.46562 14.0262 2.06289 14.3711 2.83887C15.0604 4.38991 15.5 6.56793 15.5 9Z" stroke="#A7A7A7"/>
+<path d="M11.5 9C11.5 11.4321 11.0604 13.6101 10.3711 15.1611C10.0262 15.9371 9.62832 16.5344 9.21191 16.9307C8.79811 17.3244 8.38951 17.5 8 17.5C7.61049 17.5 7.20189 17.3244 6.78809 16.9307C6.37168 16.5344 5.97383 15.9371 5.62891 15.1611C4.93956 13.6101 4.5 11.4321 4.5 9C4.5 6.56793 4.93956 4.38991 5.62891 2.83887C5.97383 2.06289 6.37168 1.46562 6.78809 1.06934C7.20189 0.675617 7.61049 0.500001 8 0.500001C8.38951 0.500001 8.79811 0.675617 9.21191 1.06934C9.62832 1.46562 10.0262 2.06289 10.3711 2.83887C11.0604 4.38991 11.5 6.56793 11.5 9Z" stroke="#3D3D3D"/>
+<path d="M7.5 9C7.5 11.4321 7.06044 13.6101 6.37109 15.1611C6.02618 15.9371 5.62832 16.5344 5.21191 16.9307C4.79811 17.3244 4.38951 17.5 4 17.5C3.61049 17.5 3.20189 17.3244 2.78809 16.9307C2.37168 16.5344 1.97383 15.9371 1.62891 15.1611C0.939556 13.6101 0.5 11.4321 0.5 9C0.5 6.56793 0.939556 4.38991 1.62891 2.83887C1.97383 2.06289 2.37168 1.46562 2.78809 1.06934C3.20189 0.675617 3.61049 0.500001 4 0.500001C4.38951 0.500001 4.79811 0.675617 5.21191 1.06934C5.62832 1.46562 6.02618 2.06289 6.37109 2.83887C7.06045 4.38991 7.5 6.56793 7.5 9Z" stroke="#1D1D1D"/>
+</svg></span><span class="t">professional skills</span></h3>
+      <div class="skills">
+        <div class="skill"><b>/внимательность:</b><p>внимание к&nbsp;деталям и&nbsp;аккуратность в&nbsp;макетах</p></div>
+        <div class="skill"><b>/гибкость:</b><p>быстрое включение в&nbsp;новые задачи и&nbsp;готовность учиться</p></div>
+        <div class="skill"><b>/работа в&nbsp;условиях ограничений:</b><p>поиск решений в&nbsp;сжатые сроки и&nbsp;при&nbsp;изменении требований</p></div>
+        <div class="skill"><b>/командная работа:</b><p>взаимодействие с&nbsp;дизайнерами, разработчиками и&nbsp;клиентами</p></div>
+        <div class="skill"><b>/самоорганизация:</b><p>самостоятельная работа и&nbsp;соблюдение дедлайнов</p></div>
+        <div class="skill"><b>/ответственность:</b><p>доведение задач до&nbsp;результата</p></div>
+        <div class="skill"><b>/работа с&nbsp;обратной связью:</b><p>спокойно воспринимаю правки, умею обсуждать и&nbsp;аргументировать решения</p></div>
+        <div class="skill"><b>/креативность:</b><p>визуальная насмотренность, вкус и&nbsp;поиск нестандартных решений</p></div>
+      </div>
+    </section>
+
+    </section>
+
+    <section class="view" id="background" role="tabpanel" aria-labelledby="tab-background" hidden>
+    <h2 class="bar">бэкграунд</h2>
+
+    <section class="panel">
+      <h3 class="sub"><span class="ico"><svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+<path d="M10.5 9C10.5 11.46 10.2777 13.6723 9.92578 15.2559C9.74895 16.0515 9.54545 16.6618 9.33594 17.0605C9.23099 17.2602 9.13689 17.3825 9.06445 17.4492C9.0333 17.4779 9.01164 17.4903 9 17.4961C8.98836 17.4903 8.9667 17.4779 8.93555 17.4492C8.86311 17.3825 8.76901 17.2602 8.66406 17.0605C8.45454 16.6618 8.25105 16.0515 8.07422 15.2559C7.72231 13.6723 7.5 11.46 7.5 9C7.5 6.53998 7.72231 4.32771 8.07422 2.74414C8.25105 1.9485 8.45455 1.33824 8.66406 0.939453C8.76901 0.739756 8.86311 0.617517 8.93555 0.550781C8.96705 0.521768 8.98845 0.508618 9 0.50293C9.01155 0.508618 9.03295 0.521768 9.06445 0.550781C9.13689 0.617517 9.23099 0.739756 9.33594 0.939453C9.54545 1.33824 9.74895 1.9485 9.92578 2.74414C10.2777 4.32771 10.5 6.53998 10.5 9Z" stroke="#A7A7A7"/>
+<path d="M9 7.5C11.46 7.5 13.6723 7.72231 15.2559 8.07422C16.0515 8.25105 16.6618 8.45455 17.0605 8.66406C17.2602 8.76901 17.3825 8.86311 17.4492 8.93555C17.4779 8.9667 17.4903 8.98836 17.4961 9C17.4903 9.01164 17.4779 9.0333 17.4492 9.06445C17.3825 9.13689 17.2602 9.23099 17.0605 9.33594C16.6618 9.54545 16.0515 9.74895 15.2559 9.92578C13.6723 10.2777 11.46 10.5 9 10.5C6.53998 10.5 4.32771 10.2777 2.74414 9.92578C1.9485 9.74895 1.33824 9.54545 0.939453 9.33594C0.739756 9.23099 0.617517 9.13689 0.550781 9.06445C0.521768 9.03295 0.508618 9.01155 0.50293 9C0.508618 8.98845 0.521768 8.96705 0.550781 8.93555C0.617517 8.86311 0.739756 8.76901 0.939453 8.66406C1.33824 8.45455 1.9485 8.25105 2.74414 8.07422C4.32771 7.72231 6.53998 7.5 9 7.5Z" stroke="#3D3D3D"/>
+</svg></span><span class="t">обо&nbsp;мне</span></h3>
+      <div class="aboutp">
+        <p>люблю минимализм, креативный подход и&nbsp;понятные визуальные решения.<br>Работаю с&nbsp;веб-дизайном: от&nbsp;структуры и&nbsp;прототипа до&nbsp;финального макета и&nbsp;сборки сайта.</p>
+        <p>в&nbsp;работе важны внимание к&nbsp;деталям, логика интерфейса и&nbsp;визуальная целостность проекта.<br>умею работать самостоятельно и&nbsp;взаимодействовать с&nbsp;клиентами и&nbsp;командой.</p>
+      </div>
+    </section>
+
+    <section class="panel jobs">
+      <div class="job">
+        <div class="head">
+          <p class="when">март 2024&nbsp;— по&nbsp;наст. время</p>
+          <h3 class="ttl"><span>фриланс</span><span class="l2">проекты:</span></h3>
+        </div>
+        <ul>
+          <li>/проектирование лендингов и&nbsp;многостраничных сайтов;</li>
+          <li>/разработка структуры, прототипов и&nbsp;визуальной концепции;</li>
+          <li>/дизайн desktop и&nbsp;mobile в&nbsp;Figma;</li>
+          <li>/подготовка материалов к&nbsp;передаче разработчикам;</li>
+          <li>/коммуникация с&nbsp;клиентами и&nbsp;ведение проектов;</li>
+          <li>/среди проектов&nbsp;— МТС, Росатом и&nbsp;коммерческие проекты в&nbsp;различных сферах.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head">
+          <p class="when">июль 2024&nbsp;— февраль 2026</p>
+          <h3 class="ttl"><span>веб-дизайнер</span><span class="l2">в&nbsp;Yoyo Agency:</span></h3>
+        </div>
+        <ul>
+          <li>/создание лендингов, многостраничных сайтов и&nbsp;интернет-магазинов для&nbsp;клиентов из&nbsp;разных отраслей;</li>
+          <li>/разработка прототипов, визуальных концепций и&nbsp;адаптивных версий;</li>
+          <li>/подготовка макетов к&nbsp;передаче разработчикам;</li>
+          <li>/проведение аудитов сайтов и&nbsp;формирование рекомендаций по&nbsp;улучшению UX&nbsp;и&nbsp;визуальной части;</li>
+          <li>/презентация проектов и&nbsp;дизайн-решений клиентам;</li>
+          <li>/курирование работы младшего дизайнера и&nbsp;стажёров, помощь в&nbsp;развитии и&nbsp;проверке их&nbsp;работы;</li>
+          <li>/участие в&nbsp;задачах графического отдела: презентации, баннеры, визуальные материалы;</li>
+          <li>/оформление кейсов и&nbsp;других материалов агентства.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel jobs">
+      <div class="job">
+        <div class="head">
+          <p class="when">июль 2023&nbsp;— март 2024</p>
+          <h3 class="ttl"><span>онлайн</span><span class="l2">обучение:</span></h3>
+        </div>
+        <ul><li>/yudaev school: курс по&nbsp;UI/UX&nbsp;дизайну, работа с&nbsp;Figma, проектирование интерфейсов, основы UX&nbsp;и&nbsp;визуальной композиции.</li></ul>
+      </div>
+      <div class="job">
+        <div class="head">
+          <p class="when">июль 2023&nbsp;— март 2024</p>
+          <h3 class="ttl"><span>повышение</span><span class="l2">квалификации:</span></h3>
+        </div>
+        <ul><li>/томский техникум информационных технологий, направление «Графический дизайн»</li></ul>
+      </div>
+    </section>
+
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  function fit(){
+    var w=root.clientWidth, on=w>=1200;
+    root.classList.toggle("scaled",on);
+    root.style.setProperty("--s",on?(w/1440).toFixed(4):"1");
+  }
+  fit();window.addEventListener("resize",fit);
+})();
+(function(){
+  var views=["portfolio","skills","background"];
+  var tabs=document.querySelectorAll('.nav [data-view]');
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var timer=null;
+  function type(bar){
+    if(!bar)return;
+    var text=bar.dataset.text||(bar.dataset.text=bar.textContent.trim());
+    bar.setAttribute("aria-label",text);
+    clearInterval(timer);
+    if(reduce){bar.textContent=text;return;}
+    bar.innerHTML='<span class="tw" aria-hidden="true"></span><span class="cur" aria-hidden="true"></span>';
+    var tw=bar.firstChild,i=0;
+    timer=setInterval(function(){i++;tw.textContent=text.slice(0,i);if(i>=text.length)clearInterval(timer);},70);
+  }
+  function animate(el){
+    if(reduce)return;
+    Array.prototype.forEach.call(el.children,function(c,i){c.style.setProperty("--i",i);});
+    el.classList.remove("enter");void el.offsetWidth;el.classList.add("enter");
+  }
+  function show(name,scroll){
+    if(views.indexOf(name)<0) name="portfolio";
+    views.forEach(function(v){document.getElementById(v).hidden=(v!==name);});
+    var cur=document.getElementById(name);animate(cur);type(cur.querySelector(".bar"));
+    tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.view===name?"true":"false");});
+    if(scroll){var m=document.querySelector("main");var top=m.getBoundingClientRect().top+window.scrollY-16;if(window.scrollY>top)window.scrollTo(0,Math.max(0,top));}
+  }
+  tabs.forEach(function(b){b.addEventListener("click",function(){
+    var n=b.dataset.view; show(n,true);
+    if(location.hash!=="#"+n){try{history.replaceState(null,"","#"+n);}catch(e){location.hash=n;}}
+  });});
+  window.addEventListener("hashchange",function(){show(location.hash.slice(1),true);});
+  show(location.hash.slice(1),false);
+})();
+</script>
+</body>
+</html>
