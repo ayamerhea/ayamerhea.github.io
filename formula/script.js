@@ -221,13 +221,13 @@ document.querySelectorAll('.track').forEach(track => {
   const blob = document.querySelector('.manifest__blob');
   if (!blob || !matchMedia('(hover:hover) and (pointer:fine)').matches || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   const zone = blob.closest('.manifest');
-  const R = 340, MAX = 46;            // радиус влияния и максимальный сдвиг, px
+  const R = 380, MAX = 34;            // радиус влияния и максимальный сдвиг, px
   let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
   const tick = () => {
-    x += (tx - x) * 0.09; y += (ty - y) * 0.09;   // плавное догоняние
+    x += (tx - x) * 0.035; y += (ty - y) * 0.035;   // плавное, неспешное догоняние
     blob.style.setProperty('--mx', x.toFixed(2) + 'px');
     blob.style.setProperty('--my', y.toFixed(2) + 'px');
-    blob.style.setProperty('--mr', (x * 0.12).toFixed(2) + 'deg');
+    blob.style.setProperty('--mr', (x * 0.08).toFixed(2) + 'deg');
     raf = (Math.abs(tx - x) > 0.05 || Math.abs(ty - y) > 0.05) ? requestAnimationFrame(tick) : 0;
   };
   const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
