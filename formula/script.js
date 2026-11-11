@@ -34,7 +34,17 @@ document.querySelectorAll('[style*="background-image"]').forEach(el => {
 
 // Закреплённое меню: подложка появляется после начала прокрутки
 const topBar = document.querySelector('.hero__top');
-const onScroll = () => topBar.classList.toggle('is-scrolled', window.scrollY > 40);
+let lastY = window.scrollY;
+const onScroll = () => {
+  const y = window.scrollY;
+  topBar.classList.toggle('is-scrolled', y > 40);
+  // прячем при прокрутке вниз, показываем при прокрутке вверх
+  if (Math.abs(y - lastY) > 6) {
+    const menuOpen = document.querySelector('.nav.is-open');
+    topBar.classList.toggle('is-hidden', y > lastY && y > 300 && !menuOpen);
+    lastY = y;
+  }
+};
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
