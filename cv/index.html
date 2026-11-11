@@ -419,6 +419,17 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
   });});
   window.addEventListener("hashchange",function(){show(location.hash.slice(1),true);});
   show(location.hash.slice(1),false);
+  // language switch: keep the reader at the same place on the other-language page
+  document.querySelectorAll('.lang a:not([aria-current])').forEach(function(a){
+    a.addEventListener("click",function(){try{sessionStorage.setItem("cv-scroll",String(window.scrollY));}catch(e){}});
+  });
+  var saved=null;try{saved=sessionStorage.getItem("cv-scroll");sessionStorage.removeItem("cv-scroll");}catch(e){}
+  function settle(){
+    if(saved!==null) window.scrollTo(0,+saved);
+    else if(location.hash && window.innerWidth>860) window.scrollTo(0,0);
+  }
+  if("scrollRestoration" in history && saved!==null) history.scrollRestoration="manual";
+  settle();window.addEventListener("load",settle);
 })();
 </script>
 </body>
