@@ -23,7 +23,6 @@ em,i{font-family:var(--display);font-style:italic;font-weight:300}
 
 /* узор с лепестками */
 .pattern{background-image:url(img/pattern.svg);background-repeat:no-repeat;background-position:right center;background-size:1043px 690px}
-.manifest.pattern{background-position:center}
 
 /* ---------- типографика ---------- */
 .h1,.h2,.stat__title,.promo__title,.manifest__title{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:-.045em;line-height:1}
