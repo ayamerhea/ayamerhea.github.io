@@ -19,6 +19,7 @@
     root.className = 'pop pop--' + kind;
     body.innerHTML = html;
     body.scrollTop = 0;
+    if (window.enhanceBtns) enhanceBtns(body);
     requestAnimationFrame(() => root.classList.add('is-open'));
     document.documentElement.classList.add('pop-open');
     if (window.lenis) lenis.stop();
@@ -154,7 +155,7 @@
     if (!picked.length) { e.target.querySelector('.quiz__err').hidden = false; e.target.querySelector('.quiz__opts').classList.add('is-error'); return; }
     answers[step] = picked;
     if (step < Q.length - 1) { step++; renderQuiz(1); }
-    else { root.classList.add('pop--outcome'); body.innerHTML = outcomeHTML(); body.scrollTop = 0; }
+    else { root.classList.add('pop--outcome'); body.innerHTML = outcomeHTML(); body.scrollTop = 0; if (window.enhanceBtns) enhanceBtns(body); }
   });
   body.addEventListener('click', e => {
     if (e.target.closest('[data-back]') && step > 0) { const f = body.querySelector('.quiz__main'); answers[step] = [...f.querySelectorAll('input:checked')].map(i => +i.value); step--; renderQuiz(-1); }

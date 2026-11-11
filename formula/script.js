@@ -1,3 +1,22 @@
+// Большие кнопки: перекатывающийся текст и «улетающая» стрелка
+window.enhanceBtns = function (root) {
+  (root || document).querySelectorAll('.btn:not([data-fx])').forEach(btn => {
+    btn.setAttribute('data-fx', '');
+    const label = btn.querySelector('.btn__label');
+    if (label) {
+      const text = label.textContent.trim();
+      label.innerHTML = `<span class="btn__roll"><span>${text}</span><span aria-hidden="true">${text}</span></span>`;
+    }
+    const arrow = btn.querySelector('.btn__arrow');
+    if (arrow && arrow.children.length === 1) {
+      const clone = arrow.firstElementChild.cloneNode(true);
+      clone.classList.add('is-next');
+      arrow.appendChild(clone);
+    }
+  });
+};
+enhanceBtns();
+
 // Autoscale (как в Tilda): от 1200px макет 1440 масштабируется под ширину экрана
 (function () {
   const root = document.documentElement;

@@ -460,3 +460,21 @@ html.pop-open{overflow:hidden}
   .outcome__card{grid-template-columns:1fr;border-radius:24px;padding:24px 20px}
 }
 @media (prefers-reduced-motion:reduce){.pop__box,.pop__bg,.quiz__main{transition:none!important}}
+
+/* ---------- эффект больших кнопок ---------- */
+.btn__label{overflow:hidden}
+.btn__roll{display:grid;line-height:1.15;overflow:hidden;padding:2px 0;margin:-2px 0}
+.btn__roll>span{grid-area:1/1;transition:transform .55s cubic-bezier(.65,0,.25,1)}
+.btn__roll>span+span{transform:translateY(110%)}
+.btn:hover .btn__roll>span:first-child{transform:translateY(-110%)}
+.btn:hover .btn__roll>span+span{transform:none}
+.btn__arrow{position:relative;overflow:hidden;display:grid!important;place-items:center}
+.btn__arrow .ico-arrow{grid-area:1/1;transition:transform .5s cubic-bezier(.65,0,.25,1)}
+.btn__arrow .ico-arrow.is-next{transform:translate(-160%,160%)}
+.btn:hover .btn__arrow .ico-arrow:not(.is-next){transform:translate(160%,-160%)}
+.btn:hover .btn__arrow .ico-arrow.is-next{transform:none;transition-delay:.06s}
+.btn:hover{transform:none}
+.btn:hover .btn__arrow{transform:rotate(0)}
+.btn__arrow{transition:background .25s,color .25s,border-radius .4s}
+.btn:hover .btn__arrow{border-radius:50%}
+@media (prefers-reduced-motion:reduce){.btn__roll>span,.btn__arrow .ico-arrow{transition:none}}
