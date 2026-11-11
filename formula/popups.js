@@ -16,7 +16,10 @@
 
   function open(kind, html) {
     lastFocus = document.activeElement;
-    root.className = 'pop pop--' + kind;
+    // ставим окно в исходную позицию без анимации, чтобы оно не «прилетало» из угла
+    root.className = 'pop pop--' + kind + ' no-anim';
+    void box.offsetWidth;
+    root.classList.remove('no-anim');
     body.innerHTML = html;
     body.scrollTop = 0;
     if (window.enhanceBtns) enhanceBtns(body);

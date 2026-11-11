@@ -541,3 +541,10 @@ html.pop-open{overflow:hidden}
 .review__who{align-self:start;height:125px}
 .review__name{margin-bottom:0;line-height:1;transform:translateY(.14em)}
 @media (max-width:960px){.review__who{height:auto}}
+
+.pop.no-anim .pop__box,.pop.no-anim .pop__bg{transition:none!important}
+/* попап записи без фото */
+.formpop .promo__photo{display:none}
+.formpop .promo__inner{grid-template-columns:1fr}
+.pop--form .pop__box{width:min(975px,calc(100vw - 48px))}
+.pop--form .pop__close{right:26px}
