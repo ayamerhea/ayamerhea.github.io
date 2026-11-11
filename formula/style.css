@@ -304,3 +304,9 @@ section[id],footer[id]{scroll-margin-top:70px}
 #directions .sec-head__mark,.directions__row b{position:absolute;left:calc(85.2% + 1.5px);margin:0;transform:translateX(-50%)}
 #directions .sec-head__mark{top:50%;transform:translate(-50%,-50%)}
 .directions__row b{top:50%;transform:translate(-50%,-50%);white-space:nowrap}
+
+/* стрелки слайдеров — по той же оси, что знак и «подробнее» (центр правой вкладки) */
+@media (min-width:961px){
+  .sec-head{position:relative}
+  .sec-head .arrows{position:absolute;left:calc(85.2% + 1.5px);top:50%;margin:0;transform:translate(-50%,-50%)}
+}

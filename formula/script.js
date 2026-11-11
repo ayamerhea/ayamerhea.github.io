@@ -60,14 +60,26 @@ nav.addEventListener('click', e => {
   if (e.target.tagName === 'A' && nav.classList.contains('is-open')) burger.click();
 });
 
+// Точки остановки карусели: начало каждой карточки и самый конец ленты
+function trackStops(track) {
+  const pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+  const max = track.scrollWidth - track.clientWidth;
+  const stops = [...track.querySelectorAll('article')].map(a => Math.min(a.offsetLeft - track.offsetLeft - pad, max)).filter(x => x >= 0);
+  stops.push(max);
+  return [...new Set(stops.map(Math.round))].sort((a, b) => a - b);
+}
+function nearestStop(track, x) {
+  return trackStops(track).reduce((best, s) => Math.abs(s - x) < Math.abs(best - x) ? s : best, 0);
+}
+
 // Карусели
 document.querySelectorAll('.slider-sec').forEach(sec => {
   const track = sec.querySelector('.track');
   sec.querySelectorAll('[data-dir]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const card = track.querySelector('article');
-      const step = card.offsetWidth + 16;
-      track.scrollBy({ left: step * Number(btn.dataset.dir), behavior: 'smooth' });
+      const stops = trackStops(track), x = track.scrollLeft, dir = Number(btn.dataset.dir);
+      const next = dir > 0 ? stops.find(s => s > x + 2) : [...stops].reverse().find(s => s < x - 2);
+      if (next !== undefined) track.scrollTo({ left: next, behavior: 'smooth' });
     });
   });
 });
@@ -162,11 +174,8 @@ document.querySelectorAll('.track').forEach(track => {
     down = false;
     if (!moved) return;
     // докатываем до ближайшей карточки
-    const card = track.querySelector('article');
-    const step = card.offsetWidth + 16;
-    const target = Math.round(track.scrollLeft / step) * step;
     track.classList.remove('is-dragging');
-    track.scrollTo({ left: target, behavior: 'smooth' });
+    track.scrollTo({ left: nearestStop(track, track.scrollLeft), behavior: 'smooth' });
   };
   window.addEventListener('pointerup', end);
   window.addEventListener('pointercancel', end);
