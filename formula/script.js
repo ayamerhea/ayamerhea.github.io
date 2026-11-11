@@ -177,6 +177,8 @@ document.querySelectorAll('.track').forEach(track => {
     // докатываем до ближайшей карточки
     track.classList.remove('is-dragging');
     track.scrollTo({ left: nearestStop(track, track.scrollLeft), behavior: 'smooth' });
+    track.dataset.dragged = '1';
+    setTimeout(() => delete track.dataset.dragged, 80);
   };
   window.addEventListener('pointerup', end);
   window.addEventListener('pointercancel', end);
