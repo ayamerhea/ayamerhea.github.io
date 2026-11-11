@@ -58,10 +58,12 @@ a{color:inherit}
 .btn svg{width:15px;height:15px;vertical-align:-2px;margin-left:2px}
 .socials{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 
-.lang{display:flex;justify-content:flex-end;gap:10px;font-size:12px;margin:-4px 0 -6px}
-.lang a{text-decoration:none;color:var(--muted);transition:color .2s}
-.lang a:hover{color:var(--accent)}
-.lang a[aria-current]{color:var(--fg)}
+.bar-row{position:relative}
+.lang{position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;font-family:var(--head);font-size:16px;letter-spacing:-1px;color:var(--muted)}
+.lang a{text-decoration:none;color:var(--muted);padding:2px 3px;transition:color .2s,background .2s}
+.lang a:hover{background:var(--accent);color:var(--paper)}
+.lang a[aria-current]{color:var(--ink)}
+@media (max-width:480px){.lang{font-size:14px;right:6px}}
 
 /* ---------- main ---------- */
 main{display:flex;flex-direction:column;gap:var(--gap);min-width:0}
@@ -166,7 +168,6 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
 <div class="wrap">
 
   <aside class="side" aria-label="Profile">
-    <div class="lang"><a href="/cv/" hreflang="ru">RU</a><a href="/en/cv/" hreflang="en" aria-current="page">EN</a></div>
     <nav class="nav" role="tablist" aria-label="Sections">
       <button type="button" role="tab" id="tab-portfolio" aria-controls="portfolio" aria-selected="true" data-view="portfolio">portfolio</button>
       <button type="button" role="tab" id="tab-skills" aria-controls="skills" aria-selected="false" data-view="skills">skills</button>
@@ -198,7 +199,10 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
   <main>
     <!-- ===== portfolio ===== -->
     <section class="view" id="portfolio" role="tabpanel" aria-labelledby="tab-portfolio">
-    <h2 class="bar">portfolio</h2>
+    <header class="bar-row">
+      <h2 class="bar">portfolio</h2>
+      <nav class="lang" aria-label="Language"><a href="/cv/" hreflang="ru">RU</a><span aria-hidden="true">/</span><a href="/en/cv/" hreflang="en" aria-current="page">EN</a></nav>
+    </header>
 
     <div class="grid2">
       <article class="case">
@@ -258,7 +262,10 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
     </section>
 
     <section class="view" id="skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
-    <h2 class="bar">skills</h2>
+    <header class="bar-row">
+      <h2 class="bar">skills</h2>
+      <nav class="lang" aria-label="Language"><a href="/cv/" hreflang="ru">RU</a><span aria-hidden="true">/</span><a href="/en/cv/" hreflang="en" aria-current="page">EN</a></nav>
+    </header>
 
     <section class="panel">
       <h3 class="sub"><span class="ico"><svg viewBox="0 0 18 16" fill="none" aria-hidden="true">
@@ -299,7 +306,10 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
     </section>
 
     <section class="view" id="background" role="tabpanel" aria-labelledby="tab-background" hidden>
-    <h2 class="bar">background</h2>
+    <header class="bar-row">
+      <h2 class="bar">background</h2>
+      <nav class="lang" aria-label="Language"><a href="/cv/" hreflang="ru">RU</a><span aria-hidden="true">/</span><a href="/en/cv/" hreflang="en" aria-current="page">EN</a></nav>
+    </header>
 
     <section class="panel">
       <h3 class="sub"><span class="ico"><svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
