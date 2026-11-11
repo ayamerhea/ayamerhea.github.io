@@ -260,3 +260,12 @@ html.scaled .directions__row span{font-size:33px}
 html.scaled .promo__title{font-size:50px}
 html.scaled .faq summary{font-size:24px}
 html.scaled .footer__nav p{font-size:37px}
+
+/* ---------- стопка блоков «о клинике» ---------- */
+.stack{position:relative}
+.stack>.stat{position:sticky;top:var(--stick,0px)}
+.stack>.stat:nth-child(1){z-index:1}
+.stack>.stat:nth-child(2){z-index:2}
+.stack>.stat:nth-child(3){z-index:3;background-color:var(--beige);border-radius:var(--r) var(--r) 0 0}
+.stack>.stat+.stat{box-shadow:0 -30px 50px -24px rgba(44,54,56,.12)}
+@media (prefers-reduced-motion:reduce){.stack>.stat{position:relative;top:auto}}

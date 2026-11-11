@@ -94,3 +94,13 @@ tabs.forEach(tab => {
     panels.forEach((p, i) => p.classList.toggle('is-active', i === Number(tab.dataset.tab)));
   });
 });
+
+// Стопка: если блок выше экрана, он прилипает так, чтобы сначала долистался до низа
+const stackItems = document.querySelectorAll('.stack > .stat');
+const setStick = () => {
+  const sc = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--s')) || 1;
+  const vh = window.innerHeight / sc;
+  stackItems.forEach(el => el.style.setProperty('--stick', Math.min(0, vh - el.offsetHeight) + 'px'));
+};
+setStick();
+window.addEventListener('resize', setStick);
