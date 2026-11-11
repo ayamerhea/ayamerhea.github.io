@@ -114,7 +114,7 @@ html.scaled .hero__top::before{left:-50vw;right:-50vw}
 .slider-sec{padding:20px 0 120px;overflow:hidden}
 .slider-sec--last{padding-bottom:200px}
 .arrows{display:flex;gap:8px;margin-right:60px}
-.arrow{width:36px;height:36px;border:1.5px solid var(--black);border-radius:10px;display:grid;place-items:center;color:var(--black);transition:background .2s,color .2s}
+.arrow{width:36px;height:36px;border:2px solid var(--black);border-radius:10px;display:grid;place-items:center;color:var(--black);transition:background .2s,color .2s}
 .arrow svg{width:23px;height:23px}
 .arrow:hover{background:var(--black);color:var(--white)}
 .track{display:flex;gap:16px;padding:20px var(--pad) 0;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--pad);scrollbar-width:none;max-width:1440px;margin:0 auto}
