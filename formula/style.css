@@ -488,3 +488,11 @@ html.pop-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.footer__mark use,.sec-head__mark use{animation:none}}
 @media (max-width:960px){.footer__nav p{grid-column:auto}}
 .footer__mark,.sec-head__mark{overflow:visible}
+
+/* карточки результатов: лёгкий подъём при наведении */
+.result{transition:transform .35s cubic-bezier(.22,.8,.24,1),box-shadow .35s ease}
+.result:hover{transform:translateY(-6px);box-shadow:0 14px 30px -18px rgba(44,54,56,.35)}
+.result .result__more .ico-arrow{transition:transform .35s ease}
+.result:hover .result__more .ico-arrow{transform:translate(2px,-2px)}
+.track.is-dragging .result{transform:none;box-shadow:none}
+.track{padding-bottom:24px;margin-bottom:-24px}
