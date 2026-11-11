@@ -59,11 +59,10 @@ a{color:inherit}
 .socials{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 
 .bar-row{position:relative}
-.lang{position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;font-family:var(--head);font-size:16px;letter-spacing:-1px;color:var(--muted)}
-.lang a{text-decoration:none;color:var(--muted);padding:2px 3px;transition:color .2s,background .2s}
-.lang a:hover{background:var(--accent);color:var(--paper)}
-.lang a[aria-current]{color:var(--ink)}
-@media (max-width:480px){.lang{font-size:14px;right:6px}}
+.lang{position:absolute;right:8px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:2px;font-family:var(--head);font-size:15px;letter-spacing:-1px}
+.lang a{display:grid;place-items:center;min-width:40px;height:30px;padding:0 7px;text-decoration:none;color:var(--ink);background:transparent;transition:color .2s,background .2s}
+.lang a:hover,.lang a[aria-current]{background:var(--bg);color:var(--paper)}
+@media (max-width:480px){.lang{right:4px}.lang a{min-width:34px;height:26px;padding:0 5px;font-size:13px}}
 
 /* ---------- main ---------- */
 main{display:flex;flex-direction:column;gap:var(--gap);min-width:0}
@@ -201,7 +200,7 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
     <section class="view" id="portfolio" role="tabpanel" aria-labelledby="tab-portfolio">
     <header class="bar-row">
       <h2 class="bar">portfolio</h2>
-      <nav class="lang" aria-label="Language"><a href="/cv/" hreflang="ru">RU</a><span aria-hidden="true">/</span><a href="/en/cv/" hreflang="en" aria-current="page">EN</a></nav>
+      <nav class="lang" aria-label="Language"><a href="/cv/" hreflang="ru">RU</a><a href="/en/cv/" hreflang="en" aria-current="page">ENG</a></nav>
     </header>
 
     <div class="grid2">
@@ -264,7 +263,7 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
     <section class="view" id="skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
     <header class="bar-row">
       <h2 class="bar">skills</h2>
-      <nav class="lang" aria-label="Language"><a href="/cv/" hreflang="ru">RU</a><span aria-hidden="true">/</span><a href="/en/cv/" hreflang="en" aria-current="page">EN</a></nav>
+      <nav class="lang" aria-label="Language"><a href="/cv/" hreflang="ru">RU</a><a href="/en/cv/" hreflang="en" aria-current="page">ENG</a></nav>
     </header>
 
     <section class="panel">
@@ -308,7 +307,7 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
     <section class="view" id="background" role="tabpanel" aria-labelledby="tab-background" hidden>
     <header class="bar-row">
       <h2 class="bar">background</h2>
-      <nav class="lang" aria-label="Language"><a href="/cv/" hreflang="ru">RU</a><span aria-hidden="true">/</span><a href="/en/cv/" hreflang="en" aria-current="page">EN</a></nav>
+      <nav class="lang" aria-label="Language"><a href="/cv/" hreflang="ru">RU</a><a href="/en/cv/" hreflang="en" aria-current="page">ENG</a></nav>
     </header>
 
     <section class="panel">
