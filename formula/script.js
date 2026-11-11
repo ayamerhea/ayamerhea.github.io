@@ -1,3 +1,19 @@
+// Прелоудер: держим минимум 0,9 с, убираем после полной загрузки
+(function () {
+  const pl = document.querySelector('.preloader');
+  if (!pl) return;
+  const t0 = performance.now();
+  const done = () => {
+    setTimeout(() => {
+      pl.classList.add('is-done');
+      document.documentElement.classList.remove('is-loading');
+      setTimeout(() => pl.remove(), 800);
+    }, Math.max(0, 900 - (performance.now() - t0)));
+  };
+  if (document.readyState === 'complete') done(); else window.addEventListener('load', done);
+  setTimeout(done, 6000); // страховка, если что-то грузится слишком долго
+})();
+
 // Большие кнопки: перекатывающийся текст и «улетающая» стрелка
 window.enhanceBtns = function (root) {
   (root || document).querySelectorAll('.btn:not([data-fx])').forEach(btn => {
