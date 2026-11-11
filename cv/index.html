@@ -137,6 +137,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0 8px}
 }
 
 /* ---------- autoscale (как в Tilda): макет 1440px масштабируется под ширину экрана от 1200px ---------- */
+html,body{overflow-x:clip}
 html.scaled .wrap{width:1440px;max-width:none;margin:0;zoom:var(--s,1)}
 html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / var(--s,1) - 32px)}
 
@@ -380,9 +381,10 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
   function fit(){
     var w=root.clientWidth, on=w>=1200;
     root.classList.toggle("scaled",on);
-    root.style.setProperty("--s",on?(w/1440).toFixed(4):"1");
+    root.style.setProperty("--s",on?String(Math.floor(w/1440*10000)/10000):"1");
   }
   fit();window.addEventListener("resize",fit);
+  if(window.ResizeObserver){var last=root.clientWidth;new ResizeObserver(function(){if(root.clientWidth!==last){last=root.clientWidth;fit();}}).observe(root);}
 })();
 (function(){
   var views=["portfolio","skills","background"];
