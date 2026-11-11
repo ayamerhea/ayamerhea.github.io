@@ -282,3 +282,8 @@ html.scaled .footer__nav p{font-size:37px}
 
 /* якоря не прячутся под закреплённым меню */
 section[id],footer[id]{scroll-margin-top:70px}
+
+/* стрелка из макета */
+.ico-arrow{width:21px;height:21px;flex:none;display:inline-block;vertical-align:middle;margin:-4px -3px -3px -2px}
+.btn__arrow .ico-arrow{width:24px;height:24px;margin:0}
+.btn--sm .btn__arrow .ico-arrow{width:21px;height:21px}
