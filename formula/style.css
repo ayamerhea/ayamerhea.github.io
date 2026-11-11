@@ -533,3 +533,6 @@ html.pop-open{overflow:hidden}
 .doc{cursor:pointer}
 .track.is-dragging .doc{cursor:grabbing}
 .doc:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* большие заголовки: Medium, letter-spacing -6% (курсивные слова остаются Light Italic) */
+.h1,.h2,.stat__title,.promo__title,.manifest__title{font-weight:500;letter-spacing:-.06em}
