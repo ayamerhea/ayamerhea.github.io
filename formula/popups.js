@@ -51,7 +51,7 @@
   const footer = () => `
     <div class="pop__foot">
       <p>${D.note}</p>
-      <a href="#signup" class="btn btn--beige" data-signup><span class="btn__label">записаться на консультацию</span><span class="btn__arrow">${ARROW}</span></a>
+      <a href="#signup" class="btn btn--dark" data-signup><span class="btn__label">записаться на консультацию</span><span class="btn__arrow">${ARROW}</span></a>
     </div>`;
 
   // ---------- направления ----------
