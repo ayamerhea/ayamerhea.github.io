@@ -22,7 +22,7 @@ em,i{font-family:var(--display);font-style:italic;font-weight:300}
 [style*="background-image"]{background-color:#c4bba6;background-size:cover;background-position:center}
 
 /* узор с лепестками */
-.pattern{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%232C3638' stroke-opacity='.03' stroke-width='.8'%3E%3Cpath d='M20 20C14 14 14 5 20 2c6 3 6 12 0 18Z'/%3E%3Cpath d='M20 20c-6 6-15 6-18 0 3-6 12-6 18 0Z'/%3E%3Cpath d='M20 20c6 6 6 15 0 18-6-3-6-12 0-18Z'/%3E%3Cpath d='M20 20c6-6 15-6 18 0-3 6-12 6-18 0Z'/%3E%3C/g%3E%3C/svg%3E");background-size:120px}
+.pattern{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22 viewBox=%22-12.5 -12.5 70 70%22%3E%3Cg fill=%22%232C3638%22 fill-opacity=%22.025%22 fill-rule=%22evenodd%22%3E%3Cpath d=%22M20.5133 20.5133C19.7531 9.89815 15.1865 3.09142 3.45132 3.45126C3.09142 15.1864 9.89815 19.7531 20.5133 20.5133ZM3.34596 0.0152413C16.7791 -0.396803 23.0333 7.57596 23.9421 20.2678L24.2256 24.2257L20.2678 23.9422C7.57596 23.0334 -0.396804 16.7791 0.0152413 3.34602L0.114318 0.114318L3.34596 0.0152413Z%22/%3E%3Cpath d=%22M24.6001 20.5133C35.2152 19.7531 42.0219 15.1864 41.6621 3.45126C29.9269 3.09142 25.3603 9.89815 24.6001 20.5133ZM45.0981 3.34602C45.5102 16.7791 37.5374 23.0334 24.8456 23.9422L20.8877 24.2257L21.1712 20.2678C22.08 7.57596 28.3342 -0.396803 41.7673 0.0152413L44.999 0.114318L45.0981 3.34602Z%22/%3E%3Cpath d=%22M41.2867 41.2868C40.5265 30.6716 35.9599 23.8649 24.2247 24.2248C23.8649 35.9599 30.6716 40.5265 41.2867 41.2868ZM24.1195 20.7887C37.5525 20.3766 43.8068 28.3494 44.7155 41.0412L44.9991 44.9991L41.0412 44.7155C28.3494 43.8067 20.3766 37.5525 20.7887 24.1195L20.8878 20.8878L24.1195 20.7887Z%22/%3E%3Cpath d=%22M3.82672 41.2868C14.4418 40.5265 21.2486 35.9599 20.8887 24.2248C9.15356 23.8649 4.58688 30.6716 3.82672 41.2868ZM24.3247 24.1195C24.7367 37.5526 16.764 43.8068 4.07217 44.7155L0.114258 44.9991L0.397772 41.0412C1.30657 28.3494 7.56081 20.3766 20.9938 20.7887L24.2255 20.8878L24.3247 24.1195Z%22/%3E%3Cpath d=%22M42.1658 13.14C44.9847 19.0102 45.0158 25.8846 42.2596 31.7773L39.64 29.1577C41.302 24.8493 41.2747 20.0393 39.5582 15.7476L42.1658 13.14ZM13.3385 2.85627C19.1723 0.127299 25.9683 0.131609 31.7995 2.86704L29.1818 5.48472C24.9377 3.84109 20.2043 3.83774 15.9581 5.47586L13.3385 2.85627ZM2.86762 31.7989C0.0979488 25.8947 0.128843 19.0013 2.96191 13.1189L5.56738 15.7244C3.83808 20.0302 3.81108 24.8596 5.48482 29.1816L2.86762 31.7989ZM31.9969 42.1539C26.0559 45.0149 19.0836 45.019 13.1404 42.1654L15.7482 39.5575C20.1175 41.3051 25.0239 41.3025 29.3914 39.5484L31.9969 42.1539Z%22/%3E%3C/g%3E%3C/svg%3E");background-size:150px}
 
 /* ---------- типографика ---------- */
 .h1,.h2,.stat__title,.promo__title,.manifest__title{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:-.045em;line-height:1}
@@ -56,11 +56,8 @@ em,i{font-family:var(--display);font-style:italic;font-weight:300}
 
 .hero>.container{position:relative}
 .hero__top{display:flex;justify-content:space-between;align-items:center;padding-top:30px}
-.logo{display:flex;align-items:center;gap:10px;color:var(--black)}
-.logo__mark{width:40px;height:40px;color:var(--accent)}
-.logo__text{display:flex;flex-direction:column;font-family:var(--display);line-height:1;letter-spacing:.02em}
-.logo__text b{font-weight:400;font-size:26px}
-.logo__text small{font-size:11px;letter-spacing:.42em;margin-top:2px}
+.logo{display:block;line-height:0}
+.logo img{width:178px;height:auto}
 .nav{display:flex;gap:26px;background:var(--white);color:var(--black);border-radius:14px;padding:12px 18px;font-size:15px}
 .nav a{transition:opacity .2s}.nav a:hover{opacity:.55}
 .burger{display:none;width:44px;height:44px;border-radius:12px;background:var(--white);flex-direction:column;justify-content:center;align-items:center;gap:6px}
