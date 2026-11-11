@@ -174,7 +174,7 @@ form.is-sent .form__fields,form.is-sent .promo__bottom{display:none}
 .faq__grid{display:grid;grid-template-columns:306px 1fr;gap:96px;margin-top:56px}
 .faq__tabs{display:flex;flex-direction:column;gap:8px}
 .faq__tab{text-align:left;background:var(--white);border-radius:10px;padding:12px 18px;font-size:15px;white-space:nowrap;transition:background .4s ease,color .4s ease,transform .25s}
-.faq__tab:not(.is-active):hover{transform:translateY(-2px)}
+.faq__tab:hover,.faq__tab.is-active{background:var(--black);color:var(--white)}
 .faq__tab i{margin-right:14px;opacity:.6}
 .faq__tab.is-active{background:var(--black);color:var(--white)}
 .faq__panels{transition:height .45s cubic-bezier(.22,.8,.24,1)}
