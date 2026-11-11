@@ -311,3 +311,29 @@ document.querySelectorAll('.faq__panel').forEach(panel => {
   if (items[0]) set(items[0]);
   items.forEach(qa => qa.querySelector('.qa__q').addEventListener('click', () => set(qa.classList.contains('is-open') ? null : qa)));
 });
+
+// Цифры в блоках «о клинике» считаются от 1 до значения, когда блок появляется на экране
+(function () {
+  const els = document.querySelectorAll('.count');
+  if (!els.length) return;
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const run = el => {
+    const to = +el.dataset.to, dur = 1800 + Math.min(to, 500) * 1.2, t0 = performance.now();
+    const ease = t => 1 - Math.pow(1 - t, 3);
+    const tick = now => {
+      const t = Math.min(1, (now - t0) / dur);
+      el.textContent = Math.max(1, Math.round(1 + (to - 1) * ease(t)));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  els.forEach(el => {
+    el.style.setProperty('--w', el.dataset.to.length + 'ch');   // ширина не прыгает во время счёта
+    if (!reduce) el.textContent = '1';
+  });
+  if (reduce) return;
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
+  }), { threshold: 0.6 });
+  els.forEach(el => io.observe(el));
+})();
