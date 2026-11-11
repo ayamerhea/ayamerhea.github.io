@@ -118,10 +118,26 @@ document.querySelectorAll('[data-review]').forEach(btn => {
 // FAQ: вкладки
 const tabs = document.querySelectorAll('.faq__tab');
 const panels = document.querySelectorAll('.faq__panel');
+const panelsWrap = document.querySelector('.faq__panels');
+let tabBusy = false;
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
+    const next = panels[Number(tab.dataset.tab)];
+    const cur = document.querySelector('.faq__panel.is-active');
+    if (next === cur || tabBusy) return;
+    tabBusy = true;
     tabs.forEach(t => t.classList.toggle('is-active', t === tab));
-    panels.forEach((p, i) => p.classList.toggle('is-active', i === Number(tab.dataset.tab)));
+    // плавно: текущая вкладка гаснет, высота блока перетекает, новая проявляется
+    panelsWrap.style.height = panelsWrap.offsetHeight + 'px';
+    cur.classList.add('is-out');
+    setTimeout(() => {
+      cur.classList.remove('is-active', 'is-out');
+      next.classList.add('is-active', 'is-in');
+      const h = next.offsetHeight;
+      panelsWrap.style.height = h + 'px';
+      requestAnimationFrame(() => requestAnimationFrame(() => next.classList.remove('is-in')));
+      setTimeout(() => { panelsWrap.style.height = ''; tabBusy = false; }, 450);
+    }, 220);
   });
 });
 
