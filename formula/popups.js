@@ -25,6 +25,16 @@
     if (window.lenis) lenis.stop();
     setTimeout(() => box.focus({ preventScroll: true }), 50);
   }
+  function swapTo(kind, html) {
+    box.style.opacity = '0';
+    setTimeout(() => {
+      root.className = 'pop pop--' + kind + ' is-open';
+      body.innerHTML = html; body.scrollTop = 0;
+      if (window.enhanceBtns) enhanceBtns(body);
+      box.style.transition = 'none'; box.style.opacity = '0';
+      requestAnimationFrame(() => { box.style.transition = ''; box.style.opacity = ''; });
+    }, 300);
+  }
   function close(then) {
     if (!root.classList.contains('is-open')) return;
     root.classList.remove('is-open');
@@ -37,7 +47,7 @@
   root.addEventListener('click', e => {
     if (e.target.closest('[data-close]')) close();
     const go = e.target.closest('[data-signup]');
-    if (go) { e.preventDefault(); close(() => goSignup()); }
+    if (go) { e.preventDefault(); swapTo('form', formHTML()); }
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 
@@ -53,6 +63,17 @@
       <p>${D.note}</p>
       <a href="#signup" class="btn btn--dark" data-signup><span class="btn__label">записаться на консультацию</span><span class="btn__arrow">${ARROW}</span></a>
     </div>`;
+
+  // ---------- форма записи (копия блока «Сделайте первый шаг сегодня») ----------
+  const formTpl = (document.querySelector('#signup .promo__inner') || {}).outerHTML || '';
+  function formHTML(doctor) {
+    let html = formTpl;
+    if (doctor) {
+      html = html.replace('<div class="form__fields">',
+        `<p class="form__doc">Запись к&nbsp;специалисту: <b>${esc(doctor)}</b></p><input type="hidden" name="doctor" value="${esc(doctor)}"><div class="form__fields">`);
+    }
+    return `<div class="formpop">${html}</div>`;
+  }
 
   // ---------- направления ----------
   function directionHTML(key) {
@@ -163,7 +184,7 @@
   body.addEventListener('change', e => {
     // «общий» ответ (ничего особенного, лицо в целом, несколько зон) снимает остальные галочки и наоборот
     const inp = e.target;
-    if (inp.type === 'checkbox' && inp.checked) {
+    if (inp.type === 'checkbox' && inp.checked && inp.closest('.quiz__opts')) {
       const opts = Q[step].opts;
       const isEx = !!opts[+inp.value].ex;
       inp.closest('.quiz__opts').querySelectorAll('input:checked').forEach(o => {
@@ -186,6 +207,11 @@
     if (kind === 'dir') open('drawer', directionHTML(arg));
     if (kind === 'res') open('drawer', resultHTML(+arg));
     if (kind === 'quiz') { step = 0; answers = []; open('quiz', ''); body.innerHTML = quizHTML(); }
+    if (kind === 'form') {
+      let doctor = '';
+      if (arg === 'doc') { const d = t.closest('.doc'); if (d) doctor = d.querySelector('h3').textContent.replace(/\s+/g, ' ').trim().replace(/(^|\s)\S/g, m => m.toUpperCase()); }
+      open('form', formHTML(doctor));
+    }
   }, true);
   document.addEventListener('keydown', e => {
     const t = e.target.closest && e.target.closest('article[data-popup]');

@@ -504,3 +504,20 @@ html.pop-open{overflow:hidden}
 
 /* заголовки карточек результатов и попапов — Montserrat Medium */
 .result h3,.pop__title{font-weight:500}
+
+/* попап записи: тот же блок, что «Сделайте первый шаг сегодня» */
+.pop--form .pop__box{left:50%;top:50%;width:min(1270px,calc(100vw - 48px));max-height:calc(100vh - 48px);background:transparent;overflow:visible;transform:translate(-50%,-46%) scale(.98);opacity:0;transition:transform .5s cubic-bezier(.22,.8,.24,1),opacity .4s ease}
+.pop--form.is-open .pop__box{transform:translate(-50%,-50%);opacity:1}
+.pop--form .pop__body{overflow:visible}
+.pop--form .pop__close{top:26px;right:calc(295px + 26px)}
+.formpop .promo__inner{padding:0}
+.formpop .promo__photo{min-height:100%}
+.form__doc{font-size:15px;margin-top:28px;opacity:.8}
+.form__doc+input+.form__fields{margin-top:14px}
+@media (max-width:960px){
+  .pop--form .pop__box{width:calc(100% - 32px);height:auto;max-height:calc(100svh - 32px);top:50%;left:16px;transform:translateY(-46%);background:transparent}
+  .pop--form.is-open .pop__box{transform:translateY(-50%)}
+  .pop--form .pop__body{overflow-y:auto;padding:0}
+  .pop--form .pop__close{right:16px;top:16px}
+  .formpop .promo__photo{display:none}
+}
