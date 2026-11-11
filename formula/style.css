@@ -181,8 +181,8 @@ form.is-sent .form__fields,form.is-sent .promo__bottom{display:none}
 .faq__panel.is-active{display:block}
 .qa{border-bottom:1px solid var(--line)}
 .qa__q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:30px 0;text-align:left;font-size:clamp(18px,1.7vw,24px);font-weight:300}
-.qa__ico{position:relative;flex:none;width:36px;height:36px;border:2px solid var(--black);border-radius:10px;color:var(--black);transition:background .3s,color .3s}
-.qa__ico svg{position:absolute;inset:-2px;width:36px;height:36px;transition:opacity .3s,transform .3s}
+.qa__ico{flex:none;box-sizing:border-box;width:36px;height:36px;border:2px solid var(--black);border-radius:10px;color:var(--black);display:grid;place-items:center;transition:background .3s,color .3s}
+.qa__ico svg{grid-area:1/1;width:14px;height:14px;display:block;transition:opacity .3s,transform .3s}
 .qa__ico .i-minus{opacity:0;transform:rotate(-90deg)}
 .qa__q:hover .qa__ico,.qa.is-open .qa__ico{background:var(--black);color:var(--white)}
 .qa.is-open .i-plus{opacity:0;transform:rotate(90deg)}
