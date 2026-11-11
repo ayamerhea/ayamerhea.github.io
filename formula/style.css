@@ -10,7 +10,7 @@
   --display:"Montserrat",sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html:not(.lenis){scroll-behavior:smooth}
 body{font-family:var(--sans);color:var(--black);background:var(--beige);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 button,input{font:inherit;color:inherit}
@@ -310,3 +310,8 @@ section[id],footer[id]{scroll-margin-top:70px}
   .sec-head{position:relative}
   .sec-head .arrows{position:absolute;left:calc(85.2% + 1.5px);top:50%;margin:0;transform:translate(-50%,-50%)}
 }
+
+/* плавный скролл (Lenis) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:clip}

@@ -55,6 +55,7 @@ burger.addEventListener('click', () => {
   const open = nav.classList.toggle('is-open');
   burger.setAttribute('aria-expanded', open);
   document.body.style.overflow = open ? 'hidden' : '';
+  if (window.lenis) open ? lenis.stop() : lenis.start();
 });
 nav.addEventListener('click', e => {
   if (e.target.tagName === 'A' && nav.classList.contains('is-open')) burger.click();
@@ -241,4 +242,23 @@ document.querySelectorAll('.track').forEach(track => {
     kick();
   });
   zone.addEventListener('mouseleave', () => { tx = 0; ty = 0; kick(); });
+})();
+
+// Плавный скролл по всему сайту (Lenis, MIT). На телефонах — родной скролл.
+(function () {
+  if (typeof Lenis === 'undefined' || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 1, smoothWheel: true });
+  window.lenis = lenis;
+  const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+  requestAnimationFrame(raf);
+  // якорные ссылки тоже плавно, с отступом под меню
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented) return;
+    const id = a.getAttribute('href');
+    const el = id === '#top' ? 0 : document.querySelector(id);
+    if (el === null) return;
+    e.preventDefault();
+    lenis.scrollTo(el, { offset: el === 0 ? 0 : -70, duration: 1.4 });
+  });
 })();
