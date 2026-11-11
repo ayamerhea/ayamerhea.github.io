@@ -527,3 +527,6 @@ html.pop-open{overflow:hidden}
 .directions__row span{transition:transform .6s cubic-bezier(.22,.8,.24,1)}
 .directions li:hover .directions__row span{transform:translateX(10px)}
 .count{font-variant-numeric:tabular-nums;display:inline-block;min-width:var(--w,auto);text-align:right}
+
+/* Medium-заголовки: letter-spacing -1% */
+.result h3,.pop__title,.review__name{letter-spacing:-.01em}
