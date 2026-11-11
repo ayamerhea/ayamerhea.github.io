@@ -51,7 +51,7 @@ em,i{font-family:var(--display);font-style:italic;font-weight:300}
 .cap--bottom i{border-radius:0 0 var(--r) var(--r)}
 
 /* ---------- HERO ---------- */
-.hero{position:relative;background:#DAD3C1;height:calc(100vh / var(--s,1) + var(--r));height:calc(100svh / var(--s,1) + var(--r));min-height:600px;color:var(--white);display:flex;flex-direction:column;overflow:hidden;padding-bottom:calc(var(--r) + 44px)}
+.hero{position:relative;background:#DAD3C1;height:calc(100vh / var(--s,1) + var(--r) + 40px);height:calc(100svh / var(--s,1) + var(--r) + 40px);min-height:600px;color:var(--white);display:flex;flex-direction:column;overflow:hidden;padding-bottom:calc(var(--r) + 40px)}
 .hero__bg{position:absolute;inset:0;background-color:#DAD3C1!important;background-size:cover;background-position:50% 0}
 
 .hero>.container{position:relative}
