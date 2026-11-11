@@ -6,6 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&amp;display=swap">
+<script>(function(){var r=document.documentElement,h=location.hash.slice(1);r.dataset.view=["portfolio","skills","background"].indexOf(h)>-1?h:"portfolio";r.classList.add("js");})();</script>
 <title>Регина Ахметова — CV</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Регина Ахметова — веб-дизайнер. Сайты полного цикла: от анализа задачи и структуры до дизайна и реализации на Tilda.">
@@ -42,9 +43,11 @@ a{color:inherit}
 .side{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));height:calc(100vh - 32px);height:calc(100dvh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow-y:auto;background:var(--panel);padding:16px;display:flex;flex-direction:column;gap:16px;text-align:center}
 .nav{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--paper);padding:0;gap:0}
 .nav button{background:none;border:0;cursor:pointer;font-size:13px;padding:13px 4px;transition:background .2s,color .2s}
-.nav button:hover,.nav button[aria-selected="true"]{background:var(--accent);color:var(--paper)}
-.view{display:flex;flex-direction:column;gap:var(--gap)}
-.view[hidden]{display:none!important}
+.nav button:hover,
+html[data-view="portfolio"] .nav [data-view="portfolio"],html[data-view="skills"] .nav [data-view="skills"],html[data-view="background"] .nav [data-view="background"]{background:var(--accent);color:var(--paper)}
+.view{display:none;flex-direction:column;gap:var(--gap)}
+html[data-view="portfolio"] #portfolio,html[data-view="skills"] #skills,html[data-view="background"] #background{display:flex}
+.js .bar:not(.typed){color:transparent}
 .portrait{display:flex;flex-direction:column;flex:1 1 auto;min-height:220px}
 .portrait .ph{aspect-ratio:272/367;max-width:100%}
 .portrait .name{background:var(--paper);color:var(--ink);font-size:19px;padding:2px}
@@ -260,7 +263,7 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
 
     </section>
 
-    <section class="view" id="skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
+    <section class="view" id="skills" role="tabpanel" aria-labelledby="tab-skills">
     <header class="bar-row">
       <h2 class="bar">навыки</h2>
       <nav class="lang" aria-label="Язык"><a href="/cv/#skills" hreflang="ru" aria-current="page">RU</a><a href="/en/cv/#skills" hreflang="en">ENG</a></nav>
@@ -304,7 +307,7 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
 
     </section>
 
-    <section class="view" id="background" role="tabpanel" aria-labelledby="tab-background" hidden>
+    <section class="view" id="background" role="tabpanel" aria-labelledby="tab-background">
     <header class="bar-row">
       <h2 class="bar">бэкграунд</h2>
       <nav class="lang" aria-label="Язык"><a href="/cv/#background" hreflang="ru" aria-current="page">RU</a><a href="/en/cv/#background" hreflang="en">ENG</a></nav>
@@ -396,6 +399,7 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
     var text=bar.dataset.text||(bar.dataset.text=bar.textContent.trim());
     bar.setAttribute("aria-label",text);
     clearInterval(timer);
+    bar.classList.add("typed");
     if(reduce){bar.textContent=text;return;}
     bar.innerHTML='<span class="tw" aria-hidden="true"></span><span class="cur" aria-hidden="true"></span>';
     var tw=bar.firstChild,i=0;
@@ -408,6 +412,7 @@ html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / va
   }
   function show(name,scroll){
     if(views.indexOf(name)<0) name="portfolio";
+    document.documentElement.dataset.view=name;
     views.forEach(function(v){document.getElementById(v).hidden=(v!==name);});
     var cur=document.getElementById(name);animate(cur);type(cur.querySelector(".bar"));
     tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.view===name?"true":"false");});
