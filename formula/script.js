@@ -1,3 +1,15 @@
+// Autoscale (как в Tilda): от 1200px макет 1440 масштабируется под ширину экрана
+(function () {
+  const root = document.documentElement;
+  const fit = () => {
+    const w = root.clientWidth, on = w >= 1200;
+    root.classList.toggle('scaled', on);
+    root.style.setProperty('--s', on ? String(Math.floor(w / 1440 * 10000) / 10000) : '1');
+  };
+  fit();
+  window.addEventListener('resize', fit);
+})();
+
 // «Вкладки» у белых листов: верх у всех .sheet, низ — у направлений и отзывов
 document.querySelectorAll('.sheet').forEach(sheet => {
   if (sheet.classList.contains('stat')) return;
@@ -37,8 +49,8 @@ document.querySelectorAll('.slider-sec').forEach(sec => {
   const track = sec.querySelector('.track');
   sec.querySelectorAll('[data-dir]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const card = track.firstElementChild;
-      const step = card.getBoundingClientRect().width + 16;
+      const card = track.querySelector('article');
+      const step = card.offsetWidth + 16;
       track.scrollBy({ left: step * Number(btn.dataset.dir), behavior: 'smooth' });
     });
   });

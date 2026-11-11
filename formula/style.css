@@ -190,7 +190,7 @@ form.is-sent .form__fields,form.is-sent .promo__bottom{display:none}
 .footer__bottom small:last-child{margin-left:auto}
 
 /* ---------- адаптив ---------- */
-@media (max-width:1200px){
+@media (max-width:1199px){
   :root{--pad:48px}
   .nav{gap:16px;font-size:14px}
   .faq__grid{gap:48px}
@@ -242,3 +242,17 @@ form.is-sent .form__fields,form.is-sent .promo__bottom{display:none}
   .manifest__title br{display:none}
   .footer__top{grid-template-columns:1fr}
 }
+
+/* ---------- autoscale (как в Tilda): макет 1440px масштабируется под ширину экрана от 1200px ---------- */
+html,body{overflow-x:clip}
+html.scaled body{width:1440px;zoom:var(--s,1)}
+/* в режиме автоскейла размеры берутся как на макете 1440, без vw */
+html.scaled .hero__title{font-size:86px}
+html.scaled .h2{font-size:63px}
+html.scaled .manifest__title{font-size:42px}
+html.scaled .stat__title{font-size:56px}
+html.scaled .stat__num{font-size:216px}
+html.scaled .directions__row span{font-size:33px}
+html.scaled .promo__title{font-size:50px}
+html.scaled .faq summary{font-size:24px}
+html.scaled .footer__nav p{font-size:37px}
