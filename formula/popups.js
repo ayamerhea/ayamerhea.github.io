@@ -89,9 +89,9 @@
       <label class="qopt"><input type="${type}" name="q${step}" value="${k}" ${answers[step] && answers[step].includes(k) ? 'checked' : ''}><span class="qopt__box"></span><span>${o.t}</span></label>`).join('');
     return `
       <aside class="quiz__side">
-        <div class="quiz__ava" style="background-image:url(img/doc-3.webp)"></div>
+        <div class="quiz__ava" style="background-image:url(img/quiz-doctor.webp)"></div>
         <div class="quiz__bubble">
-          <b>Мария Лебедева</b><i>Врач-косметолог</i>
+          <b>Мария Демидова</b><i>Врач-косметолог</i>
           <p>Здравствуйте!<br>Я&nbsp;проведу небольшую диагностику кожи и&nbsp;подберу подходящие средства ухода.</p>
           <p>Всего шесть вопросов помогут определить ваши потребности, особенности кожи и&nbsp;выбрать процедуры, которые дадут наилучший результат.</p>
         </div>
