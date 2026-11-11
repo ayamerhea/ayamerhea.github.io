@@ -125,6 +125,10 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0 8px}
   .case.wide .media .ph,.case.wide .media img{aspect-ratio:16/10.2}
 }
 
+/* ---------- autoscale (как в Tilda): макет 1440px масштабируется под ширину экрана от 1200px ---------- */
+html.scaled .wrap{width:1440px;max-width:none;margin:0;zoom:var(--s,1)}
+html.scaled .side{height:calc(100vh / var(--s,1) - 32px);height:calc(100dvh / var(--s,1) - 32px)}
+
 /* ---------- motion ---------- */
 .arr{display:inline-flex;overflow:hidden;vertical-align:middle}
 .tag .arr{margin:-2px -3px -2px -2px}
@@ -350,6 +354,15 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0 8px}
 </div>
 
 <script>
+(function(){
+  var root=document.documentElement;
+  function fit(){
+    var w=root.clientWidth, on=w>=1200;
+    root.classList.toggle("scaled",on);
+    root.style.setProperty("--s",on?(w/1440).toFixed(4):"1");
+  }
+  fit();window.addEventListener("resize",fit);
+})();
 (function(){
   var views=["portfolio","skills","background"];
   var tabs=document.querySelectorAll('.nav [data-view]');
