@@ -86,26 +86,24 @@
     const s = Q[step];
     const type = s.multi ? 'checkbox' : 'radio';
     const opts = s.opts.map((o, k) => `
-      <label class="qopt qopt--${type}"><input type="${type}" name="q${step}" value="${k}" ${answers[step] && answers[step].includes(k) ? 'checked' : ''}><span class="qopt__box"></span><span>${o.t}</span></label>`).join('');
+      <label class="qopt"><input type="${type}" name="q${step}" value="${k}" ${answers[step] && answers[step].includes(k) ? 'checked' : ''}><span class="qopt__box"></span><span>${o.t}</span></label>`).join('');
     return `
       <aside class="quiz__side">
         <div class="quiz__ava" style="background-image:url(img/doc-3.webp)"></div>
         <div class="quiz__bubble">
           <b>Мария Лебедева</b><i>Врач-косметолог</i>
-          <p>Здравствуйте! Я&nbsp;проведу небольшую диагностику кожи и&nbsp;подберу подходящие средства ухода.</p>
+          <p>Здравствуйте!<br>Я&nbsp;проведу небольшую диагностику кожи и&nbsp;подберу подходящие средства ухода.</p>
           <p>Всего шесть вопросов помогут определить ваши потребности, особенности кожи и&nbsp;выбрать процедуры, которые дадут наилучший результат.</p>
         </div>
       </aside>
       <form class="quiz__main" novalidate>
-        <div class="quiz__progress"><span style="width:${(step + 1) / Q.length * 100}%"></span></div>
         <h3 class="quiz__q">${s.q}</h3>
-        <div class="quiz__opts" style="--rows:${Math.ceil(s.opts.length / 2)}">${opts}</div>
-        ${s.multi ? '<p class="quiz__hint">*Отметьте один или несколько вариантов</p>' : ''}
-        <p class="quiz__err" hidden>Выберите хотя&nbsp;бы один вариант</p>
+        <div class="quiz__opts">${opts}</div>
+        <p class="quiz__err" hidden>Выберите ${s.multi ? 'хотя&nbsp;бы один вариант' : 'один из&nbsp;вариантов'}</p>
         <div class="quiz__nav">
           <span class="quiz__step">Шаг: ${step + 1}/${Q.length}</span>
           <button type="button" class="quiz__back" data-back aria-label="Назад" ${step === 0 ? 'disabled' : ''}><svg aria-hidden="true"><use href="#arr-l"/></svg></button>
-          <button type="submit" class="quiz__next">${step === Q.length - 1 ? 'получить результат' : 'далее'}<svg aria-hidden="true"><use href="#arr-r"/></svg></button>
+          <button type="submit" class="quiz__next">${step === Q.length - 1 ? 'получить результат' : 'далее'}</button>
         </div>
       </form>`;
   }
