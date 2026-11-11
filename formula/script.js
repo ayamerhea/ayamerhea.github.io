@@ -264,3 +264,15 @@ document.querySelectorAll('.track').forEach(track => {
     lenis.scrollTo(el, { offset: el === 0 ? 0 : -70, duration: 1.4 });
   });
 })();
+
+// FAQ: в каждой вкладке открыт один вопрос; открытие другого закрывает предыдущий
+document.querySelectorAll('.faq__panel').forEach(panel => {
+  const items = [...panel.querySelectorAll('.qa')];
+  const set = qa => items.forEach(x => {
+    const on = x === qa;
+    x.classList.toggle('is-open', on);
+    x.querySelector('.qa__q').setAttribute('aria-expanded', on);
+  });
+  if (items[0]) set(items[0]);
+  items.forEach(qa => qa.querySelector('.qa__q').addEventListener('click', () => set(qa.classList.contains('is-open') ? null : qa)));
+});
