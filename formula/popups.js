@@ -160,6 +160,15 @@
     if (e.target.closest('[data-back]') && step > 0) { const f = body.querySelector('.quiz__main'); answers[step] = [...f.querySelectorAll('input:checked')].map(i => +i.value); step--; renderQuiz(-1); }
   });
   body.addEventListener('change', e => {
+    // «общий» ответ (ничего особенного, лицо в целом, несколько зон) снимает остальные галочки и наоборот
+    const inp = e.target;
+    if (inp.type === 'checkbox' && inp.checked) {
+      const opts = Q[step].opts;
+      const isEx = !!opts[+inp.value].ex;
+      inp.closest('.quiz__opts').querySelectorAll('input:checked').forEach(o => {
+        if (o !== inp && (isEx || opts[+o.value].ex)) o.checked = false;
+      });
+    }
     const f = e.target.closest('.quiz__main');
     if (f) { f.querySelector('.quiz__err').hidden = true; f.querySelector('.quiz__opts').classList.remove('is-error'); }
   });
