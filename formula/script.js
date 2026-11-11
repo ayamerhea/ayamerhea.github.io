@@ -142,3 +142,35 @@ reviews.forEach(r => { const i = new Image(); i.src = r.photo; });
   window.addEventListener('resize', fitReviews);
   if (document.fonts) document.fonts.ready.then(fitReviews);
 })();
+
+// Карусели: листание с зажатой кнопкой мыши
+document.querySelectorAll('.track').forEach(track => {
+  let startX = 0, startScroll = 0, moved = false, down = false;
+  track.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    down = true; moved = false;
+    startX = e.clientX; startScroll = track.scrollLeft;
+  });
+  window.addEventListener('pointermove', e => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    if (!moved && Math.abs(dx) > 5) { moved = true; track.classList.add('is-dragging'); }
+    if (moved) track.scrollLeft = startScroll - dx / (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--s')) || 1);
+  });
+  const end = () => {
+    if (!down) return;
+    down = false;
+    if (!moved) return;
+    // докатываем до ближайшей карточки
+    const card = track.querySelector('article');
+    const step = card.offsetWidth + 16;
+    const target = Math.round(track.scrollLeft / step) * step;
+    track.classList.remove('is-dragging');
+    track.scrollTo({ left: target, behavior: 'smooth' });
+  };
+  window.addEventListener('pointerup', end);
+  window.addEventListener('pointercancel', end);
+  // клик после перетаскивания не должен открывать ссылку
+  track.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  track.addEventListener('dragstart', e => e.preventDefault());
+});

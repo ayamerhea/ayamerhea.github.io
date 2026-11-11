@@ -114,7 +114,8 @@ html.scaled .hero__top::before{left:-50vw;right:-50vw}
 .slider-sec{padding:20px 0 120px;overflow:hidden}
 .slider-sec--last{padding-bottom:200px}
 .arrows{display:flex;gap:8px;margin-right:60px}
-.arrow{width:36px;height:36px;border:1.5px solid var(--black);border-radius:10px;font-size:16px;line-height:1;transition:background .2s,color .2s}
+.arrow{width:36px;height:36px;border:1.5px solid var(--black);border-radius:10px;display:grid;place-items:center;color:var(--black);transition:background .2s,color .2s}
+.arrow svg{width:23px;height:23px}
 .arrow:hover{background:var(--black);color:var(--white)}
 .track{display:flex;gap:16px;padding:20px var(--pad) 0;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--pad);scrollbar-width:none;max-width:1440px;margin:0 auto}
 .track::-webkit-scrollbar{display:none}
@@ -287,3 +288,9 @@ section[id],footer[id]{scroll-margin-top:70px}
 .ico-arrow{width:21px;height:21px;flex:none;display:inline-block;vertical-align:middle;margin:-4px -3px -3px -2px}
 .btn__arrow .ico-arrow{width:24px;height:24px;margin:0}
 .btn--sm .btn__arrow .ico-arrow{width:21px;height:21px}
+
+/* перетаскивание каруселей мышью */
+.track{cursor:grab;-webkit-user-select:none;user-select:none}
+.track.is-dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto}
+.track.is-dragging *{pointer-events:none}
+.track img{-webkit-user-drag:none}
