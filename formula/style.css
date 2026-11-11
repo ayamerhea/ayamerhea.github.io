@@ -361,9 +361,9 @@ html.pop-open{overflow:hidden}
 /* квиз (по макету: 1360×600, бежевая подложка, белая панель со скруглением 56) */
 .pop--quiz .pop__box{left:50%;top:50%;width:min(1360px,calc(100vw - 48px));height:min(600px,calc(100vh - 48px));border-radius:56px;background:var(--beige);transform:translate(-50%,-46%) scale(.98);opacity:0;transition:transform .5s cubic-bezier(.22,.8,.24,1),opacity .4s ease}
 .pop--quiz.is-open .pop__box{transform:translate(-50%,-50%);opacity:1}
-.pop--quiz .pop__body{display:grid;grid-template-columns:278px 1fr;overflow:hidden}
+.pop--quiz .pop__body{display:grid;grid-template-columns:292px 1fr;overflow:hidden}
 .pop--quiz .pop__close{top:30px;right:34px}
-.quiz__side{padding:32px 0 32px 32px}
+.quiz__side{padding:32px 40px 32px 32px}
 .quiz__ava{width:48px;height:48px;border-radius:8px;background-size:cover;background-position:center}
 .quiz__bubble{position:relative;margin-top:16px;background:var(--white);border-radius:12px;padding:16px 14px 18px;font-size:11px;line-height:1.4}
 .quiz__bubble::before{content:"";position:absolute;top:-7px;left:18px;border:7px solid transparent;border-top:0;border-bottom-color:var(--white)}
