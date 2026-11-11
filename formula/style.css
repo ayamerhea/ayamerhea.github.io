@@ -487,3 +487,4 @@ html.pop-open{overflow:hidden}
 .footer__mark use,.sec-head__mark use{transform-box:fill-box;transform-origin:center;animation:mark-spin 24s linear infinite}
 @media (prefers-reduced-motion:reduce){.footer__mark use,.sec-head__mark use{animation:none}}
 @media (max-width:960px){.footer__nav p{grid-column:auto}}
+.footer__mark,.sec-head__mark{overflow:visible}
