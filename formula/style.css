@@ -294,3 +294,7 @@ section[id],footer[id]{scroll-margin-top:70px}
 .track.is-dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto}
 .track.is-dragging *{pointer-events:none}
 .track img{-webkit-user-drag:none}
+
+/* отзывы: свайп и перетаскивание */
+.review{cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none;transition:opacity .3s,transform .3s ease}
+.review.is-dragging{cursor:grabbing;transition:opacity .3s}

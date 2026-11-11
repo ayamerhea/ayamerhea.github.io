@@ -174,3 +174,35 @@ document.querySelectorAll('.track').forEach(track => {
   track.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
   track.addEventListener('dragstart', e => e.preventDefault());
 });
+
+// Отзывы: перетаскивание мышью и свайп пальцем
+(function () {
+  const area = rv;
+  let x0 = 0, y0 = 0, dx = 0, active = false, horizontal = null;
+  const go = dir => document.querySelector(`[data-review="${dir}"]`).click();
+  area.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    active = true; horizontal = null; dx = 0;
+    x0 = e.clientX; y0 = e.clientY;
+  });
+  window.addEventListener('pointermove', e => {
+    if (!active) return;
+    dx = e.clientX - x0;
+    const dy = e.clientY - y0;
+    if (horizontal === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) horizontal = Math.abs(dx) > Math.abs(dy);
+    if (horizontal) {
+      area.classList.add('is-dragging');
+      area.style.transform = `translateX(${dx * 0.25}px)`;
+    }
+  });
+  const end = () => {
+    if (!active) return;
+    active = false;
+    area.classList.remove('is-dragging');
+    area.style.transform = '';
+    if (horizontal && Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+  };
+  window.addEventListener('pointerup', end);
+  window.addEventListener('pointercancel', end);
+  area.addEventListener('dragstart', e => e.preventDefault());
+})();
