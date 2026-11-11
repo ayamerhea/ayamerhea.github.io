@@ -350,7 +350,7 @@ html.pop-open{overflow:hidden}
 .pop--drawer .pop__body{padding:56px 52px 40px}
 .pop__title{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:-.02em;font-size:22px;line-height:1.15;padding-right:48px}
 .pop__lead{font-size:15px;line-height:1.4;opacity:.75;margin-top:22px;max-width:640px}
-.pop__line{height:1px;background:var(--line);margin:28px 0 12px}
+.pop__line{height:1px;background:var(--line);margin:28px 0}
 .price{list-style:none}
 .price li{display:flex;justify-content:space-between;gap:24px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
 .price b{font-weight:400;white-space:nowrap}
@@ -496,3 +496,8 @@ html.pop-open{overflow:hidden}
 .result:hover .result__more .ico-arrow{transform:translate(2px,-2px)}
 .track.is-dragging .result{transform:none;box-shadow:none}
 .track{padding-bottom:24px;margin-bottom:-24px}
+
+/* одинаковый отступ 28px над и под разделителем в попапах */
+.pop__line+.case,.pop__line+.price__group,.pop__line+.pop__foot,.pop__line+.outcome__label{margin-top:0}
+.pop__line+.price li:first-child{padding-top:0}
+.price__group{line-height:1.15}
