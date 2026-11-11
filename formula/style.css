@@ -204,7 +204,7 @@ form.is-sent .form__fields,form.is-sent .promo__bottom{display:none}
 .footer__mark{width:40px;height:40px}
 .footer__soc{display:flex;flex-direction:column;gap:6px}
 .footer a{transition:opacity .2s}.footer a:hover{opacity:.55}
-.footer__nav{display:grid;grid-template-columns:1.6fr 2.65fr;gap:20px;border-top:1px solid var(--line);padding-top:48px;padding-bottom:80px;position:relative}
+.footer__nav{display:grid;grid-template-columns:1.6fr 1fr 1fr .65fr;gap:20px;border-top:1px solid var(--line);padding-top:48px;padding-bottom:80px;position:relative}
 .footer__nav::before{content:none}
 .footer__nav p{font-size:clamp(22px,2.6vw,37px);font-weight:300;line-height:1.35;letter-spacing:-.02em}
 .footer__bottom{display:flex;align-items:center;gap:32px;padding-bottom:36px;font-size:14px}
@@ -251,6 +251,7 @@ form.is-sent .form__fields,form.is-sent .promo__bottom{display:none}
   .footer__top{grid-template-columns:1fr 1fr}
   .footer__mark{grid-column:1/-1}
   .footer__nav{grid-template-columns:1fr}
+  .footer__nav p{grid-column:auto}
   .footer__bottom{flex-wrap:wrap;gap:12px 24px}
   .footer__bottom small:last-child{margin-left:0}
 }
@@ -478,3 +479,11 @@ html.pop-open{overflow:hidden}
 .btn__arrow{transition:background .25s,color .25s,border-radius .4s}
 .btn:hover .btn__arrow{border-radius:50%}
 @media (prefers-reduced-motion:reduce){.btn__roll>span,.btn__arrow .ico-arrow{transition:none}}
+
+/* футер: навигация с той же сеткой, что колонки адреса/контактов */
+.footer__nav p{grid-column:2/-1}
+/* знак клиники медленно вращается */
+@keyframes mark-spin{to{transform:rotate(360deg)}}
+.footer__mark use,.sec-head__mark use{transform-box:fill-box;transform-origin:center;animation:mark-spin 24s linear infinite}
+@media (prefers-reduced-motion:reduce){.footer__mark use,.sec-head__mark use{animation:none}}
+@media (max-width:960px){.footer__nav p{grid-column:auto}}
