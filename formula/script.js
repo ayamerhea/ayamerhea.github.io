@@ -32,6 +32,12 @@ document.querySelectorAll('[style*="background-image"]').forEach(el => {
   img.src = m[1];
 });
 
+// Закреплённое меню: подложка появляется после начала прокрутки
+const topBar = document.querySelector('.hero__top');
+const onScroll = () => topBar.classList.toggle('is-scrolled', window.scrollY > 40);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+
 // Мобильное меню
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
