@@ -215,3 +215,30 @@ document.querySelectorAll('.track').forEach(track => {
   window.addEventListener('pointercancel', end);
   area.addEventListener('dragstart', e => e.preventDefault());
 })();
+
+// Манифест: «магнитная» фигура — мягко отталкивается от курсора
+(function () {
+  const blob = document.querySelector('.manifest__blob');
+  if (!blob || !matchMedia('(hover:hover) and (pointer:fine)').matches || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const zone = blob.closest('.manifest');
+  const R = 340, MAX = 46;            // радиус влияния и максимальный сдвиг, px
+  let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+  const tick = () => {
+    x += (tx - x) * 0.09; y += (ty - y) * 0.09;   // плавное догоняние
+    blob.style.setProperty('--mx', x.toFixed(2) + 'px');
+    blob.style.setProperty('--my', y.toFixed(2) + 'px');
+    blob.style.setProperty('--mr', (x * 0.12).toFixed(2) + 'deg');
+    raf = (Math.abs(tx - x) > 0.05 || Math.abs(ty - y) > 0.05) ? requestAnimationFrame(tick) : 0;
+  };
+  const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+  zone.addEventListener('mousemove', e => {
+    const r = blob.getBoundingClientRect();
+    const cx = r.left + r.width / 2 - x, cy = r.top + r.height / 2 - y;   // центр без текущего сдвига
+    const dx = cx - e.clientX, dy = cy - e.clientY, d = Math.hypot(dx, dy) || 1;
+    const k = Math.max(0, 1 - d / R);
+    const f = MAX * k * k * (3 - 2 * k);                                   // мягкое нарастание у центра
+    tx = dx / d * f; ty = dy / d * f;
+    kick();
+  });
+  zone.addEventListener('mouseleave', () => { tx = 0; ty = 0; kick(); });
+})();
