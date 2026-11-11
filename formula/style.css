@@ -298,3 +298,9 @@ section[id],footer[id]{scroll-margin-top:70px}
 /* отзывы: свайп и перетаскивание */
 .review{cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none;transition:opacity .3s,transform .3s ease}
 .review.is-dragging{cursor:grabbing;transition:opacity .3s}
+
+/* направления: знак и «подробнее» по центру правой белой вкладки (70.4% + 3px … 100%) */
+#directions .sec-head,.directions__row{position:relative}
+#directions .sec-head__mark,.directions__row b{position:absolute;left:calc(85.2% + 1.5px);margin:0;transform:translateX(-50%)}
+#directions .sec-head__mark{top:50%;transform:translate(-50%,-50%)}
+.directions__row b{top:50%;transform:translate(-50%,-50%);white-space:nowrap}
