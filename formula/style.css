@@ -762,7 +762,7 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .hero__bg{height:715px}
   .hero__title{min-height:667px}
 }
-@media (max-width:640px){.pop--form .pop__box{width:calc(100% - 32px)}html.scaled-m .pop--form .pop__box{max-height:calc(100svh / var(--s,1) - 32px)}html.scaled-m .pop--drawer .pop__box{height:calc(92svh / var(--s,1))}}
+@media (max-width:640px){.pop--form .pop__box{width:calc(100% - 32px)}html.scaled-m body .pop--form .pop__box{max-height:calc(100svh / var(--s,1) - 32px)}html.scaled-m body .pop--drawer .pop__box{height:calc(92svh / var(--s,1))}}
 .m-br{display:none}
 @media (max-width:640px){.hero__lead br.m-br{display:inline}}
 @media (max-width:640px){.hero__bg{background-image:url(img/hero-m.webp)!important;height:700px;background-size:cover;background-position:center top}.hero__bg::after{background:linear-gradient(180deg,rgba(40,32,24,0) 60%,rgba(40,32,24,.18) 92%)}}
@@ -841,3 +841,41 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .footer__bottom{font-size:16px}
 }
 @media (max-width:640px){.manifest__text{text-wrap:balance;max-width:300px}.stat__text{text-wrap:balance}}
+
+/* ===== правки мобилки (iPhone) ===== */
+/* попап вне body: свои базовые стили текста */
+.pop{font-family:var(--sans);color:var(--black);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+.quiz__ava{object-fit:cover;display:block}
+.d-br{display:inline}
+/* крестик на белой плашке 44px во всех попапах, на всех экранах */
+.pop__close{width:44px;height:44px;border-radius:12px;background:var(--white);box-shadow:0 0 0 1px rgba(44,54,56,.06)}
+.pop__close span{width:18px}
+@media (max-width:640px){
+  /* 1: стрелки в направлениях */
+  .directions__row b,#directions .directions__row b{display:grid!important;place-items:center}
+  /* 2: подпись манифеста 16px, три строки */
+  .manifest__text{max-width:none;text-wrap:wrap}
+  .manifest__text br.m-br{display:inline}
+  .manifest__text br.d-br{display:none}
+  /* 3: стрелка в карточках результатов не уезжает от «залипшего» ховера */
+  .result:hover .result__more .ico-arrow,.result .result__more .ico-arrow{transform:none!important;margin:0}
+  /* 5: попапы — равные поля, кнопка по центру, крестик на плашке */
+  .pop__close{top:14px;right:14px}
+  .pop--quiz .pop__close{top:18px;right:18px}
+  .pop--quiz.pop--outcome .pop__body{margin:0;height:100%}
+  .outcome{padding:72px 20px 32px}
+  .outcome__card{padding:24px 20px}
+  .pop__foot{align-items:stretch}
+  .pop__foot .btn{align-self:center}
+  /* 6: форма записи */
+  .pop--form .pop__box{left:16px;right:16px;width:auto}
+  .formpop .promo__inner{display:block;padding:0;margin:0;max-width:none}
+  .formpop .promo__card{padding:56px 24px 32px}
+  .formpop .promo__bottom .btn{width:100%}
+  .formpop .promo__bottom .btn__label{flex:1;justify-content:center;font-size:16px;padding:0 12px}
+  .form__doc{font-size:15px}
+}
+.m-br{display:none}
+@media (max-width:640px){.manifest__text br.m-br{display:inline}}
+@media (max-width:640px){#directions .directions__row b{align-self:center!important;grid-row:1/3}.formpop .promo__row>span{padding-left:48px;white-space:nowrap}}
+@media (max-width:640px){.formpop .promo__bottom .btn__label{font-size:15px;padding:0 8px}.formpop .promo__bottom .btn__arrow{width:44px}}

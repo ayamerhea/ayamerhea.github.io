@@ -9,7 +9,14 @@
   const root = document.createElement('div');
   root.className = 'pop';
   root.innerHTML = '<div class="pop__bg" data-close></div><div class="pop__box" role="dialog" aria-modal="true" tabindex="-1"><button class="pop__close" data-close aria-label="Закрыть"><span></span><span></span></button><div class="pop__body" data-lenis-prevent></div></div>';
-  document.body.appendChild(root);
+  // на телефонах монтируем попапы вне <body> (там zoom автоскейла), чтобы iOS Safari не ломал fixed-раскладку
+  const mountPop = () => {
+    const free = window.matchMedia('(max-width:640px)').matches;
+    root.classList.toggle('pop--free', free);
+    (free ? document.documentElement : document.body).appendChild(root);
+  };
+  mountPop();
+  window.addEventListener('resize', () => { if (!root.classList.contains('is-open')) mountPop(); });
   const box = root.querySelector('.pop__box');
   const body = root.querySelector('.pop__body');
   let lastFocus = null;
@@ -17,7 +24,7 @@
   function open(kind, html) {
     lastFocus = document.activeElement;
     // ставим окно в исходную позицию без анимации, чтобы оно не «прилетало» из угла
-    root.className = 'pop pop--' + kind + ' no-anim';
+    root.className = 'pop pop--' + kind + ' no-anim' + (root.parentNode === document.documentElement ? ' pop--free' : '');
     void box.offsetWidth;
     root.classList.remove('no-anim');
     body.innerHTML = html;
@@ -31,7 +38,7 @@
   function swapTo(kind, html) {
     box.style.opacity = '0';
     setTimeout(() => {
-      root.className = 'pop pop--' + kind + ' is-open';
+      root.className = 'pop pop--' + kind + ' is-open' + (root.parentNode === document.documentElement ? ' pop--free' : '');
       body.innerHTML = html; body.scrollTop = 0;
       if (window.enhanceBtns) enhanceBtns(body);
       box.style.transition = 'none'; box.style.opacity = '0';
@@ -114,7 +121,7 @@
       <label class="qopt"><input type="${type}" name="q${step}" value="${k}" ${answers[step] && answers[step].includes(k) ? 'checked' : ''}><span class="qopt__box"></span><span>${o.t}</span></label>`).join('');
     return `
       <aside class="quiz__side">
-        <div class="quiz__ava" style="background-image:url(img/quiz-doctor.webp)"></div>
+        <img class="quiz__ava" src="img/quiz-doctor.webp" alt="" width="48" height="48">
         <div class="quiz__bubble">
           <b>Мария Демидова</b><i>Врач-косметолог</i>
           <p>Здравствуйте!<br>Я&nbsp;проведу небольшую диагностику кожи и&nbsp;подберу подходящие средства ухода.</p>
