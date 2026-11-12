@@ -793,3 +793,5 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 
 /* дисклеймер внизу попапов: уже и сбалансированные строки */
 .pop__foot p{max-width:340px;text-wrap:balance}
+
+@media (min-width:641px){.manifest .manifest__title>.manifest__m{display:none!important}}
