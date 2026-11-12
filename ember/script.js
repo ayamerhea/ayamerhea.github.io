@@ -87,19 +87,21 @@ $$('.hero__nav, .hero__info, .hero__cta, .menu-btn, .corners--hero').forEach((el
   $$('.fan').forEach(svg => svg.innerHTML = html);
   const rays = $$('.fan').map(svg => $$('.ray', svg));
   const sec = $('.light'), txt = $('.light__text'), gray = $('.light__text span');
-  // слова серой части — по одному спану
-  typo(txt);
-  gray.innerHTML = gray.textContent.split(/(\s+)/).map(w => /\S/.test(w) ? `<i class="w">${w}</i>` : w).join('');
-  const words = $$('.w', gray);
+  // весь текст — по словам; заливка белым идёт по скроллу в обе стороны
+  const lead = txt.firstChild.nodeValue;
+  txt.innerHTML = (lead + gray.textContent).split(/(\s+)/).map(w => /\S/.test(w) ? `<i class="w">${w}</i>` : w).join('');
+  const words = $$('.w', txt);
   const upd = () => {
     const r = sec.getBoundingClientRect(), vh = innerHeight;
-    const pr = clamp((vh - r.top) / (vh * 0.9), 0, 1);           // лучи: пока блок въезжает
-    const tr = txt.getBoundingClientRect();
-    const pt = clamp((vh * 0.85 - tr.top) / (vh * 0.5), 0, 1);       // текст: пока поднимается от низа экрана к середине
+    const pr = clamp((vh - r.top) / (vh * 0.9), 0, 1);
     rays.forEach(list => list.forEach((ray, i) => ray.classList.toggle('is-on', pr * 1.15 > i / list.length)));
+    const tr = txt.getBoundingClientRect();
+    // старт: верх текста у низа экрана; финиш: низ текста на трети экрана
+    const pt = clamp((vh * 0.95 - tr.top) / (vh * 0.95 - vh * 0.33 + tr.height), 0, 1);
+    const n = words.length;
     words.forEach((w, i) => {
-      const t = clamp(pt * (words.length + 3) - i, 0, 1);
-      w.style.color = `rgba(235,235,235,${0.5 + 0.5 * t})`;
+      const t = clamp(pt * (n + 2) - i, 0, 1);
+      w.style.color = `rgba(235,235,235,${(0.25 + 0.75 * t).toFixed(3)})`;
     });
   };
   addEventListener('scroll', upd, { passive: true }); upd();

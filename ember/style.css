@@ -99,7 +99,7 @@ html:not(.is-loading) .hero .reveal-h{opacity:1;transform:none}
 .fan--2{transform-origin:962.5px 645.5px;transform:rotate(180deg)}
 .light__text{position:absolute;left:362px;top:523px;width:1196px;font-size:64px;line-height:1.2;text-align:center}
 .light__text span{color:rgba(235,235,235,.5)}
-.light__text .w{font-style:normal;transition:color .3s linear}
+.light__text .w{font-style:normal}
 
 /* ============ ИСКЛЮЧИТЕЛЬНОСТЬ ============ */
 .excl{--imgH:min(900px,calc(var(--vh,1626px) - 160px));--imgT:calc((var(--vh,1626px) - var(--imgH)) / 2);--bandH:clamp(120px,calc(var(--vh,1626px) * .16),194px);--bandT:max(320px,calc(var(--imgT) + var(--imgH) * .212));height:var(--vh,1626px);min-height:820px;overflow:hidden}
