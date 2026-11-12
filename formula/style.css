@@ -532,7 +532,7 @@ html.pop-open{overflow:hidden}
 .review__name{font-weight:500}
 .directions__row span{transition:transform .6s cubic-bezier(.22,.8,.24,1)}
 .directions li:hover .directions__row span{transform:translateX(10px)}
-.count{font-variant-numeric:tabular-nums;display:inline-block;min-width:var(--w,auto);text-align:right}
+.count{font-variant-numeric:tabular-nums;display:inline-block;text-align:left}
 
 /* Medium-заголовки: letter-spacing -1px */
 .result h3,.pop__title,.review__name{letter-spacing:-1px}
@@ -774,4 +774,11 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .pop--drawer .pop__close{top:22px;right:26px}
   .pop--quiz .pop__close{top:24px;right:28px}
   .pop--form .pop__close{top:20px;right:20px}
+}
+
+/* оптическое выравнивание цифр по левому краю колонки (компенсация полей глифов) */
+@media (min-width:641px){
+  .count[data-to="20"]{margin-left:-.046em}
+  .count[data-to="15"]{margin-left:-.074em}
+  .count[data-to="500"]{margin-left:-.037em}
 }

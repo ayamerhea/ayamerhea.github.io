@@ -347,7 +347,7 @@ document.querySelectorAll('.faq__panel').forEach(panel => {
     requestAnimationFrame(tick);
   };
   els.forEach(el => {
-    el.style.setProperty('--w', el.dataset.to.length + 'ch');   // ширина не прыгает во время счёта
+    el.style.minWidth = el.getBoundingClientRect().width / (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--s')) || 1) + 'px';   // ширина = итоговое число, «+» не прыгает
     if (!reduce) el.textContent = '1';
   });
   if (reduce) return;
