@@ -812,3 +812,7 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 .quiz__next .btn__roll>span{transition:transform .55s cubic-bezier(.65,0,.25,1)}
 .quiz__next:hover .btn__roll>span:first-child{transform:translateY(-110%)}
 .quiz__next:hover .btn__roll>span+span{transform:none}
+.footer__bottom{flex-wrap:wrap}
+.footer__note{flex-basis:100%;order:10;margin-top:4px;opacity:.6!important}
+@media (min-width:641px){.footer__bottom small:last-of-type:not(.footer__note){margin-left:auto}}
+@media (min-width:641px){.footer__bottom{row-gap:14px}.footer__bottom small:nth-last-of-type(2){margin-left:auto}}
