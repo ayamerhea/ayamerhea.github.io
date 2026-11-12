@@ -128,7 +128,7 @@
         <div class="quiz__nav">
           <span class="quiz__step">Шаг: ${step + 1}/${Q.length}</span>
           <button type="button" class="quiz__back" data-back aria-label="Назад" ${step === 0 ? 'disabled' : ''}><svg aria-hidden="true"><use href="#arr-l"/></svg></button>
-          <button type="submit" class="quiz__next">${step === Q.length - 1 ? 'получить результат' : 'далее'}</button>
+          <button type="submit" class="quiz__next">${(t => `<span class="btn__roll"><span>${t}</span><span aria-hidden="true">${t}</span></span>`)(step === Q.length - 1 ? 'получить результат' : 'далее')}</button>
         </div>
       </form>`;
   }

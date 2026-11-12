@@ -807,3 +807,8 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 }
 .footer__nav .nw{white-space:nowrap}
 @media (max-width:640px){.footer__nav .nw{white-space:normal}}
+
+/* кнопка «далее» в квизе: тот же перекат текста, что у больших кнопок */
+.quiz__next .btn__roll>span{transition:transform .55s cubic-bezier(.65,0,.25,1)}
+.quiz__next:hover .btn__roll>span:first-child{transform:translateY(-110%)}
+.quiz__next:hover .btn__roll>span+span{transform:none}
