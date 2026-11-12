@@ -908,3 +908,4 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   #reviews{padding-bottom:104px}
   .faq{padding-top:78px}
 }
+@media (max-width:640px){.manifest{padding-bottom:80px}}
