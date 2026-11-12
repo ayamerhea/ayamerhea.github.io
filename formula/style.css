@@ -909,3 +909,14 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .faq{padding-top:78px}
 }
 @media (max-width:640px){.manifest{padding-bottom:80px}}
+
+/* мобилка: тексты у цифр — 4 строки (20, 15), без «висячего» слова (500), низ по низу цифр */
+@media (max-width:640px){
+  .stat__body>div:first-child{align-items:flex-end}
+  .stat__text{white-space:normal;text-wrap:balance;margin-top:0}
+  .stat__text br{display:none!important}
+  .stack>.stat:nth-child(1) .stat__text{max-width:150px}
+  .stack>.stat:nth-child(2) .stat__text{max-width:160px}
+  .stack>.stat:nth-child(3) .stat__text{max-width:150px}
+}
+@media (max-width:640px){.stat__num{line-height:.72}.stat__num .count{line-height:.72;padding-top:6px}.stat__num small{line-height:.72}.stat__num sup{line-height:1}.stat__text{margin-bottom:-3px}}
