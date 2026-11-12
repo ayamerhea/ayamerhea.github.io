@@ -42,11 +42,10 @@ img{display:block;max-width:100%}
 
 /* перекат текста на ховере */
 .roll{display:inline-block;position:relative;overflow:hidden;vertical-align:top}
-.roll::after{content:attr(data-text);position:absolute;left:0;top:100%;white-space:nowrap}
-.roll,.roll::after{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
-@media (hover:hover){
-  a:hover .roll,button:hover .roll{transform:translateY(-100%)}
-}
+.roll__in{display:block;position:relative;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+.roll__in::after{content:attr(data-text);position:absolute;left:0;top:100%;white-space:nowrap}
+@media (hover:hover){a:hover .roll__in,button:hover .roll__in{transform:translateY(-100%)}}
+
 
 .title{font:400 96px/106px var(--disp);letter-spacing:.02em;color:var(--red);-webkit-text-stroke:1px var(--red);text-transform:uppercase}
 

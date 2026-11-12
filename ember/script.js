@@ -322,6 +322,10 @@ const DNA = [
 
 /* ---------- кнопки: перекат текста и улетающая стрелка ---------- */
 function enhance(rootEl) {
+  $$('.roll:not([data-r])', rootEl || document).forEach(r => {
+    r.setAttribute('data-r', '');
+    r.innerHTML = `<span class="roll__in" data-text="${r.dataset.text}">${r.innerHTML}</span>`;
+  });
   $$('.cta:not([data-fx])', rootEl || document).forEach(b => {
     b.setAttribute('data-fx', '');
     const svg = $(':scope > .px-arrow', b);
