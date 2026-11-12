@@ -6,7 +6,14 @@ const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 const ease = t => 1 - Math.pow(1 - t, 3);
 const S = () => parseFloat(getComputedStyle(root).getPropertyValue('--s')) || 1;
 const isMob = () => root.classList.contains('mob');
-const nb = s => s.replace(/(^|[\s«(])(в|во|и|а|к|с|со|о|об|у|на|не|по|за|из|от|до|для|без|что|как|мы|я|ей|её|ее|то|же|ли|при|про|под|над)\s/gi, '$1$2 ').replace(/\s—/g, ' —');
+const NB_WORDS = 'в|во|и|а|к|ко|с|со|о|об|обо|у|на|не|ни|по|за|из|от|до|для|без|что|как|мы|я|ей|её|ее|то|же|ли|бы|при|про|под|над|или|но|да|их|его|её|все|это|вы|вас|вам|он|она|они|кто';
+const NB_RE = new RegExp('(^|[\\s\\u00A0«(„"/])(' + NB_WORDS + ')\\s+(?=\\S)', 'gi');
+const nb = s => s.replace(NB_RE, '$1$2 ').replace(NB_RE, '$1$2 ').replace(/\s+—/g, ' —').replace(/(\d)\s+(?=[a-zа-яё%])/gi, '$1 ');
+function typo(el) {
+  const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, { acceptNode: n => /SCRIPT|STYLE/.test(n.parentNode.nodeName) ? 2 : 1 });
+  const list = []; while (w.nextNode()) list.push(w.currentNode);
+  list.forEach(n => { const v = nb(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; });
+}
 
 /* ---------- прелоудер ---------- */
 (function () {
@@ -28,17 +35,20 @@ const nb = s => s.replace(/(^|[\s«(])(в|во|и|а|к|с|со|о|об|у|на|
 /* ---------- автоскейл: десктоп = макет 1920, телефон/планшет = макет 440 ---------- */
 const layoutHooks = [];
 (function () {
-  let last = null;
+  let last = null, lastW = 0;
   const fit = () => {
     const w = root.clientWidth;
     const mob = w < 1024;
     const s = mob ? Math.min(w / 440, 1.6) : w / 1920;
     root.classList.toggle('mob', mob);
     root.style.setProperty('--s', String(Math.floor(s * 10000) / 10000));
+    // высота экрана в пикселях макета; на телефоне — только при смене ширины (адресная строка не дёргает блоки)
+    if (!mob || w !== lastW) root.style.setProperty('--vh', (innerHeight / s).toFixed(1) + 'px');
+    lastW = w;
     if (last !== mob) { last = mob; layoutHooks.forEach(f => f()); }
   };
   fit();
-  addEventListener('resize', fit);
+  addEventListener('resize', () => { fit(); layoutHooks.forEach(f => f.onResize && f()); });
 })();
 
 /* видео первого экрана: своё для десктопа и мобилки */
@@ -64,23 +74,35 @@ $$('.hero__nav, .hero__info, .hero__cta, .menu-btn, .corners--hero').forEach((el
   el.style.transitionDelay = (0.25 + i * 0.08) + 's';
 });
 
-/* ---------- веер красных лучей ---------- */
+/* ---------- свет: лучи появляются по очереди, текст постепенно белеет ---------- */
 (function () {
-  const g = $('#fan-g');
-  if (!g) return;
   const S0 = [-255.439, 895.271], S1 = [353.667, 1060.52], E0 = [504.1, 46.08], E1 = [-497.339, 299.358];
-  let d = '';
+  let html = '';
   for (let i = 0; i <= 21; i++) {
-    const k = i / 21;
-    const s = [S0[0] + (S1[0] - S0[0]) * k, S0[1] + (S1[1] - S0[1]) * k];
-    const e = [E0[0] + (E1[0] - E0[0]) * k, E0[1] + (E1[1] - E0[1]) * k];
-    const m = [(s[0] + e[0]) / 2, (s[1] + e[1]) / 2];
-    const len = Math.hypot(e[0] - s[0], e[1] - s[1]);
-    const n = [-(e[1] - s[1]) / len * 2.6, (e[0] - s[0]) / len * 2.6];
-    const f = v => v.toFixed(1);
-    d += `M${f(s[0])} ${f(s[1])}L${f(m[0] + n[0])} ${f(m[1] + n[1])}L${f(e[0])} ${f(e[1])}L${f(m[0] - n[0])} ${f(m[1] - n[1])}Z`;
+    const k = i / 21, f = v => v.toFixed(1);
+    const a = [S0[0] + (S1[0] - S0[0]) * k, S0[1] + (S1[1] - S0[1]) * k];
+    const b = [E0[0] + (E1[0] - E0[0]) * k, E0[1] + (E1[1] - E0[1]) * k];
+    html += `<path class="ray" pathLength="1" d="M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}"/>`;
   }
-  g.innerHTML = `<path d="${d}"/>`;
+  $$('.fan').forEach(svg => svg.innerHTML = html);
+  const rays = $$('.fan').map(svg => $$('.ray', svg));
+  const sec = $('.light'), txt = $('.light__text'), gray = $('.light__text span');
+  // слова серой части — по одному спану
+  typo(txt);
+  gray.innerHTML = gray.textContent.split(/(\s+)/).map(w => /\S/.test(w) ? `<i class="w">${w}</i>` : w).join('');
+  const words = $$('.w', gray);
+  const upd = () => {
+    const r = sec.getBoundingClientRect(), vh = innerHeight;
+    const pr = clamp((vh - r.top) / (vh * 0.9), 0, 1);           // лучи: пока блок въезжает
+    const tr = txt.getBoundingClientRect();
+    const pt = clamp((vh * 0.85 - tr.top) / (vh * 0.5), 0, 1);       // текст: пока поднимается от низа экрана к середине
+    rays.forEach(list => list.forEach((ray, i) => ray.classList.toggle('is-on', pr * 1.15 > i / list.length)));
+    words.forEach((w, i) => {
+      const t = clamp(pt * (words.length + 3) - i, 0, 1);
+      w.style.color = `rgba(235,235,235,${0.5 + 0.5 * t})`;
+    });
+  };
+  addEventListener('scroll', upd, { passive: true }); upd();
 })();
 
 /* ---------- бегущие строки ---------- */
@@ -106,7 +128,7 @@ let scrollVel = 0, lastY = scrollY;
     marquees.forEach(m => {
       const w = m.track.scrollWidth / 2;
       if (!w) return;
-      m.x += m.dir * dirFlip * m.speed * boost * dt;
+      if (!m.hold) m.x += m.dir * dirFlip * m.speed * boost * dt;
       if (m.x <= -w) m.x += w;
       if (m.x > 0) m.x -= w;
       m.track.style.transform = `translate3d(${m.x}px,0,0)`;
@@ -174,39 +196,38 @@ const CARDS = [
   ['Пост-продакшн', 'Цифры и усиление', 'отчётность, выводы, корректировки, усиление работающих связок, рост входящих']
 ];
 (function () {
-  const sec = $('.strat'), pin = $('.strat__pin'), deck = $('.strat__deck');
+  const sec = $('.strat'), pin = $('.strat__pin'), box = $('.strat__box'), deck = $('.strat__deck');
   deck.innerHTML = CARDS.map(([l, t, d]) => `<div class="card"><span class="corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div class="card__in">
     <p class="card__label">${l}</p><h3 class="card__title">${t}</h3><svg class="card__ico" aria-hidden="true"><use href="#focus"/></svg><p class="card__text">${nb(d)}</p></div></div>`).join('');
   const cards = $$('.card', deck);
   const n = cards.length;
-  const setStick = () => {
-    const s = S(), vh = innerHeight / s, H = pin.offsetHeight;
-    const center = isMob() ? 534 : 660;
-    pin.style.setProperty('--stick', clamp(vh / 2 - center, Math.min(0, vh - H), 0) + 'px');
+  // блок занимает экран целиком, композиция макета вписывается в высоту экрана
+  const fitBox = () => {
+    const H = innerHeight / S(), D = isMob() ? 956 : 1303;
+    const k = Math.min(1, H / D);
+    box.style.transform = `translate(-50%,-50%) scale(${k})`;
   };
   const update = () => {
     const s = S();
     const r = sec.getBoundingClientRect();
-    const stick = parseFloat(pin.style.getPropertyValue('--stick')) || 0;
     const range = r.height - pin.offsetHeight * s;
-    const p = clamp((stick * s - r.top) / range, 0, 1);
+    const p = clamp(-r.top / range, 0, 1);
     const P = clamp(p / 0.88, 0, 1) * (n - 1);
-    let top = 0;
     cards.forEach((c, i) => {
       const rot = i % 2 ? 5 : -5;
+      // нижние карточки темнеют, когда на них ложится следующая
+      c.style.setProperty('--dim', (clamp(P - i, 0, 1.6) * 0.28).toFixed(3));
       if (i === 0) { c.style.transform = `rotate(${rot}deg)`; return; }
       const k = clamp(P - (i - 1), 0, 1), e = ease(k);
-      if (k > 0.5) top = i;
       const y = (1 - e) * (isMob() ? 900 : 1150);
       c.style.transform = `translate3d(0,${y}px,0) rotate(${rot + (1 - e) * rot * 3}deg)`;
       c.style.visibility = k <= 0 ? 'hidden' : '';
     });
   };
-  setStick(); update();
-  addEventListener('resize', () => { setStick(); update(); });
-  layoutHooks.push(() => { setStick(); update(); });
+  fitBox(); update();
+  addEventListener('resize', () => { fitBox(); update(); });
+  layoutHooks.push(() => { fitBox(); update(); });
   addEventListener('scroll', update, { passive: true });
-  window.__stratUpdate = update;
 })();
 
 /* ---------- Наш результат: аккордеон ---------- */
@@ -238,22 +259,28 @@ const CASES = [
   { img: 'img/case-3.webp', tag: 'эксперт', name: 'Velvet hour', text: 'Позиционирование психолога-консультанта: тон коммуникации, контент-архитектура и подкаст, который цитируют в профильных каналах.', stats: [['Подписчики', '+48 тыс.'], ['Конверсия в запись', '7,8%'], ['Срок', '4 месяца']] }
 ];
 (function () {
-  const track = $('.cases__track');
-  track.innerHTML = CASES.map((c, i) => `<a class="reel${i === 1 ? ' is-main' : ''}" href="#" data-case="${i}" aria-label="Кейс ${c.name}">
+  const wrap = $('.cases__track');
+  // кейсы повторяются по кругу: набор из 6 (3 кейса × 2), чтобы чередование высот совпадало при склейке
+  const one = [0, 1, 2, 0, 1, 2].map((c, i) => `<a class="reel" href="#" data-case="${c}" aria-label="Кейс ${CASES[c].name}">
     <span class="corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-    <span class="reel__img"><img src="${c.img}" alt="" loading="lazy"></span><span class="reel__watch">watch</span></a>`).join('');
-  // параллакс на десктопе
-  const reels = $$('.reel', track), sec = $('.cases');
-  const par = () => {
-    if (isMob()) { reels.forEach(r => r.style.transform = ''); return; }
-    const r = sec.getBoundingClientRect(), vh = innerHeight;
-    const k = clamp((vh - r.top) / (vh + r.height), 0, 1) - 0.5;
-    reels.forEach((el, i) => el.style.transform = `translate3d(0,${k * [-160, 120, -260][i]}px,0)`);
-  };
-  addEventListener('scroll', par, { passive: true }); layoutHooks.push(par); par();
-  // мобилка: начинаем с центрального ролика
-  layoutHooks.push(() => { if (isMob()) requestAnimationFrame(() => { track.scrollLeft = (track.scrollWidth - track.clientWidth) / 2; }); });
-  if (isMob()) requestAnimationFrame(() => { track.scrollLeft = (track.scrollWidth - track.clientWidth) / 2; });
+    <span class="reel__img"><img src="${CASES[c].img}" alt="" loading="lazy" draggable="false"></span><span class="reel__watch">watch</span></a>`).join('');
+  wrap.innerHTML = `<div class="track"><div class="reels">${one}</div><div class="reels" aria-hidden="true">${one}</div></div>`;
+  const track = $('.track', wrap);
+  const m = { track, dir: -1, speed: 40, x: 0 };
+  const start = () => { m.x = isMob() ? 87.5 - 6 * 305 : 200 - 6 * 627.5; };
+  start(); layoutHooks.push(start);
+  marquees.push(m);
+  // перетаскивание мышью и пальцем
+  let down = false, sx = 0, x0 = 0, moved = false;
+  wrap.addEventListener('pointerdown', e => { down = true; moved = false; sx = e.clientX; x0 = m.x; m.hold = true; });
+  addEventListener('pointermove', e => {
+    if (!down) return;
+    const dx = (e.clientX - sx) / S();
+    if (Math.abs(dx) > 6) moved = true;
+    m.x = x0 + dx;
+  });
+  addEventListener('pointerup', () => { if (down) { down = false; m.hold = false; } });
+  wrap.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
 })();
 
 /* ---------- ДНК ---------- */
@@ -280,6 +307,34 @@ const DNA = [
   swipe(box.parentElement, d => go(cur + d));
 })();
 
+/* ДНК на всю высоту экрана: контент (линии 208…1139 макета) по центру, при нехватке высоты — масштаб */
+(function () {
+  const box = $('.dna__box');
+  const fit = () => {
+    if (isMob()) { box.style.transform = ''; return; }
+    const H = innerHeight / S(), C = 931, top = 208;
+    const k = Math.min(1, (H - 80) / C);
+    box.style.transformOrigin = `0 ${top + C / 2}px`;
+    box.style.transform = `translateY(${(H / 2 - (top + C / 2)).toFixed(1)}px) scale(${k.toFixed(4)})`;
+  };
+  fit(); addEventListener('resize', fit); layoutHooks.push(fit);
+})();
+
+/* ---------- кнопки: перекат текста и улетающая стрелка ---------- */
+function enhance(rootEl) {
+  $$('.cta:not([data-fx])', rootEl || document).forEach(b => {
+    b.setAttribute('data-fx', '');
+    const svg = $(':scope > .px-arrow', b);
+    if (!svg) return;
+    const fly = document.createElement('span');
+    fly.className = 'fly';
+    svg.replaceWith(fly);
+    fly.appendChild(svg);
+    const c = svg.cloneNode(true); c.classList.add('is-next'); fly.appendChild(c);
+  });
+}
+enhance();
+
 /* ---------- попап: кейс и заявка ---------- */
 (function () {
   const pop = $('.pop'), media = $('.pop__media'), info = $('.pop__info');
@@ -304,6 +359,7 @@ const DNA = [
         <label><span>О проекте</span><input name="about"></label>
         <button class="cta" type="submit"><span class="roll" data-text="отправить">отправить</span> <svg class="px-arrow"><use href="#px-arrow"/></svg></button>
         <p class="lead__done">Спасибо! Продюсер свяжется с вами в течение дня.</p></form>`;
+      enhance(info);
       $('.lead', info).addEventListener('submit', ev => { ev.preventDefault(); ev.target.classList.add('is-done'); });
       open();
     }
@@ -345,3 +401,6 @@ if (window.Lenis && matchMedia('(hover:hover) and (pointer:fine)').matches && !m
   const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
 }
+
+/* типограф по всей странице */
+[document.body, $(".menu"), $(".pop")].forEach(typo);
