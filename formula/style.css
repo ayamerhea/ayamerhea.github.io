@@ -790,3 +790,6 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 
 /* «вкладки» футера не наследуют стиль подписей (i) */
 .footer .cap i{opacity:1;margin:0;font-size:inherit}
+
+/* дисклеймер внизу попапов: уже и сбалансированные строки */
+.pop__foot p{max-width:340px;text-wrap:balance}
