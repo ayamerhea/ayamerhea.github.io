@@ -257,7 +257,20 @@ html:not(.is-loading) .hero .reveal-h{opacity:1;transform:none}
 /* ============ ПОПАП / МЕНЮ (смонтированы в <html>, вне zoom) ============ */
 .pop,.menu{position:fixed;left:0;top:0;width:calc(100vw / var(--s));height:calc(100vh / var(--s));height:calc(100dvh / var(--s));zoom:var(--s);z-index:900;visibility:hidden;opacity:0;transition:opacity .5s ease,visibility .5s;font:400 16px/1.5 var(--text);letter-spacing:-.01em;text-transform:uppercase;color:var(--white)}
 .pop.is-open,.menu.is-open{visibility:visible;opacity:1}
-.pop{background:rgba(11,11,11,.92);display:grid;place-items:center}
+.pop{background:var(--black);display:grid;place-items:center}
+.pop::after{content:"";position:absolute;inset:0;background:var(--noise);opacity:.09;mix-blend-mode:screen;pointer-events:none}
+.pop.is-lead .pop__media{display:none}
+.pop.is-lead .pop__info{width:640px}
+.pop.is-lead .pop__info h3{font-size:64px;line-height:.95;margin:12px 0 48px}
+.lead{display:grid;gap:28px}
+.lead label{display:block}
+.lead label span{display:block;margin-bottom:6px;font-size:14px;line-height:20px;opacity:.6}
+.lead input{display:block;width:100%;padding:8px 0 12px;background:none;border:0;border-bottom:1px solid rgba(235,235,235,.35);border-radius:0;color:var(--white);font:400 20px/28px var(--text);letter-spacing:-.01em;outline:none;transition:border-color .3s}
+.lead input:focus{border-color:var(--red)}
+.lead .cta{justify-self:start;margin-top:36px}
+.lead__done{display:none;font-size:20px;line-height:1.4}
+.lead.is-done>*{display:none}
+.lead.is-done .lead__done{display:block}
 .pop__box{position:relative;display:flex;gap:64px;align-items:flex-end;transform:translateY(40px);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .pop.is-open .pop__box{transform:none}
 .pop__media{position:relative;width:450px;height:800px;background:#200203;overflow:hidden}
@@ -399,6 +412,9 @@ html.mob .pop__box{flex-direction:column;align-items:stretch;gap:24px;width:400p
 html.mob .pop__media{width:400px;height:520px}
 html.mob .pop__info{width:400px}
 html.mob .pop__info h3{font-size:48px;margin:6px 0 16px}
+html.mob .pop.is-lead .pop__info{width:400px}
+html.mob .pop.is-lead .pop__info h3{font-size:44px;margin:8px 0 32px}
+html.mob .lead input{font-size:18px}
 html.mob .pop__info p{font-size:14px}
 html.mob .pop__info ul{margin-top:16px}
 html.mob .pop__info li{font-size:14px}

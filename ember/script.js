@@ -351,13 +351,13 @@ enhance();
     if (c) {
       e.preventDefault();
       const d = CASES[+c.dataset.case];
-      media.style.display = '';
+      pop.classList.remove('is-lead');
       media.innerHTML = `<img src="${d.img}" alt="">`;
       info.innerHTML = `<small>${d.tag}</small><h3>${d.name}</h3><p>${nb(d.text)}</p><ul>${d.stats.map(([a, b]) => `<li><span>${a}</span><b>${b}</b></li>`).join('')}</ul>`;
       open();
     } else if (l) {
       e.preventDefault();
-      media.style.display = 'none';
+      pop.classList.add('is-lead');
       info.innerHTML = `<small>заявка</small><h3>Сделать имя видимым</h3>
         <form class="lead"><label><span>Имя</span><input name="name" required autocomplete="name"></label>
         <label><span>Телефон или Telegram</span><input name="contact" required></label>
