@@ -816,3 +816,6 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 .footer__note{flex-basis:100%;order:10;margin-top:4px;opacity:.6!important}
 @media (min-width:641px){.footer__bottom small:last-of-type:not(.footer__note){margin-left:auto}}
 @media (min-width:641px){.footer__bottom{row-gap:14px}.footer__bottom small:nth-last-of-type(2){margin-left:auto}}
+
+/* цифры в «о клинике»: трекинг -2px */
+.stat__num,.stat__num .count{letter-spacing:-2px}
