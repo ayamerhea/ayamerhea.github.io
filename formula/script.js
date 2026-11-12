@@ -353,3 +353,20 @@ document.querySelectorAll('.faq__panel').forEach(panel => {
   }), { threshold: 0.6 });
   els.forEach(el => io.observe(el));
 })();
+
+// Мобильные отзывы: лента карточек (как в макете), строится из того же массива
+(function () {
+  const sec = document.getElementById('reviews');
+  if (!sec || typeof reviews === 'undefined') return;
+  const track = document.createElement('div');
+  track.className = 'track review-track';
+  track.innerHTML = reviews.map((r, i) => `
+    <article class="rcard">
+      <div class="rcard__head">
+        <div><i>(${i + 1}/${reviews.length})</i><p class="rcard__name">${r.name}</p></div>
+        <div class="rcard__photo" style="background-image:url(${r.photo})"></div>
+      </div>
+      <p class="rcard__text">${r.text}</p>
+    </article>`).join('');
+  sec.appendChild(track);
+})();
