@@ -56,9 +56,9 @@ const layoutHooks = [];
   const v = $('.hero__bg');
   if (!v) return;
   const set = () => {
-    const src = isMob() ? 'img/hero-m.mp4?v=11121046' : 'img/hero.mp4?v=11121046';
+    const src = isMob() ? 'img/hero-m.mp4?v=11121112' : 'img/hero.mp4?v=11121112';
     if (v.getAttribute('src') === src) return;
-    v.poster = isMob() ? 'img/hero-m.webp?v=11121046' : 'img/hero.webp?v=11121046';
+    v.poster = isMob() ? 'img/hero-m.webp?v=11121112' : 'img/hero.webp?v=11121112';
     v.src = src; v.muted = true;
     const p = v.play(); if (p) p.catch(() => {});
   };
@@ -212,13 +212,12 @@ const CARDS = [
     const r = sec.getBoundingClientRect();
     const range = r.height - pin.offsetHeight * s;
     const p = clamp(-r.top / range, 0, 1);
-    const P = clamp(p / 0.88, 0, 1) * (n - 1);
+    // сначала блок без карточек (текст читается), затем карточки ложатся по одной
+    const P = clamp((p - 0.1) / 0.8, 0, 1) * n;
     cards.forEach((c, i) => {
       const rot = i % 2 ? 5 : -5;
-      // нижние карточки темнеют, когда на них ложится следующая
-      c.style.setProperty('--dim', (clamp(P - i, 0, 1.6) * 0.28).toFixed(3));
-      if (i === 0) { c.style.transform = `rotate(${rot}deg)`; return; }
-      const k = clamp(P - (i - 1), 0, 1), e = ease(k);
+      c.style.setProperty('--dim', (clamp(P - i - 1, 0, 1.6) * 0.28).toFixed(3));
+      const k = clamp(P - i, 0, 1), e = ease(k);
       const y = (1 - e) * (isMob() ? 900 : 1150);
       c.style.transform = `translate3d(0,${y}px,0) rotate(${rot + (1 - e) * rot * 3}deg)`;
       c.style.visibility = k <= 0 ? 'hidden' : '';
