@@ -880,3 +880,10 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 @media (max-width:640px){#directions .directions__row b{align-self:center!important;grid-row:1/3}.formpop .promo__row>span{padding-left:48px;white-space:nowrap}}
 @media (max-width:640px){.formpop .promo__bottom .btn__label{font-size:15px;padding:0 8px}.formpop .promo__bottom .btn__arrow{width:44px}}
 @media (min-width:641px){.manifest__text{margin-top:37px}}
+
+/* мобилка: заголовки «о клинике» в рамках колонок (40–350), тексты 12px */
+@media (max-width:640px){
+  .stat__title{font-size:34px;padding:0 30px}
+  .stack>.stat:nth-child(3) .stat__row>span{padding-right:0}
+  .stat__text{font-size:12px;line-height:1.3;max-width:170px}
+}
