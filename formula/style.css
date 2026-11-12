@@ -818,7 +818,7 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 @media (min-width:641px){.footer__bottom{row-gap:14px}.footer__bottom small:nth-last-of-type(2){margin-left:auto}}
 
 /* цифры в «о клинике»: трекинг -2px */
-.stat__num,.stat__num .count{letter-spacing:-6px}
+.stat__num,.stat__num .count{letter-spacing:-10px}
 
 /* низ футера на той же сетке, что адрес / контакты / соцсети */
 .footer__links{display:flex;gap:32px;flex-wrap:wrap}
