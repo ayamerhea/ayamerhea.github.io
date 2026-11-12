@@ -145,7 +145,7 @@ html:not(.is-loading) .hero .reveal-h{opacity:1;transform:none}
 .strat__pin{position:sticky;top:0;height:var(--vh,1303px);overflow:hidden;background:var(--black)}
 .strat__box{position:absolute;left:50%;top:50%;width:1920px;height:1303px;transform:translate(-50%,-50%)}
 .strat__word{position:absolute;left:47px;top:200px;width:1826px;font:400 476px/333px var(--disp);color:var(--red);opacity:.8;text-align:center;white-space:nowrap;letter-spacing:0}
-.strat__text{position:absolute;left:111px;top:593px;width:1699px;font-size:32px;line-height:1.6;text-align:center;color:var(--red);opacity:.5}
+.strat__text{position:absolute;left:111px;top:593px;width:1699px;font-size:32px;line-height:1.6;text-align:center;color:var(--white)}
 .strat__deck{position:absolute;left:615px;top:304px;width:689px;height:713px;z-index:6}
 .card{position:absolute;inset:0;will-change:transform}
 .card__in{position:absolute;inset:0;background:var(--red);text-align:center}
