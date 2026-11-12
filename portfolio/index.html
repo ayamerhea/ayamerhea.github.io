@@ -33,13 +33,16 @@ a{color:inherit;text-decoration:none}
 .top__btn:hover span{transform:translateY(-100%)}
 
 /* первый экран */
-.hero{position:relative;height:420vh}
+.hero{position:relative;height:560vh}
 .hero__pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--black)}
 .hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 .hero__video--loop{transition:opacity .35s ease}
 .hero__video--loop.is-off{opacity:0}
-.hero__band{position:absolute;top:0;bottom:0;right:0;left:100%;background:var(--black);will-change:left}
-.hero__band::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,.18)}
+.hero__video--scrub{transform-origin:61% 48.5%;will-change:transform}
+.hero__room{position:absolute;right:40px;bottom:36px;z-index:2;text-align:right;color:#fff;opacity:0;transform:translateY(20px);pointer-events:none;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero__room p{font-weight:500;font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.hero__room b{display:block;font:400 clamp(30px,3vw,58px)/1 Forum,serif;text-transform:uppercase}
+.hero__fade{position:absolute;inset:0;background:var(--black);opacity:0;pointer-events:none;z-index:3}
 
 .hero__title{z-index:2}
 .grid{position:absolute;left:0;right:0;top:var(--top);bottom:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:46% 54%;transition:opacity .4s}
@@ -76,6 +79,8 @@ a{color:inherit;text-decoration:none}
   .cell:nth-child(3) a{display:none}
   .cell a{left:14px;right:14px;bottom:14px;font-size:12px}
   .hero__title{left:16px;bottom:22px;font-size:44px}
+  .hero__room{left:16px;right:16px;bottom:24px;text-align:left}
+  .hero__room b{font-size:30px}
   .next{padding:100px 16px 80px}
   .next li a{flex-direction:column;gap:8px}
   .next li span{text-align:left}
@@ -94,7 +99,8 @@ a{color:inherit;text-decoration:none}
   <div class="hero__pin">
     <video class="hero__video hero__video--scrub" muted playsinline preload="auto"></video>
     <video class="hero__video hero__video--loop" muted playsinline loop autoplay preload="auto" poster="media/street.webp"></video>
-    <div class="hero__band" aria-hidden="true"></div>
+    <div class="hero__fade"></div>
+    <div class="hero__room"><p>Регина, веб-дизайнер</p><b>Перевожу атмосферу бренда<br>в сайты, которые запоминают</b></div>
     <div class="grid">
       <div class="cell"><a href="#next">Обо мне <svg viewBox="0 0 14 14"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a></div>
       <div class="cell"><a href="#next">Проекты <svg viewBox="0 0 14 14"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a></div>
@@ -134,84 +140,79 @@ a{color:inherit;text-decoration:none}
   clock(); setInterval(clock, 10000);
 
   /* видео: десктоп и мобилка */
-  // два ролика: бесшовная петля «стою у перехода» и основной — для перемотки скроллом
+  // петля «стою у перехода» + основной ролик: иду → тёмный проём → комната → сажусь за ноутбук
   const v = $('.hero__video--scrub'), lv = $('.hero__video--loop');
   const mob = matchMedia('(max-width:760px)').matches;
-  v.src = mob ? 'media/street-m.mp4' : 'media/street.mp4';
+  v.src = mob ? 'media/story-m.mp4' : 'media/story.mp4';
   lv.src = mob ? 'media/street-loop-m.mp4' : 'media/street-loop.mp4';
-  const VW = 1920, VH = 1080;
-  const STAND_END = 5.0, VIDEO_END = 8.2;
-  // петля = кадры 0.8…4.9 исходника, хвост склеен с началом через плавный переход
-  const loopToSrc = lt => Math.min(lt + .8, 4.9);
+  const VW = 1920, VH = 1080, END = 9.5;
 
-  /* правый край героини (спина) в долях ширины кадра — размечено по кадрам */
-  const BACK = [[0, .86], [5.5, .86], [5.75, .84], [6.0, .79], [6.25, .76], [6.5, .72], [6.75, .67], [7.0, .58], [7.25, .49], [7.5, .42], [7.75, .34], [8.0, .26], [8.2, .25]];
-  const backAt = t => {
-    if (t <= BACK[0][0]) return BACK[0][1];
-    for (let i = 1; i < BACK.length; i++) if (t <= BACK[i][0]) {
-      const [t0, x0] = BACK[i - 1], [t1, x1] = BACK[i];
-      return lerp(x0, x1, (t - t0) / (t1 - t0));
+  // где героиня в кадре (доля ширины) — для кадрирования на телефоне
+  const FOCUS = [[0, .8], [1.5, .66], [2.2, .58], [2.6, .52], [3.6, .22], [4.5, .26], [6.5, .4], [9.5, .42]];
+  const at = (tbl, t) => {
+    if (t <= tbl[0][0]) return tbl[0][1];
+    for (let i = 1; i < tbl.length; i++) if (t <= tbl[i][0]) {
+      const [t0, a] = tbl[i - 1], [t1, b] = tbl[i];
+      return lerp(a, b, (t - t0) / (t1 - t0));
     }
-    return BACK[BACK.length - 1][1];
+    return tbl[tbl.length - 1][1];
   };
 
-  /* видео и полоса по скроллу */
-  const hero = $('.hero'), band = $('.hero__band'), grid = $('.grid'), top = $('.top'), title = $('.hero__title');
+  const hero = $('.hero'), grid = $('.grid'), top = $('.top'), title = $('.hero__title'), room = $('.hero__room'), fade = $('.hero__fade');
   let cur = 0, target = 0, scrub = false, shown = 0;
-  // время реально показанного кадра — чтобы полоса не обгоняла картинку при перемотке
   if ('requestVideoFrameCallback' in HTMLVideoElement.prototype) {
     const onFrame = (now, meta) => { shown = meta.mediaTime; v.requestVideoFrameCallback(onFrame); };
     v.requestVideoFrameCallback(onFrame);
   } else shown = null;
   const tryPlay = () => { const p = lv.play(); if (p) p.catch(() => {}); };
   lv.addEventListener('loadeddata', tryPlay);
-  // основной ролик показываем только после того, как он встал на нужный кадр — без вспышек
   v.addEventListener('seeked', () => { if (scrub) lv.classList.add('is-off'); });
 
   const frame = () => {
     const r = hero.getBoundingClientRect();
     const vh = innerHeight, W = innerWidth;
     const p = clamp(-r.top / (r.height - vh), 0, 1);
-    const pWalk = clamp(p / .62, 0, 1);              // героиня идёт
-    const pCover = clamp((p - .62) / .2, 0, 1);       // полоса закрывает экран
+    const pVid = clamp(p / .78, 0, 1);              // сюжет ролика
+    const pZoom = clamp((p - .78) / .18, 0, 1);     // наезд в экран ноутбука
 
     if (p > .002) {
-      if (!scrub) { scrub = true; cur = loopToSrc(lv.currentTime); v.currentTime = cur; }
-      target = STAND_END + pWalk * (VIDEO_END - STAND_END);
-    } else if (scrub) {
-      scrub = false; lv.classList.remove('is-off'); tryPlay();
-    }
+      if (!scrub) { scrub = true; cur = 0; v.currentTime = 0; }
+      target = pVid * END;
+    } else if (scrub) { scrub = false; lv.classList.remove('is-off'); tryPlay(); }
     if (scrub) {
       cur += (target - cur) * .18;
       if (Math.abs(v.currentTime - cur) > .015 && !v.seeking) v.currentTime = cur;
     }
     const t = !scrub ? 0 : (shown === null ? cur : shown);
 
-    // кадр видео на экране (object-fit: cover) и сдвиг кадра на мобилке за героиней
+    // телефон: кадр едет за героиней
     const sc = Math.max(W / VW, vh / VH), dw = VW * sc;
-    let posX = .5;
     if (W / vh < 1.2 && dw > W) {
-      const c = backAt(t) - .07;
-      posX = clamp((W * .62 - c * dw) / (W - dw), 0, 1);
+      const c = pZoom > 0 ? lerp(at(FOCUS, t), .61, easeIO(pZoom)) : at(FOCUS, t);
+      const posX = clamp((W * .5 - c * dw) / (W - dw), 0, 1);
       v.style.objectPosition = lv.style.objectPosition = (posX * 100).toFixed(2) + '% 50%';
     }
-    const ox = (W - dw) * posX;
-    const toScreen = fx => ox + fx * dw;
 
-    // край полосы: появляется справа, догоняет спину героини и идёт за ней
-    let edge;
-    if (t < STAND_END) edge = W + 2;
-    else {
-      const k = clamp((t - STAND_END) / .8, 0, 1);
-      const follow = toScreen(backAt(t) + .012);
-      edge = lerp(W + 2, follow, easeIO(k));
+    // наезд в ноутбук и уход в чёрный
+    {
+      const dh = VH * sc;
+      const op = (v.style.objectPosition || '50% 50%').split(' ')[0];
+      const px = parseFloat(op) / 100 || .5;
+      const ox = (W - dw) * px, oy = (vh - dh) / 2;
+      v.style.transformOrigin = `${(ox + .61 * dw).toFixed(1)}px ${(oy + .485 * dh).toFixed(1)}px`;
     }
-    if (pCover > 0) edge = lerp(Math.min(edge, toScreen(.262)), -2, easeIO(pCover));
-    band.style.left = clamp(edge, -2, W + 2).toFixed(1) + 'px';
+    v.style.transform = pZoom > 0 ? `scale(${(1 + 4 * easeIO(pZoom)).toFixed(3)})` : '';
+    fade.style.opacity = clamp((pZoom - .55) / .45, 0, 1).toFixed(3);
 
-    const go = p > .84 ? clamp(1 - (p - .84) / .1, 0, 1) : 1;
-    grid.style.opacity = go; title.style.opacity = go;
-    top.classList.toggle('is-dark', p > .8);
+    // сетка и заголовок живут на улице, гаснут в тёмном проёме (≈2.3–2.9 с ролика)
+    const g = clamp(1 - (t - 2.1) / .7, 0, 1);
+    grid.style.opacity = g; title.style.opacity = g;
+    grid.style.pointerEvents = g < .1 ? 'none' : '';
+    // подпись в комнате: появляется, когда она садится
+    const rm = clamp((t - 6.4) / 1.2, 0, 1) * (1 - clamp(pZoom / .4, 0, 1));
+    room.style.opacity = rm.toFixed(3);
+    room.style.transform = `translateY(${(20 * (1 - rm)).toFixed(1)}px)`;
+    top.classList.toggle('is-dark', t > 2.4);
     requestAnimationFrame(frame);
   };
   requestAnimationFrame(frame);
