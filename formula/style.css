@@ -795,3 +795,6 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 .pop__foot p{max-width:340px;text-wrap:balance}
 
 @media (min-width:641px){.manifest .manifest__title>.manifest__m{display:none!important}}
+
+/* текст под фигурой манифеста: 6px от низа фигуры до букв */
+@media (min-width:641px){.manifest__text{margin-top:3px}}
