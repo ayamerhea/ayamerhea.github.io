@@ -1,3 +1,9 @@
+/* Helvetica Neue — свои файлы, чтобы шрифт был одинаковым на всех устройствах */
+@font-face{font-family:"HN";src:url(fonts/HelveticaNeue-Thin.woff2) format("woff2");font-weight:100 200;font-display:swap}
+@font-face{font-family:"HN";src:url(fonts/HelveticaNeue-Light.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"HN";src:url(fonts/HelveticaNeue-Roman.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"HN";src:url(fonts/HelveticaNeue-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"HN";src:url(fonts/HelveticaNeue-Bold.woff2) format("woff2");font-weight:600 700;font-display:swap}
 :root{
   --black:#2C3638;
   --beige:#DAD3C1;
@@ -6,7 +12,7 @@
   --line:rgba(44,54,56,.2);
   --pad:85px;
   --r:48px;
-  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --sans:"HN","Helvetica Neue",Helvetica,Arial,sans-serif;
   --display:"Montserrat",sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -757,3 +763,4 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .hero__title{min-height:667px}
 }
 @media (max-width:640px){.pop--form .pop__box{width:calc(100% - 32px)}html.scaled-m .pop--form .pop__box{max-height:calc(100svh / var(--s,1) - 32px)}html.scaled-m .pop--drawer .pop__box{height:calc(92svh / var(--s,1))}}
+@media (max-width:640px){.hero__lead{max-width:305px}}
