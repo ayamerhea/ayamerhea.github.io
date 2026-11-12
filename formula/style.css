@@ -899,3 +899,4 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .stat__num small{grid-column:2;grid-row:2;margin:0 0 0 2px!important;letter-spacing:0;align-self:end;line-height:1}
 }
 @media (max-width:640px){.stat__num .count{margin-right:7px}.stat__text{max-width:none;white-space:nowrap;text-wrap:nowrap}.stat__text br{display:inline!important}}
+@media (max-width:640px){#results.slider-sec{padding-bottom:104px}}
