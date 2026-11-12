@@ -920,3 +920,14 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .stack>.stat:nth-child(3) .stat__text{max-width:150px}
 }
 @media (max-width:640px){.stat__num{line-height:.72}.stat__num .count{line-height:.72;padding-top:6px}.stat__num small{line-height:.72}.stat__num sup{line-height:1}.stat__text{margin-bottom:-3px}}
+
+/* мобилка: 120px между смысловыми блоками */
+@media (max-width:640px){
+  .manifest{padding-top:120px;padding-bottom:37px}
+  .stat{padding-bottom:120px}
+  #results.slider-sec{padding-top:0;padding-bottom:144px}
+  #results .sec-head{padding-top:0}
+  #specialists.slider-sec{padding-top:80px;padding-bottom:144px}
+  .faq{padding-top:118px;padding-bottom:120px}
+  .footer{margin-top:120px}
+}
