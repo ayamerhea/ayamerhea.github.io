@@ -109,7 +109,7 @@ html:not(.is-loading) .hero .reveal-h{opacity:1;transform:none}
 .corners--excl i:nth-child(4){border-width:0 0 1.6px 1.6px}
 .excl__imgs{position:absolute;inset:0;overflow:hidden;background:#3a0204}
 .excl__img{position:absolute;inset:0;background:50% 50%/cover no-repeat;opacity:0;transform:scale(1.06);transition:opacity .9s ease,transform 1.6s cubic-bezier(.2,.8,.2,1)}
-.excl__img::after{content:"";position:absolute;inset:0;background:var(--red);mix-blend-mode:multiply}
+
 .excl__img.is-on{opacity:1;transform:none}
 .excl__band{position:absolute;left:0;top:677px;width:1920px;height:194px}
 .excl__band::before{content:"";position:absolute;inset:0;background:var(--red);mix-blend-mode:multiply}
