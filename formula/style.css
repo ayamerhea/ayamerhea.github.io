@@ -900,3 +900,11 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 }
 @media (max-width:640px){.stat__num .count{margin-right:7px}.stat__text{max-width:none;white-space:nowrap;text-wrap:nowrap}.stat__text br{display:inline!important}}
 @media (max-width:640px){#results.slider-sec{padding-bottom:104px}}
+
+/* мобилка: ровные отступы 80px между блоками */
+@media (max-width:640px){
+  #specialists.slider-sec{padding-bottom:104px}
+  #reviews .sec-head{padding-top:78px}
+  #reviews{padding-bottom:104px}
+  .faq{padding-top:78px}
+}
