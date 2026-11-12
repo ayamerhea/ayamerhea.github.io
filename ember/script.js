@@ -358,7 +358,7 @@ enhance();
     } else if (l) {
       e.preventDefault();
       pop.classList.add('is-lead');
-      info.innerHTML = `<small>заявка</small><h3>Сделать имя видимым</h3>
+      info.innerHTML = `<h3>Сделать имя видимым</h3>
         <form class="lead"><label><span>Имя</span><input name="name" required autocomplete="name"></label>
         <label><span>Телефон или Telegram</span><input name="contact" required></label>
         <label><span>О проекте</span><input name="about"></label>
