@@ -805,3 +805,5 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .review__who{height:var(--rh,125px)}
   .review__photo{height:var(--rh,125px);width:calc(var(--rh,125px) * .864);border-radius:14px}
 }
+.footer__nav .nw{white-space:nowrap}
+@media (max-width:640px){.footer__nav .nw{white-space:normal}}
