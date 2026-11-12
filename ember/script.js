@@ -198,7 +198,7 @@ const CARDS = [
   ['Пост-продакшн', 'Цифры и усиление', 'отчётность, выводы, корректировки, усиление работающих связок, рост входящих']
 ];
 (function () {
-  const sec = $('.strat'), pin = $('.strat__pin'), box = $('.strat__box'), deck = $('.strat__deck');
+  const sec = $('.strat'), pin = $('.strat__pin'), box = $('.strat__box'), deck = $('.strat__deck'), txt = $('.strat__text');
   deck.innerHTML = CARDS.map(([l, t, d]) => `<div class="card"><span class="corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div class="card__in">
     <p class="card__label">${l}</p><h3 class="card__title">${t}</h3><svg class="card__ico" aria-hidden="true"><use href="#focus"/></svg><p class="card__text">${nb(d)}</p></div></div>`).join('');
   const cards = $$('.card', deck);
@@ -216,6 +216,8 @@ const CARDS = [
     const p = clamp(-r.top / range, 0, 1);
     // сначала блок без карточек (текст читается), затем карточки ложатся по одной
     const P = clamp((p - 0.1) / 0.8, 0, 1) * n;
+    // как только начинает ложиться первая карточка — текст приглушается
+    txt.style.opacity = (1 - 0.65 * clamp(P, 0, 1)).toFixed(3);
     cards.forEach((c, i) => {
       const rot = i % 2 ? 5 : -5;
       c.style.setProperty('--dim', (clamp(P - i - 1, 0, 1.6) * 0.28).toFixed(3));
