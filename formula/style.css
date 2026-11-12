@@ -798,3 +798,10 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 
 /* текст под фигурой манифеста: 6px от низа фигуры до букв */
 @media (min-width:641px){.manifest__text{margin-top:3px}}
+
+/* отзывы (десктоп): фото и блок имени по высоте самого длинного отзыва */
+@media (min-width:961px){
+  .review{align-items:start}
+  .review__who{height:var(--rh,125px)}
+  .review__photo{height:var(--rh,125px);width:calc(var(--rh,125px) * .864);border-radius:14px}
+}

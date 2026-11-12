@@ -204,6 +204,7 @@ reviews.forEach(r => { const i = new Image(); i.src = r.photo; });
     probe.style.width = textEl.offsetWidth + 'px';
     const h = Math.max(...reviews.map(r => { probe.textContent = r.text; return probe.offsetHeight; }));
     textEl.style.minHeight = h + 'px';
+    rv.style.setProperty('--rh', h + 'px');   // фото и имя по высоте самого длинного отзыва
   };
   fitReviews();
   window.addEventListener('resize', fitReviews);
