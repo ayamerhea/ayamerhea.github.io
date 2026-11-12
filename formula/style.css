@@ -831,3 +831,13 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .footer__bottom .footer__note{grid-column:1/-1}
 }
 @media (max-width:640px){.footer__links{flex-direction:column;gap:16px}}
+
+/* мобилка: основные тексты 16px вместо 12px */
+@media (max-width:640px){
+  .stat__text{font-size:16px;line-height:1.25;max-width:205px}
+  .manifest__text{font-size:16px;line-height:1.25;max-width:330px;margin-left:auto;margin-right:auto}
+  .footer i{font-size:16px}
+  .footer__top p{font-size:16px}
+  .footer__bottom{font-size:16px}
+}
+@media (max-width:640px){.manifest__text{text-wrap:balance;max-width:300px}.stat__text{text-wrap:balance}}
