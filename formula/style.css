@@ -931,3 +931,4 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .faq{padding-top:118px;padding-bottom:120px}
   .footer{margin-top:120px}
 }
+@media (max-width:640px){.stack>.stat:nth-child(3) .stat__title{padding:0 42px 0 18px}}
