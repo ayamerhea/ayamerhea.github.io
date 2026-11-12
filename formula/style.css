@@ -412,7 +412,7 @@ html.pop-open{overflow:hidden}
 .quiz__back:not(:disabled):hover{background:var(--black);color:var(--white)}
 .quiz__back svg{width:20px;height:20px}
 .quiz__next{height:36px;padding:0 16px;border-radius:10px;background:var(--black);color:var(--white);font-size:14px;transition:background .25s}
-.quiz__next:hover{background:var(--accent)}
+.quiz__next:hover{background:var(--black)}
 
 /* результат квиза */
 .pop--quiz.pop--outcome .pop__box{background:var(--white)}
