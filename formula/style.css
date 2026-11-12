@@ -787,3 +787,6 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 .directions__row b .ico-arrow,.footer__soc a .ico-arrow{transition:transform .35s ease}
 .directions li:hover .directions__row b .ico-arrow,.footer__soc a:hover .ico-arrow{transform:translate(2px,-2px)}
 @media (max-width:640px){.directions li:hover .directions__row b .ico-arrow{transform:none}}
+
+/* «вкладки» футера не наследуют стиль подписей (i) */
+.footer .cap i{opacity:1;margin:0;font-size:inherit}
