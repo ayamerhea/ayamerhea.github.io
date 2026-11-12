@@ -548,3 +548,35 @@ html.pop-open{overflow:hidden}
 .formpop .promo__inner{grid-template-columns:1fr}
 .pop--form .pop__box{width:min(975px,calc(100vw - 48px))}
 .pop--form .pop__close{right:26px}
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ (по макету 390)
+   ========================================================= */
+.logo__light{display:none}
+@media (max-width:640px){
+  /* шапка */
+  .hero>.hero__top{padding:10px 10px 10px}
+  .hero__top.is-scrolled{padding-top:8px;padding-bottom:8px}
+  .logo img{width:162px}
+  .logo{position:relative}
+  .logo__light{display:block}
+  .logo__dark{position:absolute;inset:0;opacity:0;transition:opacity .35s}
+  .logo__light{transition:opacity .35s}
+  .hero__top.is-scrolled .logo__dark{opacity:1}
+  .hero__top.is-scrolled .logo__light{opacity:0}
+  .burger{width:44px;height:44px;border-radius:12px}
+
+  /* первый экран: фото + белая карточка снизу */
+  .hero{display:block;height:auto;min-height:0;max-height:none;padding-bottom:calc(var(--r) + 12px);background:var(--beige)}
+  .hero__bg{inset:0 0 auto 0;height:calc(171vw + 48px);background-position:52% 0}
+  .hero__bg::after{background:linear-gradient(180deg,rgba(40,32,24,0) 55%,rgba(40,32,24,.25) 90%)}
+  .hero>.hero__content{padding:0;margin:0}
+  .hero__title{min-height:171vw;justify-content:flex-end;padding:0 40px 48px;font-size:43px;line-height:1.15}
+  .hero__title>span:first-child{padding-left:76px}
+  .hero__row{gap:0}
+  .hero__bottom{margin:0;border:0;padding:70px 35px 40px;background:var(--white);color:var(--black);border-radius:40px;flex-direction:column;align-items:stretch;gap:44px;position:relative}
+  .hero__lead{font-size:16px;line-height:1.25;font-weight:400;text-indent:27px}
+  .hero__bottom .btn{width:100%}
+  .hero__bottom .btn__label{flex:1;justify-content:center;padding:15px 20px;font-size:16px;background:var(--black);color:var(--white)}
+  .hero__bottom .btn__arrow{width:48px;background:var(--black);color:var(--white)}
+}
