@@ -819,3 +819,15 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
 
 /* цифры в «о клинике»: трекинг -2px */
 .stat__num,.stat__num .count{letter-spacing:-2px}
+
+/* низ футера на той же сетке, что адрес / контакты / соцсети */
+.footer__links{display:flex;gap:32px;flex-wrap:wrap}
+@media (min-width:641px){
+  .footer__bottom{display:grid;grid-template-columns:1.6fr 1fr 1fr .65fr;column-gap:20px;row-gap:14px;align-items:center}
+  .footer__bottom .footer__links{grid-column:1}
+  .footer__bottom small{margin:0!important}
+  .footer__bottom small:nth-of-type(1){grid-column:2/4}
+  .footer__bottom small:nth-of-type(2){grid-column:4;justify-self:start;white-space:nowrap}
+  .footer__bottom .footer__note{grid-column:1/-1}
+}
+@media (max-width:640px){.footer__links{flex-direction:column;gap:16px}}
