@@ -46,9 +46,9 @@ const layoutHooks = [];
   const v = $('.hero__bg');
   if (!v) return;
   const set = () => {
-    const src = isMob() ? 'img/hero-m.mp4' : 'img/hero.mp4';
+    const src = isMob() ? 'img/hero-m.mp4?v=11121046' : 'img/hero.mp4?v=11121046';
     if (v.getAttribute('src') === src) return;
-    v.poster = isMob() ? 'img/hero-m.webp' : 'img/hero.webp';
+    v.poster = isMob() ? 'img/hero-m.webp?v=11121046' : 'img/hero.webp?v=11121046';
     v.src = src; v.muted = true;
     const p = v.play(); if (p) p.catch(() => {});
   };
