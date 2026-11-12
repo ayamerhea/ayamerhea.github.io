@@ -143,8 +143,7 @@ html:not(.is-loading) .hero .reveal-h{opacity:1;transform:none}
 .strat__text{position:absolute;left:111px;top:593px;width:1699px;font-size:32px;line-height:1.6;text-align:center;color:var(--red);opacity:.5}
 .strat__deck{position:absolute;left:615px;top:304px;width:689px;height:713px;z-index:6}
 .card{position:absolute;inset:0;will-change:transform}
-.card__in{position:absolute;inset:0;background:var(--black);text-align:center;transition:background-color .5s ease}
-.card.is-top .card__in{background:var(--red)}
+.card__in{position:absolute;inset:0;background:var(--red);text-align:center}
 .card .corners{inset:-21.5px}
 .card .corners i{width:22px;height:22px;border-color:var(--white)}
 .card .corners i:nth-child(1){border-width:1.6px 0 0 1.6px}

@@ -201,7 +201,6 @@ const CARDS = [
       c.style.transform = `translate3d(0,${y}px,0) rotate(${rot + (1 - e) * rot * 3}deg)`;
       c.style.visibility = k <= 0 ? 'hidden' : '';
     });
-    cards.forEach((c, i) => c.classList.toggle('is-top', i === 0 && P < 0.5));
   };
   setStick(); update();
   addEventListener('resize', () => { setStick(); update(); });
