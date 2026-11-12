@@ -763,4 +763,5 @@ html.scaled-m .hero>.hero__top{width:390px;max-width:none}
   .hero__title{min-height:667px}
 }
 @media (max-width:640px){.pop--form .pop__box{width:calc(100% - 32px)}html.scaled-m .pop--form .pop__box{max-height:calc(100svh / var(--s,1) - 32px)}html.scaled-m .pop--drawer .pop__box{height:calc(92svh / var(--s,1))}}
-@media (max-width:640px){.hero__lead{max-width:305px}}
+.m-br{display:none}
+@media (max-width:640px){.hero__lead br.m-br{display:inline}}
