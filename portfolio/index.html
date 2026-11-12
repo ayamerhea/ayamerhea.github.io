@@ -36,6 +36,8 @@ a{color:inherit;text-decoration:none}
 .hero{position:relative;height:420vh}
 .hero__pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--black)}
 .hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.hero__video--loop{transition:opacity .35s ease}
+.hero__video--loop.is-off{opacity:0}
 .hero__band{position:absolute;top:0;bottom:0;right:0;left:100%;background:var(--black);will-change:left}
 .hero__band::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,.18)}
 
@@ -90,7 +92,8 @@ a{color:inherit;text-decoration:none}
 
 <section class="hero">
   <div class="hero__pin">
-    <video class="hero__video" muted playsinline preload="auto" poster="media/street.webp"></video>
+    <video class="hero__video hero__video--scrub" muted playsinline preload="auto"></video>
+    <video class="hero__video hero__video--loop" muted playsinline loop autoplay preload="auto" poster="media/street.webp"></video>
     <div class="hero__band" aria-hidden="true"></div>
     <div class="grid">
       <div class="cell"><a href="#next">Обо мне <svg viewBox="0 0 14 14"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a></div>
@@ -131,11 +134,15 @@ a{color:inherit;text-decoration:none}
   clock(); setInterval(clock, 10000);
 
   /* видео: десктоп и мобилка */
-  const v = $('.hero__video');
+  // два ролика: бесшовная петля «стою у перехода» и основной — для перемотки скроллом
+  const v = $('.hero__video--scrub'), lv = $('.hero__video--loop');
   const mob = matchMedia('(max-width:760px)').matches;
   v.src = mob ? 'media/street-m.mp4' : 'media/street.mp4';
+  lv.src = mob ? 'media/street-loop-m.mp4' : 'media/street-loop.mp4';
   const VW = 1920, VH = 1080;
-  const STAND_END = 5.4, VIDEO_END = 8.2;
+  const STAND_END = 5.0, VIDEO_END = 8.2;
+  // петля = кадры 0.8…4.9 исходника, хвост склеен с началом через плавный переход
+  const loopToSrc = lt => Math.min(lt + .8, 4.9);
 
   /* правый край героини (спина) в долях ширины кадра — размечено по кадрам */
   const BACK = [[0, .86], [5.5, .86], [5.75, .84], [6.0, .79], [6.25, .76], [6.5, .72], [6.75, .67], [7.0, .58], [7.25, .49], [7.5, .42], [7.75, .34], [8.0, .26], [8.2, .25]];
@@ -156,9 +163,10 @@ a{color:inherit;text-decoration:none}
     const onFrame = (now, meta) => { shown = meta.mediaTime; v.requestVideoFrameCallback(onFrame); };
     v.requestVideoFrameCallback(onFrame);
   } else shown = null;
-  v.addEventListener('timeupdate', () => { if (!scrub && v.currentTime > STAND_END - .05) v.currentTime = 0; });
-  const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
-  v.addEventListener('loadeddata', tryPlay);
+  const tryPlay = () => { const p = lv.play(); if (p) p.catch(() => {}); };
+  lv.addEventListener('loadeddata', tryPlay);
+  // основной ролик показываем только после того, как он встал на нужный кадр — без вспышек
+  v.addEventListener('seeked', () => { if (scrub) lv.classList.add('is-off'); });
 
   const frame = () => {
     const r = hero.getBoundingClientRect();
@@ -168,16 +176,16 @@ a{color:inherit;text-decoration:none}
     const pCover = clamp((p - .62) / .2, 0, 1);       // полоса закрывает экран
 
     if (p > .002) {
-      if (!scrub) { scrub = true; v.pause(); cur = v.currentTime; }
+      if (!scrub) { scrub = true; cur = loopToSrc(lv.currentTime); v.currentTime = cur; }
       target = STAND_END + pWalk * (VIDEO_END - STAND_END);
     } else if (scrub) {
-      scrub = false; tryPlay();
+      scrub = false; lv.classList.remove('is-off'); tryPlay();
     }
     if (scrub) {
       cur += (target - cur) * .18;
       if (Math.abs(v.currentTime - cur) > .015 && !v.seeking) v.currentTime = cur;
     }
-    const t = shown === null ? (scrub ? cur : v.currentTime) : shown;
+    const t = !scrub ? 0 : (shown === null ? cur : shown);
 
     // кадр видео на экране (object-fit: cover) и сдвиг кадра на мобилке за героиней
     const sc = Math.max(W / VW, vh / VH), dw = VW * sc;
@@ -185,7 +193,7 @@ a{color:inherit;text-decoration:none}
     if (W / vh < 1.2 && dw > W) {
       const c = backAt(t) - .07;
       posX = clamp((W * .62 - c * dw) / (W - dw), 0, 1);
-      v.style.objectPosition = (posX * 100).toFixed(2) + '% 50%';
+      v.style.objectPosition = lv.style.objectPosition = (posX * 100).toFixed(2) + '% 50%';
     }
     const ox = (W - dw) * posX;
     const toScreen = fx => ox + fx * dw;
