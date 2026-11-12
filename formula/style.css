@@ -748,3 +748,12 @@ html.pop-open{overflow:hidden}
   .promo--form .promo__bottom .btn__label{font-size:16px;padding:0 14px}
 }
 @media (max-width:640px){.check br{display:none}}
+
+/* ---------- автоскейл для телефонов: макет 390 масштабируется под экран ---------- */
+html.scaled-m body{width:390px;zoom:var(--s,1)}
+html.scaled-m .hero>.hero__top{width:390px;max-width:none}
+@media (max-width:640px){
+  .hero__bg{height:715px}
+  .hero__title{min-height:667px}
+}
+@media (max-width:640px){.pop--form .pop__box{width:calc(100% - 32px)}html.scaled-m .pop--form .pop__box{max-height:calc(100svh / var(--s,1) - 32px)}html.scaled-m .pop--drawer .pop__box{height:calc(92svh / var(--s,1))}}

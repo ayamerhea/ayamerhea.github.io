@@ -37,9 +37,12 @@ enhanceBtns();
 (function () {
   const root = document.documentElement;
   const fit = () => {
-    const w = root.clientWidth, on = w >= 1200;
+    const w = root.clientWidth, on = w >= 1200, onM = w <= 640;
     root.classList.toggle('scaled', on);
-    root.style.setProperty('--s', on ? String(Math.floor(w / 1440 * 10000) / 10000) : '1');
+    root.classList.toggle('scaled-m', onM);
+    // десктоп: макет 1440; телефоны: макет 390
+    const s = on ? w / 1440 : onM ? w / 390 : 1;
+    root.style.setProperty('--s', String(Math.floor(s * 10000) / 10000));
   };
   fit();
   window.addEventListener('resize', fit);
