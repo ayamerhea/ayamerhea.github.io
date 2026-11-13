@@ -3,25 +3,13 @@ const root = document.documentElement;
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-const isMob = () => root.classList.contains('mob');
+
+/* брейкпоинты: телефон — до 767px */
+const mq = matchMedia('(max-width:767px)');
+const isMob = () => mq.matches;
 const hooks = [];
-
-/* автоскейл: десктоп — макет 1440, телефон и планшет — макет 360 */
-(function () {
-  let last = null;
-  const fit = () => {
-    const w = root.clientWidth, mob = w < 900;
-    root.classList.toggle('mob', mob);
-    const sc = mob ? Math.min(w / 360, 2) : w / 1440;
-    root.style.setProperty('--s', String(sc));
-    root.style.setProperty('--vh', (innerHeight / sc).toFixed(1) + 'px');
-    if (last !== mob) { last = mob; hooks.forEach(f => f()); }
-  };
-  fit(); addEventListener('resize', () => { fit(); hooks.forEach(f => f.always && f()); });
-})();
-
-/* шапка живёт вне body, чтобы fixed не ломался внутри zoom (iOS) */
-root.appendChild($('.hdr'));
+mq.addEventListener('change', () => hooks.forEach(f => f()));
+addEventListener('resize', () => hooks.forEach(f => f.always && f()));
 
 /* шапка: на светлых блоках — тёмная подложка, при скролле вниз прячется */
 (function () {
@@ -69,7 +57,8 @@ const CASES = [
   dots.innerHTML = CASES.map(() => '<i></i>').join('');
   const cards = $$('.case', track), D = $$('i', dots);
   let i = N; // стартуем со средней копии
-  const geom = () => isMob() ? { w: 335, gap: 20, left: 12.5 } : { w: 926, gap: 20, left: 257 };
+  const wrap = track.parentElement;
+  const geom = () => { const w = cards[0].offsetWidth; return { w, gap: 20, left: (wrap.clientWidth - w) / 2 }; };
   const place = (anim) => {
     const g = geom();
     track.style.transition = anim ? '' : 'none';
@@ -95,7 +84,8 @@ const CASES = [
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
     x0 = null;
   }, { passive: true });
-  place(false); hooks.push(() => place(false));
+  place(false);
+  const re = () => place(false); re.always = true; hooks.push(re);
 })();
 
 /* форма */
