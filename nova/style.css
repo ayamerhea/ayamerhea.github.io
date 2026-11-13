@@ -68,7 +68,7 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
 @media (hover:hover){.hdr__nav a:hover::after{transform:scaleX(1);transform-origin:left}}
 
 /* первый экран */
-.hero{--H:max(700px,var(--vh,1320px));--sh:clamp(132px,calc(var(--H) * .184),243px);height:var(--H);background:var(--ink);color:var(--milk);overflow:hidden}
+.hero{--H:1320px;--sh:clamp(132px,calc(var(--H) * .184),243px);height:var(--H);background:var(--ink);color:var(--milk);overflow:hidden}
 .hero__head{position:relative;z-index:2;width:926px;margin:0 auto;padding-top:clamp(108px,calc(var(--H) * .096),127px);text-align:center}
 .hero__lead{width:649px;margin:20px auto 0}
 .hero__btns{display:flex;justify-content:center;gap:8px;margin-top:40px}
