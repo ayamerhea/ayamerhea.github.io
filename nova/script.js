@@ -12,7 +12,9 @@ const hooks = [];
   const fit = () => {
     const w = root.clientWidth, mob = w < 900;
     root.classList.toggle('mob', mob);
-    root.style.setProperty('--s', String(mob ? Math.min(w / 360, 2) : w / 1440));
+    const sc = mob ? Math.min(w / 360, 2) : w / 1440;
+    root.style.setProperty('--s', String(sc));
+    root.style.setProperty('--vh', (innerHeight / sc).toFixed(1) + 'px');
     if (last !== mob) { last = mob; hooks.forEach(f => f()); }
   };
   fit(); addEventListener('resize', () => { fit(); hooks.forEach(f => f.always && f()); });
