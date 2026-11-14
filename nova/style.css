@@ -222,7 +222,7 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
   .h1{font-size:48px}
   .hero__img{width:min(959px,100vw + 60px)}
   .stats{grid-template-columns:repeat(2,1fr);margin-top:-200px}
-  .stat{min-height:190px;border-radius:60px;padding-top:44px}
+  .stat{min-height:190px;border-radius:60px;padding:30px 24px;display:flex;flex-direction:column;justify-content:center;align-items:center}
   .split{grid-template-columns:1fr;min-height:0}
   .dir__head,.why__head{padding:100px 20px 48px}
   .why__head{order:-1}
@@ -252,7 +252,7 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
   .hero__img{width:calc(100% + 60px);margin-top:24px}
   .hero__fade{bottom:0;height:40%}
   .stats{margin:-26px 12px 0;gap:12px}
-  .stat{min-height:157px;border-radius:54px;padding:40px 18px 30px}
+  .stat{min-height:157px;border-radius:54px;padding:24px 14px}
   .stat b{font-size:24px}
   .stat span{margin-top:12px;font-size:14px}
   .blob--1{top:111px;width:721px;height:625px;margin-left:-524px;filter:blur(90px)}
