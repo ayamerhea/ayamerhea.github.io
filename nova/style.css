@@ -268,8 +268,9 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
   .dir__head,.why__head{padding:57px 12px 45px}
   .dir__cards,.why__cards{grid-template-columns:1fr;padding:12px;gap:12px}
   .pcard{min-height:482px}
-  .pcard h3{top:322px;bottom:auto}
-  .pcard p{top:373px;opacity:1;left:16px;right:16px}
+  .pcard{display:flex;flex-direction:column;justify-content:flex-end;padding:0 16px 40px}
+  .pcard h3,.pcard p{position:static;opacity:1;transform:none}
+  .pcard p{margin-top:20px}
   .pcard__glow{bottom:-120px}
   .wcard{min-height:360px}
 
