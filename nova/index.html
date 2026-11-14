@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#100D10">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/Involve-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=11131844">
+<link rel="stylesheet" href="style.css?v=11140801">
 </head>
 <body>
 
@@ -20,9 +20,16 @@
     <nav class="hdr__nav">
       <a href="#directions">Направления</a><a href="#how">Как это работает</a><a href="#cases">Кейсы</a><a href="#why">Почему мы</a>
     </nav>
+    <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false"><i></i><i></i><i></i></button>
   </div>
   <a class="btn btn--pink hdr__btn" href="#form">Подать заявку <svg><use href="#arr"/></svg></a>
 </header>
+<div class="mmenu" aria-hidden="true">
+  <nav class="mmenu__nav">
+    <a href="#directions">Направления</a><a href="#how">Как это работает</a><a href="#cases">Кейсы</a><a href="#why">Почему мы</a>
+  </nav>
+  <a class="btn btn--pink mmenu__btn" href="#form">Подать заявку <svg><use href="#arr"/></svg></a>
+</div>
 
 <!-- первый экран -->
 <section class="hero" id="top">
@@ -152,6 +159,6 @@
 </svg>
 
 <script src="vendor/lenis.min.js"></script>
-<script src="script.js?v=11131844"></script>
+<script src="script.js?v=11140801"></script>
 </body>
 </html>

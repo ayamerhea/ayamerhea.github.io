@@ -124,6 +124,21 @@ document.addEventListener('click', e => {
   const id = a.getAttribute('href'); if (id.length < 2) { e.preventDefault(); return; }
   const t = $(id); if (!t) return;
   e.preventDefault();
-  const y = t.getBoundingClientRect().top + scrollY - (id === '#top' ? 0 : 0);
+  const y = t.getBoundingClientRect().top + scrollY - (id !== '#top' && isMob() ? 20 : 0);
   if (lenis) lenis.scrollTo(y, { duration: 1.3 }); else scrollTo({ top: y, behavior: 'smooth' });
 });
+
+/* мобильное меню */
+(function () {
+  const btn = $('.burger'), menu = $('.mmenu');
+  const set = open => {
+    root.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', open); btn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+    menu.setAttribute('aria-hidden', !open);
+    if (lenis) open ? lenis.stop() : lenis.start();
+  };
+  btn.addEventListener('click', () => set(!root.classList.contains('menu-open')));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+  mq.addEventListener('change', () => { if (!mq.matches) set(false); });
+})();
