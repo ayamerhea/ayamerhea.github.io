@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Тренажёр тайского языка: карточки, письмо, тест, аудирование и прописи согласных">
+<meta name="theme-color" content="#11133a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22%2311133a%22/%3E%3Ctext x=%2232%22 y=%2245%22 font-size=%2236%22 text-anchor=%22middle%22 fill=%22%23f2f2f4%22 font-family=%22sans-serif%22%3E%E0%B8%81%3C/text%3E%3C/svg%3E">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Тайский тренажёр</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Noto+Sans+Thai+Looped:wght@300;400;600&family=Sarabun:wght@400;600&display=swap">
+<style>
+/* Layout: grey canvas, white rounded cards, dark night hero with iridescent glow; thin oversized Manrope display; vertical section labels */
+:root{
+  --bg:#f2f2f4; --surface:#ffffff; --surface-2:#f2f2f4; --fg:#0b0b0f; --muted:#9a9aa6; --line:rgba(11,11,15,.14);
+  --accent:#7a5cc9; --accent-soft:rgba(122,92,201,.1); --on-accent:#fff;
+  --btn:#0b0b0f; --on-btn:#ffffff;
+  --grad:linear-gradient(90deg,#f4a67d 0%,#dba3c4 50%,#b4a5ee 100%);
+  --night:#11133a; --night-fg:#f2f2f4; --night-dim:rgba(242,242,244,.45);
+  --good:#2d8a4e; --good-soft:rgba(45,138,78,.1); --bad:#d1364f; --bad-soft:rgba(209,54,79,.09);
+  --c-mid:#4f7be0; --c-high:#e0864f; --c-low:#9a6be0;
+  --guide:rgba(11,11,15,.06); --guide-line:rgba(11,11,15,.3); --grid:rgba(11,11,15,.08); --ink:#7a5cc9;
+  --shadow:none;
+  --f-ui:"Manrope","Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Arial,"Noto Sans Thai Looped","Sarabun",sans-serif;
+  --f-th:"Noto Sans Thai Looped","Sarabun","Thonburi","Leelawadee UI",sans-serif;
+  --r-xl:36px; --r-lg:28px; --r-md:20px; --r-sm:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#08080d; --surface:#15151d; --surface-2:#1e1e28; --fg:#f2f2f4; --muted:#7f7f8c; --line:rgba(255,255,255,.14);
+  --accent:#bba6f6; --accent-soft:rgba(187,166,246,.13); --btn:#f2f2f4; --on-btn:#0b0b0f;
+  --night:#0f1131; --good:#5ccf86; --good-soft:rgba(92,207,134,.13); --bad:#ff6b80; --bad-soft:rgba(255,107,128,.12);
+  --c-mid:#7fa2ff; --c-high:#ffa36b; --c-low:#c19bff;
+  --guide:rgba(255,255,255,.07); --guide-line:rgba(255,255,255,.35); --grid:rgba(255,255,255,.1); --ink:#bba6f6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#08080d; --surface:#15151d; --surface-2:#1e1e28; --fg:#f2f2f4; --muted:#7f7f8c; --line:rgba(255,255,255,.14);
+  --accent:#bba6f6; --accent-soft:rgba(187,166,246,.13); --btn:#f2f2f4; --on-btn:#0b0b0f;
+  --night:#0f1131; --good:#5ccf86; --good-soft:rgba(92,207,134,.13); --bad:#ff6b80; --bad-soft:rgba(255,107,128,.12);
+  --c-mid:#7fa2ff; --c-high:#ffa36b; --c-low:#c19bff;
+  --guide:rgba(255,255,255,.07); --guide-line:rgba(255,255,255,.35); --grid:rgba(255,255,255,.1); --ink:#bba6f6; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-ui);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:12px}
+.th{font-family:var(--f-th)}
+.dim{color:var(--muted)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:14px}
+.brand b{font-weight:500;font-size:15px;letter-spacing:.28em}
+.brand span{color:var(--muted);font-size:13px}
+.seg{display:inline-flex;gap:6px;flex-wrap:wrap}
+.seg button{border:1px solid var(--fg);background:transparent;padding:5px 14px;border-radius:99px;font-size:13px;font-weight:500;color:var(--fg);white-space:nowrap;transition:background .2s,color .2s}
+.seg button:hover{background:var(--surface-2)}
+.seg button[aria-pressed="true"]{background:var(--btn);color:var(--on-btn);border-color:var(--btn)}
+.seg.small button{padding:5px 12px;font-size:13px;border-color:var(--line)}
+.seg.small button[aria-pressed="true"]{border-color:var(--btn)}
+
+main{padding-block:24px 0}
+h1{font-size:clamp(44px,7.5vw,92px);font-weight:300;letter-spacing:-.045em;line-height:.98;margin:0 0 14px;text-wrap:balance}
+h2{font-size:22px;font-weight:500;letter-spacing:-.02em;margin:0}
+.sub{color:var(--fg);margin:0;max-width:56ch;font-size:15px}
+.label{font-size:13px;color:var(--muted);font-weight:400;margin:32px 0 12px}
+.panel{background:var(--surface);border-radius:var(--r-lg)}
+
+/* Vertical section labels */
+.sec{display:grid;grid-template-columns:44px minmax(0,1fr);gap:0;margin-top:48px}
+.vlabel{writing-mode:vertical-rl;transform:rotate(180deg);color:var(--muted);font-size:12px;align-self:start;justify-self:start;padding-bottom:4px}
+
+/* Buttons */
+.btn{border:0;border-radius:999px;padding:12px 24px;font-weight:500;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,opacity .2s}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--btn);color:var(--on-btn)}
+.btn.grad{background:var(--grad);color:#fff;text-shadow:0 1px 2px rgba(80,40,90,.18)}
+.btn.secondary{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.btn.plain{background:var(--surface-2);color:var(--fg)}
+.btn.good{background:var(--good-soft);color:var(--good)}
+.btn.bad{background:var(--bad-soft);color:var(--bad)}
+.btn.wide{width:100%}
+.btn[disabled]{opacity:.35;cursor:default}
+.icon-btn{border:1px solid var(--line);background:transparent;width:40px;height:40px;border-radius:50%;display:inline-grid;place-items:center;color:var(--fg);flex:none;transition:background .2s}
+.icon-btn:hover{background:var(--surface-2)}
+.icon-btn svg{width:18px;height:18px}
+.link{border:0;background:none;color:var(--accent);padding:0;font-weight:500}
+.tagpill{display:inline-flex;align-self:flex-start;border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:2px 12px;font-size:12px}
+
+/* Night hero */
+.night{position:relative;overflow:hidden;background:var(--night);color:var(--night-fg);border-radius:var(--r-xl);padding:clamp(28px,5vw,56px);isolation:isolate}
+.night::before,.night::after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(50px);opacity:.85}
+.night::before{width:520px;height:420px;right:-120px;top:-180px;background:conic-gradient(from 200deg,#6fd3ff,#b18cff,#ff9ac9,#ffcf8a,#7fffd4,#6fd3ff);animation:drift 18s ease-in-out infinite alternate}
+.night::after{width:340px;height:300px;right:18%;bottom:-220px;background:conic-gradient(from 40deg,#ff9ac9,#8a7dff,#5fd0ff,#ff9ac9);opacity:.5}
+@keyframes drift{to{transform:translate(-60px,40px) rotate(40deg)}}
+.night h1{color:var(--night-fg)}
+.night h1 .dim{color:var(--night-dim)}
+.night .sub{color:var(--night-fg);opacity:.8}
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:end;margin-top:40px}
+.hero .num{font-size:clamp(88px,12vw,148px);font-weight:300;letter-spacing:-.06em;line-height:.8;font-variant-numeric:tabular-nums}
+.hero .what{font-size:17px;font-weight:400}
+.stack{display:flex;height:4px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.14);margin:14px 0 12px;max-width:520px}
+.stack i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:4px 22px;font-size:13px;color:var(--night-dim)}
+.legend b{font-weight:500;color:var(--night-fg)}
+
+/* Modes */
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.mode{border:0;background:var(--surface);border-radius:var(--r-lg);padding:22px;text-align:left;display:flex;flex-direction:column;gap:10px;min-height:190px;transition:box-shadow .2s,transform .2s;position:relative}
+.mode:hover{transform:translateY(-2px)}
+.mode svg{width:26px;height:26px;color:var(--fg);margin-top:auto}
+.mode b{font-size:22px;font-weight:400;letter-spacing:-.02em}
+.mode small{color:var(--muted);font-size:13px;line-height:1.4}
+.mode[aria-pressed="true"]{box-shadow:inset 0 0 0 1.5px var(--fg)}
+.mode[aria-pressed="true"] .tagpill{background:var(--grad);color:#fff;border-color:transparent}
+.opts{display:flex;flex-direction:column}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 22px;flex-wrap:wrap}
+.opt + .opt{border-top:1px solid var(--line)}
+.opt > span{font-weight:400}
+.startrow{margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.startrow .btn{min-width:280px;padding-block:16px;font-size:16px}
+.note{font-size:13px;color:var(--muted);text-align:center;margin:0;max-width:60ch}
+.switch{position:relative;width:48px;height:28px;border-radius:99px;border:0;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);flex:none;transition:background .2s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.switch[aria-checked="true"]{background:var(--grad);box-shadow:none}
+.switch[aria-checked="true"]::after{transform:translateX(20px)}
+
+/* Session */
+.s-top{display:flex;align-items:center;gap:14px;margin:8px 0 24px}
+.s-top .bar{flex:1;height:3px;border-radius:99px;background:var(--line);overflow:hidden}
+.s-top .bar i{display:block;height:100%;background:var(--grad);border-radius:99px;transition:width .3s}
+.s-top .count{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;min-width:44px;text-align:right}
+.stage{max-width:580px;margin:0 auto;display:flex;flex-direction:column;gap:14px;padding-bottom:24px}
+.flip{perspective:1400px;cursor:pointer;border-radius:var(--r-lg)}
+.flip-inner{position:relative;min-height:330px;transition:transform .6s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flip.on .flip-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);border-radius:var(--r-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:32px;text-align:center}
+.face.back{transform:rotateY(180deg)}
+.face .corner{position:absolute;top:16px;right:16px}
+.face .tag{position:absolute;top:20px;left:22px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 12px}
+.big-th{font-family:var(--f-th);font-size:clamp(48px,9vw,76px);line-height:1.3;font-weight:300;overflow-wrap:anywhere}
+.big-th.long{font-size:clamp(32px,6vw,48px)}
+.big-ru{font-size:clamp(28px,5vw,40px);font-weight:300;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+.tr{color:var(--accent);font-size:18px;font-weight:500}
+.en{color:var(--muted);font-size:13px}
+.mini-note{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 14px;max-width:420px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.keys{font-size:12px;color:var(--muted);text-align:center}
+@media (hover:none){.keys{display:none}}
+.q{background:var(--surface);border-radius:var(--r-lg);padding:28px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;min-height:190px;justify-content:center}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice{border:1px solid transparent;background:var(--surface);border-radius:var(--r-md);padding:14px 16px;text-align:left;min-height:62px;display:flex;align-items:center;gap:12px;font-size:15px;transition:border-color .15s,background .15s}
+.choice .k{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:99px;min-width:24px;height:24px;display:inline-grid;place-items:center;flex:none}
+.choice .ct{min-width:0;display:flex;flex-direction:column}
+.choice .ct .th{font-size:22px;line-height:1.4}
+.choice .ct small{color:var(--muted)}
+.choice:hover:not([disabled]){border-color:var(--fg)}
+.choice.right{border-color:var(--good);background:var(--good-soft)}
+.choice.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.choice[disabled]{cursor:default}
+.field{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;border-radius:0;padding:14px 4px;font-size:22px;font-weight:300;outline:none;color:var(--fg)}
+.field:focus{border-color:var(--fg)}
+.field::placeholder{color:var(--muted)}
+.verdict{border-radius:var(--r-md);padding:16px 20px;display:flex;flex-direction:column;gap:4px;background:var(--surface)}
+.verdict.ok{box-shadow:inset 3px 0 0 var(--good)}
+.verdict.no{box-shadow:inset 3px 0 0 var(--bad)}
+.verdict.close{box-shadow:inset 3px 0 0 var(--accent)}
+.verdict b{font-size:15px;font-weight:500}
+.verdict.ok b{color:var(--good)} .verdict.no b{color:var(--bad)} .verdict.close b{color:var(--accent)}
+.play{width:116px;height:116px;border-radius:50%;border:0;background:var(--grad);color:#fff;display:grid;place-items:center}
+.play svg{width:44px;height:44px}
+.result{text-align:center;padding:44px 24px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.result .num{font-size:110px;font-weight:300;letter-spacing:-.06em;line-height:.9;font-variant-numeric:tabular-nums}
+.result .btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px}
+
+/* Words */
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:28px}
+.search{flex:1;min-width:200px;border:0;border-bottom:1px solid var(--line);background:transparent;padding:10px 2px;font-size:17px;outline:none}
+.search:focus{border-color:var(--fg)}
+.tip{display:flex;gap:16px;align-items:center;padding:16px 22px;margin-top:24px;font-size:14px}
+.tip > .th{font-size:28px;font-weight:300}
+.list{overflow:hidden}
+.item{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 14px 14px 22px}
+.item + .item{border-top:1px solid var(--line)}
+.item .thw{font-family:var(--f-th);font-size:24px;line-height:1.35;font-weight:400;overflow-wrap:anywhere}
+.item .trw{color:var(--accent);font-size:13px;font-weight:500}
+.item .ruw{font-size:15px;min-width:0}
+.item .ruw small{display:block;color:var(--muted);font-size:12px}
+.item .acts{display:flex;align-items:center;gap:6px}
+.pill{font-size:12px;padding:2px 11px;border-radius:99px;white-space:nowrap;border:1px solid var(--line)}
+.pill.new{color:var(--muted)}
+.pill.learn{color:var(--accent);border-color:currentColor}
+.pill.known{background:var(--grad);color:#fff;border-color:transparent}
+.icon-btn.ghost{border-color:transparent;color:var(--muted)}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+.danger-zone{margin-top:32px;display:flex;justify-content:center;gap:12px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+
+/* Alphabet */
+.classes{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:transparent;border-radius:99px;padding:5px 14px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:7px}
+.chip[aria-pressed="true"]{background:var(--btn);color:var(--on-btn);border-color:var(--btn)}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;margin-top:20px}
+.tile{border:0;background:var(--surface);border-radius:var(--r-md);padding:16px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;transition:transform .2s,box-shadow .2s}
+.tile:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px var(--fg)}
+.tile .L{font-family:var(--f-th);font-size:44px;line-height:1.25;font-weight:300}
+.tile .n{font-size:11px;color:var(--muted);white-space:nowrap}
+.tile .dot{position:absolute;top:12px;left:12px}
+.tile .done{position:absolute;top:8px;right:10px;font-size:11px;font-weight:600;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tile.obs .L{opacity:.35}
+.cls-mid{background:var(--c-mid)} .cls-high{background:var(--c-high)} .cls-low{background:var(--c-low)}
+.t-mid{color:var(--c-mid)} .t-high{color:var(--c-high)} .t-low{color:var(--c-low)}
+.alpha-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+
+/* Giant footer word */
+.giant{font-family:var(--f-th);font-weight:300;font-size:clamp(80px,19vw,240px);line-height:1;letter-spacing:-.02em;color:var(--fg);opacity:.07;text-align:center;margin:64px 0 0;user-select:none;overflow:hidden;white-space:nowrap}
+
+/* Sheet */
+.scrim{position:fixed;inset:0;background:rgba(8,8,16,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:20;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:fade .2s}
+.sheet{background:var(--surface);border-radius:var(--r-xl);width:100%;max-width:880px;max-height:100%;overflow:auto;box-shadow:0 40px 100px rgba(0,0,0,.3);animation:rise .3s cubic-bezier(.2,.8,.2,1)}
+.sheet.narrow{max-width:500px}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 0 28px;gap:10px}
+.sheet-body{padding:12px 28px 28px}
+@keyframes fade{from{opacity:0}}
+@keyframes rise{from{transform:translateY(24px);opacity:0}}
+.letter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px}
+.lt-hero{display:flex;align-items:center;gap:18px}
+.lt-hero .L{font-family:var(--f-th);font-size:110px;line-height:1.15;font-weight:300}
+.lt-hero .emo{font-size:56px;line-height:1}
+.lt-name{font-family:var(--f-th);font-size:28px;font-weight:300}
+.facts{display:flex;flex-direction:column;margin-top:18px;border-top:1px solid var(--line)}
+.fact{display:flex;justify-content:space-between;gap:12px;padding:12px 0;font-size:14px;border-bottom:1px solid var(--line)}
+.fact span:first-child{color:var(--muted)}
+.fact span:last-child{text-align:right;font-weight:500}
+.trace-box{display:flex;flex-direction:column;gap:10px}
+canvas#pad{width:100%;aspect-ratio:1;max-width:100%;background:var(--surface-2);border-radius:var(--r-lg);touch-action:none;cursor:crosshair;display:block}
+.trace-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.score{font-weight:500;font-size:14px;min-height:22px}
+.pager{display:flex;gap:8px}
+.form{display:flex;flex-direction:column;gap:12px}
+.form label{display:flex;flex-direction:column;gap:2px;font-size:12px;color:var(--muted);font-weight:400}
+.form .field{font-size:17px;padding:8px 2px}
+.form .field.thf{font-family:var(--f-th);font-size:24px}
+.form select.field{appearance:auto}
+.form-actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:10px}
+.confirm{font-size:14px;color:var(--bad);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:30;width:min(520px,calc(100% - 32px));background:var(--surface);color:var(--fg);border-radius:var(--r-md);box-shadow:0 20px 60px rgba(0,0,0,.25);padding:16px 20px;display:flex;flex-direction:column;gap:4px;font-size:14px;animation:rise .3s}
+.toast .link{align-self:flex-end}
+
+@media (max-width:820px){
+  .modes{grid-template-columns:1fr 1fr}
+  .letter{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .sec{grid-template-columns:1fr;margin-top:32px}
+  .vlabel{writing-mode:horizontal-tb;transform:none;margin-bottom:12px;font-size:13px}
+  .item{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px}
+  .item .ruw{grid-column:1}
+  .item .acts{grid-row:1 / span 2;grid-column:2}
+  .hero{grid-template-columns:1fr;gap:14px}
+  .mode{min-height:160px}
+}
+@media (max-width:440px){
+  .choices{grid-template-columns:1fr}
+  .top .wrap{justify-content:center}
+  .startrow .btn{min-width:0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><b>TH\</b><span>Тайский тренажёр</span></div>
+    <nav class="seg" id="tabs" aria-label="Разделы">
+      <button data-tab="learn" aria-pressed="true">Учить</button>
+      <button data-tab="words" aria-pressed="false">Словарь</button>
+      <button data-tab="alphabet" aria-pressed="false">Алфавит</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="v-learn">
+    <div id="learn-home"></div>
+    <div id="session" hidden></div>
+  </section>
+  <section id="v-words" hidden></section>
+  <section id="v-alphabet" hidden></section>
+</main>
+<div class="wrap" aria-hidden="true"><div class="giant">ภาษาไทย</div></div>
+<div id="modal"></div>
+
+<script>
+/* ---------- Data ---------- */
+const SEED = [
+ ['ผม / ฉัน','phǒm / chǎn','я, меня','I / me','word','ผม говорят мужчины, ฉัน — женщины'],
+ ['คุณ','khun','ты, вы','You','word'],
+ ['เขา','khǎo','он, его','He / him','word'],
+ ['เธอ','thəə','она, её','She / her','word','В разговоре про женщину тоже часто говорят เขา'],
+ ['เรา','rao','мы, нас','We / us','word'],
+ ['พวกเขา','phûak-khǎo','они, их','They / them','word'],
+ ['มัน','man','оно, это','It','word'],
+ ['สบาย','sà-baai','хорошо, комфортно','Fine','word'],
+ ['ไม่สบาย','mâi sà-baai','болеть, нездоровится','Sick','word','Дословно «не хорошо». Ещё есть слово ป่วย (pùai)'],
+ ['ชื่อ','chûue','имя','Name','word'],
+ ['อะไร','à-rai','что','What','word'],
+ ['วันนี้','wan-níi','сегодня','Today','word'],
+ ['ของคุณ','khɔ̌ɔng khun','твой, ваш','Your','word','В речи ของ часто опускают: ชื่อคุณ — твоё имя'],
+ ['ที่ไหน','thîi-nǎi','где','Where','word'],
+ ['มาจาก','maa-jàak','быть родом из, приехать из','Come from','word'],
+ ['ประเทศ','prà-thêet','страна','Country','word'],
+ ['มาก','mâak','очень','Very','word'],
+ ['พัก','phák','остановиться, отдыхать','Stay, take a rest','word'],
+ ['อยู่','yùu','жить, находиться','Live','word'],
+ ['ตอนนี้','dtɔɔn-níi','сейчас','Now','word'],
+ ['ที่','thîi','в, на (о месте)','At','word'],
+ ['สบายดีไหม','sà-baai dii mǎi','Как дела?','How are you?','phrase'],
+ ['สบายดี','sà-baai dii','У меня всё хорошо','I\'m fine','phrase'],
+ ['ไม่สบาย','mâi sà-baai','Я болею','I\'m sick','phrase'],
+ ['คุณชื่ออะไร','khun chûue à-rai','Как тебя зовут?','What is your name?','phrase'],
+ ['ฉันชื่อ …','chǎn chûue …','Меня зовут …','My name is …','phrase'],
+ ['ยินดีที่ได้รู้จัก','yin-dii thîi dâai rúu-jàk','Приятно познакомиться','Nice to meet you','phrase'],
+ ['คุณมาจากที่ไหน','khun maa-jàak thîi-nǎi','Откуда ты?','Where do you come from?','phrase'],
+ ['ฉันมาจาก …','chǎn maa-jàak …','Я из …','I\'m from …','phrase','Россия — รัสเซีย (rát-sia)'],
+ ['คุณพักที่ไหน','khun phák thîi-nǎi','Где ты остановилась?','Where do you stay?','phrase'],
+ ['ฉันพักที่ฉลอง','chǎn phák thîi chà-lɔ̌ɔng','Я живу в Чалонге','I stay in Chalong','phrase'],
+ ['ตอนนี้คุณอยู่ที่ไหน','dtɔɔn-níi khun yùu thîi-nǎi','Где ты сейчас?','Where are you now?','phrase'],
+ ['ตอนนี้ฉันอยู่ที่ …','dtɔɔn-níi chǎn yùu thîi …','Сейчас я в …','Now I\'m at …','phrase'],
+].map((r,i)=>({id:'w'+(i+1),th:r[0],tr:r[1],ru:r[2],en:r[3],type:r[4],note:r[5]||'',lesson:'Урок 1'}));
+
+// letter, name translit, name word, meaning, emoji, class, initial sound, final sound, obsolete
+const LETTERS = [
+ ['ก','gɔɔ gài','ไก่','курица','🐔','mid','g','k'],
+ ['ข','khɔ̌ɔ khài','ไข่','яйцо','🥚','high','kh','k'],
+ ['ฃ','khɔ̌ɔ khùat','ขวด','бутылка','🍾','high','kh','k',1],
+ ['ค','khɔɔ khwaai','ควาย','буйвол','🐃','low','kh','k'],
+ ['ฅ','khɔɔ khon','คน','человек','🧍','low','kh','k',1],
+ ['ฆ','khɔɔ rá-khang','ระฆัง','колокол','🔔','low','kh','k'],
+ ['ง','ngɔɔ nguu','งู','змея','🐍','low','ng','ng'],
+ ['จ','jɔɔ jaan','จาน','тарелка','🍽️','mid','j','t'],
+ ['ฉ','chɔ̌ɔ chìng','ฉิ่ง','тарелочки','🥁','high','ch',''],
+ ['ช','chɔɔ cháang','ช้าง','слон','🐘','low','ch','t'],
+ ['ซ','sɔɔ sôo','โซ่','цепь','⛓️','low','s','t'],
+ ['ฌ','chɔɔ chəə','เฌอ','дерево','🌳','low','ch',''],
+ ['ญ','yɔɔ yǐng','หญิง','женщина','👩','low','y','n'],
+ ['ฎ','dɔɔ chá-daa','ชฎา','танцевальная корона','👑','mid','d','t'],
+ ['ฏ','dtɔɔ bpà-dtàk','ปฏัก','копьё','🔱','mid','dt','t'],
+ ['ฐ','thɔ̌ɔ thǎan','ฐาน','пьедестал','🏛️','high','th','t'],
+ ['ฑ','thɔɔ mon-thoo','มณโฑ','Монтхо, героиня «Рамакиен»','👸','low','th','t'],
+ ['ฒ','thɔɔ phûu-thâo','ผู้เฒ่า','старик','👴','low','th','t'],
+ ['ณ','nɔɔ neen','เณร','послушник','🧘','low','n','n'],
+ ['ด','dɔɔ dèk','เด็ก','ребёнок','👶','mid','d','t'],
+ ['ต','dtɔɔ dtào','เต่า','черепаха','🐢','mid','dt','t'],
+ ['ถ','thɔ̌ɔ thǔng','ถุง','мешок','👝','high','th','t'],
+ ['ท','thɔɔ thá-hǎan','ทหาร','солдат','💂','low','th','t'],
+ ['ธ','thɔɔ thong','ธง','флаг','🚩','low','th','t'],
+ ['น','nɔɔ nǔu','หนู','мышь','🐭','low','n','n'],
+ ['บ','bɔɔ bai-mái','ใบไม้','лист','🍃','mid','b','p'],
+ ['ป','bpɔɔ bplaa','ปลา','рыба','🐟','mid','bp','p'],
+ ['ผ','phɔ̌ɔ phûeng','ผึ้ง','пчела','🐝','high','ph',''],
+ ['ฝ','fɔ̌ɔ fǎa','ฝา','крышка','🫙','high','f',''],
+ ['พ','phɔɔ phaan','พาน','поднос на ножке','🏺','low','ph','p'],
+ ['ฟ','fɔɔ fan','ฟัน','зубы','🦷','low','f','p'],
+ ['ภ','phɔɔ sǎm-phao','สำเภา','джонка','⛵','low','ph','p'],
+ ['ม','mɔɔ máa','ม้า','лошадь','🐎','low','m','m'],
+ ['ย','yɔɔ yák','ยักษ์','великан','👹','low','y','y'],
+ ['ร','rɔɔ ruea','เรือ','лодка','🚣','low','r','n'],
+ ['ล','lɔɔ ling','ลิง','обезьяна','🐒','low','l','n'],
+ ['ว','wɔɔ wǎen','แหวน','кольцо','💍','low','w','w'],
+ ['ศ','sɔ̌ɔ sǎa-laa','ศาลา','беседка','🛖','high','s','t'],
+ ['ษ','sɔ̌ɔ rue-sǐi','ฤๅษี','отшельник','🧙','high','s','t'],
+ ['ส','sɔ̌ɔ sǔea','เสือ','тигр','🐅','high','s','t'],
+ ['ห','hɔ̌ɔ hìip','หีบ','сундук','🧰','high','h',''],
+ ['ฬ','lɔɔ jù-laa','จุฬา','воздушный змей','🪁','low','l','n'],
+ ['อ','ɔɔ àang','อ่าง','таз','🛁','mid','',''],
+ ['ฮ','hɔɔ nók-hûuk','นกฮูก','сова','🦉','low','h',''],
+].map((r,i)=>({id:'L'+i,ch:r[0],name:r[1],word:r[2],ru:r[3],emo:r[4],cls:r[5],ini:r[6],fin:r[7],obs:!!r[8]}));
+
+const SOUND = {g:'«к» без выдоха, между к и г',kh:'«кх», к с выдохом',ng:'«нг», как в англ. sing',j:'между «ч» и «дж», без выдоха',ch:'«ч» с выдохом',s:'«с»',y:'«й»',d:'«д»',dt:'между «т» и «д», без выдоха',th:'«тх», т с выдохом',n:'«н»',b:'«б»',bp:'между «п» и «б», без выдоха',ph:'«пх», п с выдохом',f:'«ф»',m:'«м»',r:'«р», в речи часто как «л»',l:'«л»',w:'как англ. w',h:'мягкий «х», выдох','':'не звучит, держит гласную'};
+const FINAL = {k:'-k (к)',t:'-t (т)',p:'-p (п)',n:'-n (н)',ng:'-ng (нг)',m:'-m (м)',y:'-i (й)',w:'-o (у)','':'не бывает'};
+const CLS = {mid:'Средний',high:'Высокий',low:'Низкий'};
+const CLS_HINT = {mid:'Без знака тона слог звучит ровно, в среднем тоне',high:'Без знака тона: открытый слог восходящий, закрытый низкий',low:'Без знака тона: открытый слог ровный, закрытый высокий или падающий'};
+
+/* ---------- Storage ---------- */
+const K={words:'thai.v1.words',prog:'thai.v1.progress',prefs:'thai.v1.prefs'};
+function load(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+let words = load(K.words,null) || SEED.map(w=>({...w}));
+let prog = load(K.prog,{});
+let prefs = Object.assign({mode:'cards',scope:'due',dir:'th',auto:true,showTr:true,tab:'learn'},load(K.prefs,{}));
+const saveWords=()=>save(K.words,words), saveProg=()=>save(K.prog,prog), savePrefs=()=>save(K.prefs,prefs);
+
+/* ---------- Helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const DAY=864e5, INT=[0,1,2,4,7,15,30,60];
+const now=()=>Date.now();
+const byId=id=>!id?null:id[0]==='L'?LETTERS[+id.slice(1)]:words.find(w=>w.id===id);
+function status(id){const p=prog[id];if(!p||!p.seen)return'new';return p.box>=4?'known':'learn'}
+function isDue(id){const p=prog[id];return !p||!p.seen||p.due<=now()}
+function grade(id,ok){
+  const p=prog[id]||{box:0,due:0,seen:0,right:0,wrong:0};
+  p.seen++; if(ok){p.box=Math.min(p.box+1,INT.length-1);p.right++;p.due=now()+INT[p.box]*DAY-36e5}
+  else{p.box=Math.max(0,Math.min(p.box,1)-1);p.wrong++;p.due=now()}
+  prog[id]=p; saveProg();
+}
+const isLong=s=>[...s].length>9;
+
+const ICON={
+ speak:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+ close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+ edit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
+ left:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+ right:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+ cards:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="6" width="14" height="14" rx="3"/><path d="M7 3h11a3 3 0 0 1 3 3v11"/></svg>',
+ write:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 20h7"/></svg>',
+ quiz:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/><path d="M15.5 17l1.5 1.5 3-3"/></svg>',
+ listen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18.5c1 1.5 2.2 2.5 4 2.5 2.5 0 3.5-2 4-3.5.6-1.8 4-3.5 4-8.5a6 6 0 0 0-12 0"/><path d="M10 9a2 2 0 0 1 4 0c0 1.5-2 2-2 4"/></svg>',
+ play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+};
+
+/* ---------- Speech ---------- */
+let thVoice=null, voicesChecked=false;
+function loadVoices(){try{const v=speechSynthesis.getVoices();if(v.length){voicesChecked=true;thVoice=v.find(x=>/^th/i.test(x.lang))||null}}catch(e){}}
+if('speechSynthesis' in window){loadVoices();speechSynthesis.onvoiceschanged=()=>{loadVoices();if(view==='learn'&&!session)renderHome()}}
+let utter=null, warned=false;
+function speak(text,rate=.85){
+  if(!('speechSynthesis' in window)){noVoiceToast();return}
+  const t=String(text).replace(/…|\.\.\./g,'').replace(/\s*\/\s*/g,' ').trim(); if(!t)return;
+  loadVoices();
+  if(voicesChecked&&!thVoice){noVoiceToast(true);return}
+  const go=()=>{try{
+    utter=new SpeechSynthesisUtterance(t);utter.lang='th-TH';if(thVoice)utter.voice=thVoice;utter.rate=rate;
+    let started=false;utter.onstart=()=>{started=true};
+    utter.onerror=ev=>{if(ev.error!=='interrupted'&&ev.error!=='canceled')noVoiceToast()};
+    speechSynthesis.resume();speechSynthesis.speak(utter);
+    setTimeout(()=>{if(!started&&!thVoice)noVoiceToast()},1500);
+  }catch(e){noVoiceToast()}};
+  if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(go,80)}else go();
+}
+function primeSpeech(){try{if(!('speechSynthesis' in window))return;const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u)}catch(e){}}
+function noVoiceToast(force){
+  if(warned&&!force)return; warned=true; if(document.querySelector('.toast'))return;
+  const ua=navigator.userAgent, how=/iPad|iPhone|Macintosh/.test(ua)&&'ontouchend' in document?'Настройки → Универсальный доступ → Устный контент → Голоса → Тайский':/Mac/.test(ua)?'Системные настройки → Универсальный доступ → Устный контент → Системный голос → Управлять голосами → Thai':/Windows/.test(ua)?'Параметры → Время и язык → Речь → Добавить голоса → Тайский':'настройки синтеза речи системы, добавь тайский голос';
+  const el=document.createElement('div');el.className='toast';el.setAttribute('role','status');
+  const win=/Windows/.test(ua);
+  el.innerHTML=`<b>Нет тайского голоса</b><span>${win?'Самый простой путь: открой эту страницу в Microsoft Edge, там тайский голос встроен. Или установи его в Windows: ':'Установи его в системе: '}${how}. Потом перезапусти браузер.</span><button class="link" aria-label="Закрыть">Понятно</button>`;
+  el.querySelector('button').onclick=()=>el.remove();document.body.appendChild(el);
+}
+const letterSay=l=>l.ch+'อ '+l.word;
+
+/* ---------- Answer checking ---------- */
+function norm(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ɔ/g,'o').replace(/ə/g,'e').replace(/ɛ/g,'ae').replace(/ʉ/g,'ue').replace(/(ค่ะ|คะ|ครับ)$/,'').replace(/[^a-z฀-๿]/g,'')}
+function loose(s){return norm(s).replace(/dt/g,'t').replace(/bp/g,'p').replace(/([kptc])h/g,'$1').replace(/j/g,'c').replace(/(.)\1+/g,'$1')}
+function check(input,w){
+  const vars=[...w.tr.split('/'),...w.th.split('/')].map(s=>s.trim()).filter(Boolean);
+  const n=norm(input); if(!n)return'no';
+  if(vars.some(v=>norm(v)===n))return'ok';
+  if(vars.some(v=>loose(v)===loose(input)))return'close';
+  return'no';
+}
+
+/* ---------- Tabs ---------- */
+let view='learn';
+function setTab(t,push=true){
+  view=t; prefs.tab=t; savePrefs();
+  document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tab===t));
+  ['learn','words','alphabet'].forEach(v=>$('#v-'+v).hidden=v!==t);
+  if(push&&location.hash!=='#'+t)history.replaceState(null,'','#'+t);
+  if(t==='learn'){if(!session)renderHome()} else if(t==='words')renderWords(); else renderAlphabet();
+  window.scrollTo(0,0);
+}
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b){if(session&&b.dataset.tab!=='learn')endSession(true);setTab(b.dataset.tab)}});
+window.addEventListener('hashchange',()=>{const t=location.hash.slice(1);if(['learn','words','alphabet'].includes(t))setTab(t,false)});
+
+/* ---------- Learn home ---------- */
+const MODES=[
+ {id:'cards',tag:'Память',name:'Карточки',desc:'Переворачивай и отмечай, помнишь ли',icon:'cards'},
+ {id:'write',tag:'Письмо',name:'Написать',desc:'Видишь перевод, пишешь транскрипцию',icon:'write'},
+ {id:'quiz',tag:'Выбор',name:'Тест',desc:'Выбери верный ответ из четырёх',icon:'quiz'},
+ {id:'listen',tag:'Слух',name:'На слух',desc:'Слушаешь тайский, угадываешь смысл',icon:'listen'},
+];
+function pool(){
+  const ws=words;
+  if(prefs.scope==='due'){
+    const due=ws.filter(w=>isDue(w.id));
+    const old=shuffle(due.filter(w=>prog[w.id]&&prog[w.id].seen)).sort((a,b)=>prog[a.id].due-prog[b.id].due);
+    const fresh=shuffle(due.filter(w=>!prog[w.id]||!prog[w.id].seen));
+    return [...old,...fresh].slice(0,20);
+  }
+  if(prefs.scope==='words')return shuffle(ws.filter(w=>w.type==='word'));
+  if(prefs.scope==='phrases')return shuffle(ws.filter(w=>w.type==='phrase'));
+  return shuffle(ws);
+}
+function seg(name,opts,val){return `<div class="seg small" role="group" data-seg="${name}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${v===val}">${l}</button>`).join('')}</div>`}
+function plural(n,a,b,c){const m=n%10,h=n%100;return m===1&&h!==11?a:m>=2&&m<=4&&(h<10||h>=20)?b:c}
+function renderHome(){
+  const total=words.length, cn={new:0,learn:0,known:0};
+  words.forEach(w=>cn[status(w.id)]++);
+  const due=words.filter(w=>isDue(w.id)).length;
+  const items=pool();
+  const nextDue=Math.min(...words.map(w=>prog[w.id]&&prog[w.id].seen?prog[w.id].due:Infinity));
+  const showDir=prefs.mode==='cards'||prefs.mode==='quiz';
+  const noVoice=voicesChecked&&!thVoice;
+  let note='';
+  if(!items.length&&prefs.scope==='due') note=`На сегодня всё повторено. ${isFinite(nextDue)?'Следующее повторение '+fmtDate(nextDue)+'.':''} <button class="link" id="anyway">Повторить всё равно</button>`;
+  else if(noVoice) note=/Windows/.test(navigator.userAgent)?'В этом браузере нет тайского голоса, поэтому звука не будет. Открой страницу в Microsoft Edge: там тайский голос встроен.':'В системе нет тайского голоса, поэтому звука не будет. Установи тайский голос в настройках устройства и перезапусти браузер.';
+  else if(prefs.mode==='write') note='Тоны ставить не нужно. Можно писать латиницей или тайскими буквами.';
+  $('#learn-home').innerHTML=`
+   <section class="night">
+     <h1>Повторим <span class="dim">слова</span></h1>
+     <p class="sub">${total} ${plural(total,'карточка','карточки','карточек')}. Интервальные повторения: знакомое показывается реже, трудное чаще.</p>
+     <div class="hero">
+       <div class="num">${due}</div>
+       <div>
+         <div class="what">${plural(due,'карточка ждёт','карточки ждут','карточек ждут')} повторения сегодня</div>
+         <div class="stack" aria-hidden="true"><i style="width:${cn.known/total*100}%;background:var(--grad)"></i><i style="width:${cn.learn/total*100}%;background:rgba(255,255,255,.55)"></i></div>
+         <div class="legend"><span>\\ Выучено <b>${cn.known}</b></span><span>\\ Учу <b>${cn.learn}</b></span><span>\\ Новые <b>${cn.new}</b></span></div>
+       </div>
+     </div>
+   </section>
+   <div class="sec"><div class="vlabel">Режим</div>
+     <div class="modes">${MODES.map(m=>`<button class="mode" data-mode="${m.id}" aria-pressed="${prefs.mode===m.id}"><span class="tagpill">${m.tag}</span><b>${m.name}</b><small>${m.desc}</small>${ICON[m.icon]}</button>`).join('')}</div>
+   </div>
+   <div class="sec"><div class="vlabel">Настройки</div>
+     <div class="panel opts">
+       <div class="opt"><span>Что повторять</span>${seg('scope',[['due','По расписанию'],['all','Всё'],['words','Слова'],['phrases','Фразы']],prefs.scope)}</div>
+       ${showDir?`<div class="opt"><span>Направление</span>${seg('dir',[['th','Тайский → русский'],['ru','Русский → тайский']],prefs.dir)}</div>`:''}
+       <div class="opt"><span>Транскрипция рядом с тайским словом</span><button class="switch" id="showtr" role="switch" aria-checked="${prefs.showTr}" aria-label="Показывать транскрипцию"></button></div>
+       <div class="opt"><span>Озвучивать тайский автоматически</span><button class="switch" id="auto" role="switch" aria-checked="${prefs.auto}" aria-label="Автоозвучка"></button></div>
+     </div>
+   </div>
+   <div class="startrow">
+     <button class="btn grad" id="start" ${items.length?'':'disabled'}>Начать${items.length?' · '+items.length:''}</button>
+     ${note?`<p class="note">${note}</p>`:''}
+   </div>`;
+}
+function fmtDate(t){const d=Math.round((t-now())/DAY);if(d<=0)return'уже скоро';if(d===1)return'завтра';return'через '+d+' '+plural(d,'день','дня','дней')}
+$('#learn-home').addEventListener('click',e=>{
+  const m=e.target.closest('[data-mode]'); if(m){prefs.mode=m.dataset.mode;savePrefs();renderHome();return}
+  const s=e.target.closest('[data-seg] button'); if(s){prefs[s.parentNode.dataset.seg]=s.dataset.v;savePrefs();renderHome();return}
+  if(e.target.closest('#showtr')){prefs.showTr=!prefs.showTr;savePrefs();renderHome();return}
+  if(e.target.closest('#auto')){prefs.auto=!prefs.auto;savePrefs();renderHome();return}
+  if(e.target.closest('#anyway')){prefs.scope='all';savePrefs();renderHome();return}
+  if(e.target.closest('#start')){primeSpeech();startSession(prefs.mode,pool().map(w=>w.id))}
+});
+
+/* ---------- Session ---------- */
+let session=null;
+function startSession(mode,ids,returnTo='learn'){
+  if(!ids.length)return;
+  session={mode,queue:[...ids],i:0,right:0,wrong:0,mistakes:new Set(),requeued:new Set(),answered:false,flipped:false,returnTo};
+  if(view!=='learn'){view='learn';document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tab==='learn'));['learn','words','alphabet'].forEach(v=>$('#v-'+v).hidden=v!=='learn')}
+  $('#learn-home').hidden=true; $('#session').hidden=false; window.scrollTo(0,0);
+  renderStep();
+}
+function endSession(silent){
+  const back=session&&session.returnTo; session=null; try{speechSynthesis.cancel()}catch(e){}
+  $('#session').hidden=true; $('#learn-home').hidden=false;
+  if(!silent)setTab(back||'learn');
+}
+function topBar(){
+  const n=session.queue.length, i=Math.min(session.i,n);
+  return `<div class="s-top"><button class="icon-btn" data-act="close" aria-label="Закончить">${ICON.close}</button><div class="bar"><i style="width:${i/n*100}%"></i></div><span class="count">${Math.min(i+1,n)}/${n}</span></div>`;
+}
+const spk=(t,label='Озвучить')=>`<button class="icon-btn" data-say="${esc(t)}" aria-label="${label}">${ICON.speak}</button>`;
+function thBlock(w){return `<div class="big-th ${isLong(w.th)?'long':''}">${esc(w.th)}</div>`}
+function infoBack(w,withTh){
+  return `${withTh?thBlock(w):''}<div class="tr">${esc(w.tr)}</div>${withTh?'':`<div class="big-ru">${esc(w.ru)}</div>`}<div class="en">${esc(w.en)}</div>${w.note?`<div class="mini-note">${esc(w.note)}</div>`:''}`;
+}
+function distractors(item,n=3){
+  if(item.ch){return shuffle(LETTERS.filter(l=>l.id!==item.id&&l.name!==item.name)).slice(0,n)}
+  let same=words.filter(w=>w.id!==item.id&&w.type===item.type&&w.th!==item.th&&w.ru!==item.ru);
+  if(same.length<n)same=words.filter(w=>w.id!==item.id&&w.th!==item.th&&w.ru!==item.ru);
+  return shuffle(same).slice(0,n);
+}
+function renderStep(){
+  const s=session, el=$('#session');
+  if(s.i>=s.queue.length){renderResult();return}
+  const item=byId(s.queue[s.i]); s.answered=false; s.flipped=false;
+  let body='';
+  if(s.mode==='cards'){
+    const thFront=prefs.dir==='th';
+    const front=thFront?`<span class="tag">Тайский</span>${thBlock(item)}${prefs.showTr?`<div class="tr">${esc(item.tr)}</div>`:''}<span class="corner">${spk(item.th)}</span>`
+                       :`<span class="tag">Русский</span><div class="big-ru">${esc(item.ru)}</div><div class="en">${esc(item.en)}</div>`;
+    const back=thFront?`<span class="tag">Перевод</span><div class="big-ru">${esc(item.ru)}</div><div class="tr">${esc(item.tr)}</div><div class="en">${esc(item.en)}</div>${item.note?`<div class="mini-note">${esc(item.note)}</div>`:''}<span class="corner">${spk(item.th)}</span>`
+                      :`<span class="tag">Тайский</span>${infoBack(item,true)}<span class="corner">${spk(item.th)}</span>`;
+    body=`<div class="flip" id="flip" tabindex="0" role="button" aria-label="Перевернуть карточку"><div class="flip-inner"><div class="face front">${front}</div><div class="face back">${back}</div></div></div>
+      <div id="cardActs"><button class="btn secondary wide" data-act="flip">Показать ответ</button></div>
+      <div class="keys">Пробел — перевернуть · 1 — не помню · 2 — помню</div>`;
+    if(thFront&&prefs.auto)setTimeout(()=>speak(item.th),250);
+  }
+  else if(s.mode==='write'){
+    body=`<div class="q"><div class="big-ru">${esc(item.ru)}</div><div class="en">${esc(item.en)}</div></div>
+      <input class="field" id="answer" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Транскрипция или тайскими буквами">
+      <div id="wres"></div>
+      <div id="wacts"><button class="btn primary wide" data-act="check">Проверить</button></div>
+      <div class="keys">Enter — проверить и дальше</div>`;
+  }
+  else if(s.mode==='quiz'||s.mode==='listen'||s.mode==='letters'){
+    const opts=shuffle([item,...distractors(item)]);
+    s.opts=opts.map(o=>o.id);
+    let prompt;
+    if(s.mode==='listen') prompt=`<button class="play" data-act="replay" aria-label="Прослушать ещё раз">${ICON.play}</button><button class="link" data-act="slow">Медленнее</button><div id="reveal"></div>`;
+    else if(s.mode==='letters') prompt=`<div class="big-th" style="font-size:88px;line-height:1.15">${item.ch}</div><div class="en">Как называется буква?</div><div id="reveal"></div>`;
+    else if(prefs.dir==='th') prompt=`${thBlock(item)}${prefs.showTr?`<div class="tr">${esc(item.tr)}</div>`:''}<div>${spk(item.th)}</div><div id="reveal"></div>`;
+    else prompt=`<div class="big-ru">${esc(item.ru)}</div><div class="en">${esc(item.en)}</div><div id="reveal"></div>`;
+    const label=o=>{
+      if(s.mode==='letters')return `<span class="ct"><span>${esc(o.name)}</span><small>${esc(o.ru)}</small></span>`;
+      if(s.mode==='quiz'&&prefs.dir==='ru')return `<span class="ct"><span class="th">${esc(o.th)}</span><small>${esc(o.tr)}</small></span>`;
+      return `<span class="ct"><span>${esc(o.ru)}</span></span>`;
+    };
+    body=`<div class="q">${prompt}</div>
+      <div class="choices">${opts.map((o,k)=>`<button class="choice" data-pick="${o.id}"><span class="k">${k+1}</span>${label(o)}</button>`).join('')}</div>
+      <div id="qnext"></div>
+      <div class="keys">1–4 — выбрать ответ · Enter — дальше</div>`;
+    if(s.mode==='listen')setTimeout(()=>speak(item.th),300);
+    if(s.mode==='quiz'&&prefs.dir==='th'&&prefs.auto)setTimeout(()=>speak(item.th),250);
+  }
+  el.innerHTML=topBar()+`<div class="stage">${body}</div>`;
+  const a=$('#answer'); if(a)a.focus();
+}
+function flip(){
+  const s=session; if(!s||s.mode!=='cards')return;
+  const f=$('#flip'); s.flipped=!s.flipped; f.classList.toggle('on',s.flipped);
+  if(s.flipped){
+    $('#cardActs').innerHTML=`<div class="row2"><button class="btn bad" data-act="no">Не помню</button><button class="btn good" data-act="yes">Помню</button></div>`;
+    if(prefs.dir==='ru'&&prefs.auto)speak(byId(s.queue[s.i]).th);
+  }
+}
+function rateCard(ok){
+  const s=session; if(!s.flipped)return;
+  const id=s.queue[s.i]; grade(id,ok);
+  if(ok)s.right++; else{s.wrong++;s.mistakes.add(id);if(!s.requeued.has(id)){s.requeued.add(id);s.queue.splice(Math.min(s.i+4,s.queue.length),0,id)}}
+  s.i++; renderStep();
+}
+function pick(id){
+  const s=session; if(s.answered)return; s.answered=true;
+  const item=byId(s.queue[s.i]), ok=id===item.id;
+  grade(item.id,ok); if(ok)s.right++; else{s.wrong++;s.mistakes.add(item.id)}
+  document.querySelectorAll('.choice').forEach(b=>{b.disabled=true;if(b.dataset.pick===item.id)b.classList.add('right');else if(b.dataset.pick===id)b.classList.add('wrong')});
+  const r=$('#reveal');
+  if(r){
+    if(s.mode==='listen')r.innerHTML=`<div class="big-th ${isLong(item.th)?'long':''}" style="margin-top:8px">${esc(item.th)}</div><div class="tr">${esc(item.tr)}</div>`;
+    else if(s.mode==='letters')r.innerHTML=`<div class="tr">${item.emo} ${esc(item.name)} <span class="en">· ${esc(item.word)} — ${esc(item.ru)}</span></div>`;
+    else r.innerHTML=prefs.dir==='th'&&!prefs.showTr?`<div class="tr">${esc(item.tr)}</div>`:'';
+  }
+  if(s.mode==='letters')speak(letterSay(item));
+  else if(s.mode!=='listen'&&prefs.dir==='ru')speak(item.th);
+  if(ok&&s.mode!=='letters'&&s.mode!=='listen'){setTimeout(()=>{if(session===s&&s.answered){s.i++;renderStep()}},850)}
+  else $('#qnext').innerHTML=`<button class="btn primary wide" data-act="next">Дальше</button>`;
+}
+function checkWrite(){
+  const s=session; const inp=$('#answer'); if(!inp||s.answered)return;
+  if(!inp.value.trim()){inp.focus();return}
+  s.answered=true; inp.disabled=true;
+  const item=byId(s.queue[s.i]); const r=check(inp.value,item); const ok=r!=='no';
+  s.lastOk=ok; grade(item.id,ok); if(ok)s.right++; else{s.wrong++;s.mistakes.add(item.id)}
+  const title={ok:'Верно',close:'Почти верно',no:'Не совсем'}[r];
+  const hint=r==='close'?'<span class="en">Проверь придыхание и длину гласных, засчитано</span>':'';
+  $('#wres').innerHTML=`<div class="verdict ${r}"><b>${title}</b>${hint}<div style="display:flex;align-items:center;gap:12px;margin-top:6px"><span class="th" style="font-size:26px">${esc(item.th)}</span><span class="tr">${esc(item.tr)}</span>${spk(item.th)}</div></div>`;
+  $('#wacts').innerHTML=ok?`<button class="btn primary wide" data-act="next">Дальше</button>`
+    :`<div class="row2"><button class="btn plain" data-act="override">Я ответила верно</button><button class="btn primary" data-act="next">Дальше</button></div>`;
+  speak(item.th);
+}
+function renderResult(){
+  const s=session, total=s.right+s.wrong, m=[...s.mistakes];
+  $('#session').innerHTML=`<div class="stage"><div class="panel result">
+    <div class="sub">Готово</div>
+    <div class="num">${s.right}<span style="color:var(--muted);font-size:36px">/${total}</span></div>
+    <div>${m.length?`Ошибок: ${m.length}. Эти карточки вернутся при следующем повторении.`:'Всё верно, так держать.'}</div>
+    ${m.length?`<div class="en" style="max-width:420px">${m.map(id=>{const x=byId(id);return esc(x.ch?x.ch+' '+x.name:x.th+' — '+x.ru)}).join(' · ')}</div>`:''}
+    <div class="btns">${m.length?`<button class="btn secondary" data-act="again">Повторить ошибки</button>`:''}<button class="btn primary" data-act="done">Готово</button></div>
+  </div></div>`;
+}
+$('#session').addEventListener('click',e=>{
+  const s=session; if(!s)return;
+  const say=e.target.closest('[data-say]'); if(say){e.stopPropagation();speak(say.dataset.say);return}
+  const p=e.target.closest('[data-pick]'); if(p){pick(p.dataset.pick);return}
+  const a=e.target.closest('[data-act]'); const act=a&&a.dataset.act;
+  if(!act){if(e.target.closest('#flip'))flip();return}
+  const item=byId(s.queue[s.i]);
+  ({
+    close:()=>endSession(),
+    flip, yes:()=>rateCard(true), no:()=>rateCard(false),
+    check:checkWrite,
+    next:()=>{s.i++;renderStep()},
+    override:()=>{grade(item.id,true);s.right++;s.wrong--;s.mistakes.delete(item.id);s.i++;renderStep()},
+    replay:()=>speak(item.th), slow:()=>speak(item.th,.55),
+    again:()=>startSession(s.mode,shuffle([...s.mistakes]),s.returnTo),
+    done:()=>endSession()
+  })[act]?.();
+});
+document.addEventListener('keydown',e=>{
+  if($('#modal').firstChild){if(e.key==='Escape')closeModal();return}
+  const s=session; if(!s||view!=='learn')return;
+  const done=s.i>=s.queue.length;
+  if(e.key==='Escape'){endSession();return}
+  if(done)return;
+  if(s.mode==='cards'){
+    if(e.key===' '||e.key==='Enter'){e.preventDefault();if(!s.flipped)flip();else rateCard(true)}
+    else if(e.key==='1')rateCard(false); else if(e.key==='2')rateCard(true);
+  } else if(s.mode==='write'){
+    if(e.key==='Enter'){e.preventDefault();if(!s.answered)checkWrite();else{s.i++;renderStep()}}
+  } else {
+    if(/^[1-4]$/.test(e.key)&&!s.answered){const id=s.opts[+e.key-1];if(id)pick(id)}
+    else if(e.key==='Enter'&&s.answered){e.preventDefault();s.i++;renderStep()}
+  }
+});
+
+/* ---------- Words ---------- */
+let query='';
+function renderWords(){
+  const lessons=[...new Set(words.map(w=>w.lesson))];
+  const q=query.trim().toLowerCase();
+  const match=w=>!q||[w.th,w.tr,w.ru,w.en].some(x=>String(x).toLowerCase().includes(q))||norm(w.tr).includes(norm(q));
+  const row=w=>{const st=status(w.id);return `<div class="item">
+      <div><div class="thw">${esc(w.th)}</div><div class="trw">${esc(w.tr)}</div></div>
+      <div class="ruw">${esc(w.ru)}<small>${esc(w.en)}</small></div>
+      <div class="acts"><span class="pill ${st}">${{new:'Новое',learn:'Учу',known:'Выучено'}[st]}</span>${spk(w.th)}<button class="icon-btn ghost" data-edit="${w.id}" aria-label="Изменить">${ICON.edit}</button></div>
+    </div>`};
+  let html='';
+  lessons.forEach(l=>{
+    const ws=words.filter(w=>w.lesson===l&&match(w)); if(!ws.length)return;
+    const wd=ws.filter(w=>w.type==='word'), ph=ws.filter(w=>w.type==='phrase');
+    if(wd.length)html+=`<div class="label">${esc(l)} · Слова · ${wd.length}</div><div class="panel list">${wd.map(row).join('')}</div>`;
+    if(ph.length)html+=`<div class="label">${esc(l)} · Фразы · ${ph.length}</div><div class="panel list">${ph.map(row).join('')}</div>`;
+  });
+  $('#v-words').innerHTML=`
+    <h1>Мой <span class="dim">словарь</span></h1>
+    <p class="sub">Нажми на динамик, чтобы послушать. Транскрипцию можно поправить под вариант преподавателя.</p>
+    <div class="panel tip"><span class="th">ค่ะ</span><span>Девушки заканчивают фразу вежливой частицей <span class="th">ค่ะ</span> (khâ), а вопрос — <span class="th">คะ</span> (khá): <span class="th">สบายดีค่ะ</span>, <span class="th">คุณชื่ออะไรคะ</span>.</span></div>
+    <div class="toolbar"><input class="search" id="q" type="search" placeholder="Поиск по словам" value="${esc(query)}" aria-label="Поиск"><button class="btn primary" data-add>Добавить слово</button></div>
+    ${html||`<div class="panel empty" style="margin-top:20px">Ничего не нашлось по запросу «${esc(query)}»</div>`}
+    <div class="danger-zone" id="dz"><button class="link" data-transfer>Перенести данные</button><span>·</span><button class="link" data-reset>Сбросить прогресс</button></div>`;
+}
+$('#v-words').addEventListener('input',e=>{if(e.target.id==='q'){query=e.target.value;const pos=e.target.selectionStart;renderWords();const q=$('#q');q.focus();q.setSelectionRange(pos,pos)}});
+$('#v-words').addEventListener('click',e=>{
+  const say=e.target.closest('[data-say]'); if(say){speak(say.dataset.say);return}
+  const ed=e.target.closest('[data-edit]'); if(ed){openWordForm(words.find(w=>w.id===ed.dataset.edit));return}
+  if(e.target.closest('[data-add]')){openWordForm(null);return}
+  if(e.target.closest('[data-reset]')){$('#dz').innerHTML=`<span class="confirm">Весь прогресс повторений обнулится. <button class="btn bad" data-reset-yes>Сбросить</button><button class="btn plain" data-reset-no>Отмена</button></span>`;return}
+  if(e.target.closest('[data-reset-yes]')){prog={};saveProg();renderWords();return}
+  if(e.target.closest('[data-reset-no]')){renderWords();return}
+  if(e.target.closest('[data-transfer]'))openTransfer();
+});
+function openWordForm(w){
+  const lessons=[...new Set(words.map(x=>x.lesson))];
+  const d=w||{th:'',tr:'',ru:'',en:'',type:'word',lesson:lessons[lessons.length-1]||'Урок 1',note:''};
+  openModal(`<div class="sheet narrow" role="dialog" aria-modal="true" aria-label="${w?'Изменить слово':'Новое слово'}">
+    <div class="sheet-head"><h2>${w?'Изменить слово':'Новое слово'}</h2><button class="icon-btn" data-close aria-label="Закрыть">${ICON.close}</button></div>
+    <form class="sheet-body form" id="wf">
+      <label>Тайский<input class="field thf" id="f-th" required value="${esc(d.th)}" placeholder="สวัสดี"></label>
+      <label>Транскрипция<input class="field" id="f-tr" required value="${esc(d.tr)}" placeholder="sà-wàt-dii"></label>
+      <label>Перевод<input class="field" id="f-ru" required value="${esc(d.ru)}" placeholder="здравствуйте"></label>
+      <div class="row2">
+        <label>English<input class="field" id="f-en" value="${esc(d.en)}" placeholder="Hello"></label>
+        <label>Урок<input class="field" id="f-lesson" list="lessons" value="${esc(d.lesson)}"><datalist id="lessons">${lessons.map(l=>`<option value="${esc(l)}">`).join('')}<option value="Урок ${lessons.length+1}"></datalist></label>
+      </div>
+      <label>Тип<select class="field" id="f-type"><option value="word" ${d.type==='word'?'selected':''}>Слово</option><option value="phrase" ${d.type==='phrase'?'selected':''}>Фраза</option></select></label>
+      <label>Заметка<input class="field" id="f-note" value="${esc(d.note)}" placeholder="Необязательно"></label>
+      <div class="form-actions" id="fa">
+        ${w?'<button type="button" class="btn bad" data-del>Удалить</button>':'<span></span>'}
+        <button type="submit" class="btn primary">${w?'Сохранить':'Добавить'}</button>
+      </div>
+    </form></div>`);
+  $('#wf').addEventListener('submit',e=>{
+    e.preventDefault();
+    const v=id=>$('#f-'+id).value.trim();
+    const data={th:v('th'),tr:v('tr'),ru:v('ru'),en:v('en'),type:v('type'),lesson:v('lesson')||'Урок 1',note:v('note')};
+    if(w)Object.assign(w,data); else words.push({id:'u'+Date.now().toString(36),...data});
+    saveWords(); closeModal(); renderWords();
+  });
+  $('#fa').addEventListener('click',e=>{
+    if(e.target.closest('[data-del]'))$('#fa').innerHTML=`<span class="confirm">Удалить «${esc(w.th)}» вместе с прогрессом?</span><span style="display:flex;gap:8px"><button type="button" class="btn plain" data-cancel>Отмена</button><button type="button" class="btn bad" data-del-yes>Удалить</button></span>`;
+    if(e.target.closest('[data-del-yes]')){words=words.filter(x=>x!==w);delete prog[w.id];saveWords();saveProg();closeModal();renderWords()}
+    if(e.target.closest('[data-cancel]')){closeModal();openWordForm(w)}
+  });
+  setTimeout(()=>$('#f-th').focus(),50);
+}
+
+/* ---------- Transfer ---------- */
+function openTransfer(){
+  const data=JSON.stringify({v:1,words,prog});
+  openModal(`<div class="sheet narrow" role="dialog" aria-modal="true" aria-label="Перенести данные">
+    <div class="sheet-head"><h2>Перенести данные</h2><button class="icon-btn" data-close aria-label="Закрыть">${ICON.close}</button></div>
+    <div class="sheet-body form">
+      <p class="sub" style="font-size:14px">Слова и прогресс хранятся в этом браузере. Чтобы перенести их в другой браузер или на другое устройство, скопируй код здесь и вставь его там.</p>
+      <label>Код этого браузера<textarea class="field" id="t-out" rows="3" readonly style="font-size:12px;resize:vertical">${esc(data)}</textarea></label>
+      <div class="form-actions" style="justify-content:flex-end;margin-top:0"><button type="button" class="btn secondary" id="t-copy">Скопировать</button></div>
+      <label>Вставить код из другого браузера<textarea class="field" id="t-in" rows="3" style="font-size:12px;resize:vertical" placeholder='{"v":1,"words":[...'></textarea></label>
+      <div class="form-actions" style="margin-top:0"><span class="score" id="t-msg"></span><button type="button" class="btn primary" id="t-load">Загрузить</button></div>
+    </div></div>`);
+  $('#t-copy').onclick=()=>{const t=$('#t-out');const done=()=>{$('#t-copy').textContent='Скопировано'};
+    try{navigator.clipboard.writeText(t.value).then(done,()=>{t.select();document.execCommand('copy');done()})}catch(e){t.select();try{document.execCommand('copy')}catch(_){}done()}};
+  $('#t-load').onclick=()=>{
+    const m=$('#t-msg');
+    try{const d=JSON.parse($('#t-in').value.trim());
+      if(!Array.isArray(d.words)||!d.words.length||typeof d.prog!=='object')throw 0;
+      words=d.words;prog=d.prog||{};saveWords();saveProg();
+      m.style.color='var(--good)';m.textContent=`Загружено: ${words.length} ${plural(words.length,'слово','слова','слов')}`;
+      renderWords();
+    }catch(e){m.style.color='var(--bad)';m.textContent='Код не распознан. Скопируй его целиком.'}
+  };
+}
+
+/* ---------- Modal ---------- */
+function openModal(html){$('#modal').innerHTML=`<div class="scrim">${html}</div>`;document.body.style.overflow='hidden'}
+function closeModal(){$('#modal').innerHTML='';document.body.style.overflow='';pad=null}
+$('#modal').addEventListener('click',e=>{if(e.target.classList.contains('scrim')||e.target.closest('[data-close]'))closeModal()});
+
+/* ---------- Alphabet ---------- */
+let clsFilter='all';
+function renderAlphabet(){
+  const counts={mid:0,high:0,low:0}; LETTERS.forEach(l=>counts[l.cls]++);
+  const known=LETTERS.filter(l=>status(l.id)==='known').length;
+  const list=LETTERS.filter(l=>clsFilter==='all'||l.cls===clsFilter);
+  $('#v-alphabet').innerHTML=`
+    <div class="alpha-head">
+      <div><h1>Согласные <span class="dim">буквы</span></h1><p class="sub">44 буквы. У каждой есть имя-подсказка: ก — gɔɔ gài, «курица». Выучено ${known} из 44.</p></div>
+      <button class="btn grad" data-train>Тренировка · 10 букв</button>
+    </div>
+    <div class="label">Класс согласной определяет тон слога</div>
+    <div class="classes">
+      <button class="chip" data-cls="all" aria-pressed="${clsFilter==='all'}">Все · 44</button>
+      ${['mid','high','low'].map(c=>`<button class="chip" data-cls="${c}" aria-pressed="${clsFilter===c}"><i class="dot cls-${c}"></i>${CLS[c]} · ${counts[c]}</button>`).join('')}
+    </div>
+    <div class="grid">${list.map(l=>`<button class="tile ${l.obs?'obs':''}" data-letter="${l.id}" aria-label="${l.ch} ${esc(l.name)}">
+      <i class="dot cls-${l.cls}"></i>${status(l.id)==='known'?'<span class="done">✓</span>':''}
+      <span class="L">${l.ch}</span><span class="n">${esc(l.name)}</span></button>`).join('')}</div>`;
+}
+$('#v-alphabet').addEventListener('click',e=>{
+  const c=e.target.closest('[data-cls]'); if(c){clsFilter=c.dataset.cls;renderAlphabet();return}
+  const t=e.target.closest('[data-letter]'); if(t){openLetter(+t.dataset.letter.slice(1));return}
+  if(e.target.closest('[data-train]')){primeSpeech();
+    const src=LETTERS.filter(l=>!l.obs&&(clsFilter==='all'||l.cls===clsFilter));
+    const due=shuffle(src.filter(l=>isDue(l.id))), rest=shuffle(src.filter(l=>!isDue(l.id)));
+    startSession('letters',[...due,...rest].slice(0,10).map(l=>l.id),'alphabet');
+  }
+});
+
+/* ---------- Letter sheet + tracing ---------- */
+let pad=null, cur=0;
+function openLetter(i){
+  cur=i; const l=LETTERS[i];
+  openModal(`<div class="sheet" role="dialog" aria-modal="true" aria-label="Буква ${l.ch}">
+    <div class="sheet-head">
+      <div class="pager"><button class="icon-btn" data-nav="-1" aria-label="Предыдущая буква">${ICON.left}</button><button class="icon-btn" data-nav="1" aria-label="Следующая буква">${ICON.right}</button></div>
+      <button class="icon-btn" data-close aria-label="Закрыть">${ICON.close}</button>
+    </div>
+    <div class="sheet-body letter">
+      <div>
+        <div class="lt-hero"><span class="L">${l.ch}</span><span class="emo" aria-hidden="true">${l.emo}</span></div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:4px">
+          <div><div class="lt-name">${l.ch}อ ${l.word}</div><div class="tr">${esc(l.name)}</div></div>
+          <button class="icon-btn" data-sayl aria-label="Озвучить">${ICON.speak}</button>
+        </div>
+        <div style="margin-top:6px">«${esc(l.word)}» значит <b>${esc(l.ru)}</b></div>
+        <div class="facts">
+          <div class="fact"><span>Класс</span><span class="t-${l.cls}">${CLS[l.cls]}</span></div>
+          <div class="fact"><span>В начале слога</span><span>${l.ini?esc(l.ini)+' · ':''}${SOUND[l.ini]}</span></div>
+          <div class="fact"><span>В конце слога</span><span>${FINAL[l.fin]}</span></div>
+        </div>
+        <p class="en" style="margin-top:12px">${CLS_HINT[l.cls]}.${l.obs?' Буква устарела и в современных словах не встречается.':''}</p>
+      </div>
+      <div class="trace-box">
+        <div class="trace-bar">
+          ${seg('guide',[['on','По контуру'],['off','По памяти']],pad?.guide===false?'off':'on')}
+          <span class="en">Начинай с кружочка</span>
+        </div>
+        <canvas id="pad" aria-label="Поле для письма буквы ${l.ch}"></canvas>
+        <div class="score" id="score">&nbsp;</div><div class="trace-bar" style="justify-content:flex-end"><button class="btn plain" data-clear>Очистить</button><button class="btn primary" data-score>Проверить</button></div>
+      </div>
+    </div></div>`);
+  initPad(l);
+  setTimeout(()=>speak(letterSay(l)),200);
+}
+$('#modal').addEventListener('click',e=>{
+  if(!pad)return;
+  const n=e.target.closest('[data-nav]'); if(n){const g=pad.guide;openLetter((cur+ +n.dataset.nav+LETTERS.length)%LETTERS.length);pad.guide=g;syncGuide();drawPad();return}
+  if(e.target.closest('[data-sayl]')){speak(letterSay(LETTERS[cur]));return}
+  const g=e.target.closest('[data-seg="guide"] button'); if(g){pad.guide=g.dataset.v==='on';pad.reveal=false;syncGuide();drawPad();return}
+  if(e.target.closest('[data-clear]')){pad.strokes=[];pad.reveal=false;$('#score').innerHTML='&nbsp;';drawPad();return}
+  if(e.target.closest('[data-score]'))scorePad();
+});
+document.addEventListener('keydown',e=>{
+  if(!pad||!$('#modal').firstChild)return;
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const g=pad.guide;openLetter((cur+(e.key==='ArrowRight'?1:-1)+LETTERS.length)%LETTERS.length);pad.guide=g;syncGuide();drawPad()}
+});
+function syncGuide(){document.querySelectorAll('[data-seg="guide"] button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.v==='on')===pad.guide))}
+function initPad(l){
+  const c=$('#pad');
+  pad={c,l,strokes:[],guide:pad?.guide??true,reveal:false,drawing:null};
+  const ro=new ResizeObserver(()=>{const r=c.getBoundingClientRect(),d=window.devicePixelRatio||1;c.width=Math.round(r.width*d);c.height=Math.round(r.width*d);drawPad()});
+  ro.observe(c);
+  document.fonts&&document.fonts.load('200px "Noto Sans Thai Looped"',l.ch).then(()=>drawPad()).catch(()=>{});
+  const pt=e=>{const r=c.getBoundingClientRect();return[(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]};
+  c.addEventListener('pointerdown',e=>{e.preventDefault();c.setPointerCapture(e.pointerId);pad.drawing=[pt(e)];pad.strokes.push(pad.drawing);$('#score').innerHTML='&nbsp;';drawPad()});
+  c.addEventListener('pointermove',e=>{if(!pad.drawing)return;const ev=e.getCoalescedEvents?e.getCoalescedEvents():[e];ev.forEach(x=>pad.drawing.push(pt(x)));drawPad()});
+  const up=()=>{pad.drawing=null};
+  c.addEventListener('pointerup',up);c.addEventListener('pointercancel',up);
+}
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function placeLetter(ctx,ch,S,weight=400){
+  ctx.textAlign='left';ctx.textBaseline='alphabetic';
+  const fam='"Noto Sans Thai Looped","Sarabun",sans-serif';
+  ctx.font=`${weight} 100px ${fam}`;
+  const m0=ctx.measureText(ch);
+  const w0=(m0.actualBoundingBoxLeft||0)+(m0.actualBoundingBoxRight||m0.width), h0=(m0.actualBoundingBoxAscent||50)+(m0.actualBoundingBoxDescent||0);
+  const fs=100*Math.min(S*.6/Math.max(h0,1),S*.7/Math.max(w0,1));
+  ctx.font=`${weight} ${fs}px ${fam}`;
+  const m=ctx.measureText(ch);
+  const L=m.actualBoundingBoxLeft||0,R=m.actualBoundingBoxRight||m.width,A=m.actualBoundingBoxAscent||S*.4,D=m.actualBoundingBoxDescent||0;
+  return [S/2+(L-R)/2, S/2+(A-D)/2];
+}
+function drawStrokes(ctx,S,w,color){
+  ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineCap='round';ctx.lineJoin='round';
+  pad.strokes.forEach(st=>{ctx.beginPath();st.forEach(([x,y],k)=>k?ctx.lineTo(x*S,y*S):ctx.moveTo(x*S,y*S));if(st.length===1)ctx.lineTo(st[0][0]*S+.1,st[0][1]*S);ctx.stroke()});
+}
+function drawPad(){
+  if(!pad)return; const c=pad.c, ctx=c.getContext('2d'), S=c.width; if(!S)return;
+  ctx.clearRect(0,0,S,S);
+  ctx.save();ctx.strokeStyle=css('--grid');ctx.lineWidth=Math.max(1,S/400);ctx.setLineDash([S/60,S/60]);
+  ctx.beginPath();ctx.moveTo(S/2,S*.06);ctx.lineTo(S/2,S*.94);ctx.moveTo(S*.06,S/2);ctx.lineTo(S*.94,S/2);ctx.stroke();ctx.restore();
+  if(pad.guide||pad.reveal){
+    const [x,y]=placeLetter(ctx,pad.l.ch,S);
+    ctx.fillStyle=css('--guide');ctx.fillText(pad.l.ch,x,y);
+    ctx.save();ctx.setLineDash([S/90,S/110]);ctx.lineWidth=Math.max(1,S/320);ctx.strokeStyle=css('--guide-line');ctx.strokeText(pad.l.ch,x,y);ctx.restore();
+  }
+  drawStrokes(ctx,S,S*.045,css('--ink'));
+}
+function scorePad(){
+  if(!pad.strokes.length){$('#score').textContent='Сначала напиши букву';return}
+  const S=160;
+  const mk=()=>{const c=document.createElement('canvas');c.width=c.height=S;return c.getContext('2d',{willReadFrequently:true})};
+  const pix=ctx=>{const d=ctx.getImageData(0,0,S,S).data,a=new Uint8Array(S*S);for(let i=0;i<a.length;i++)a[i]=d[i*4+3]>60?1:0;return a};
+  const A=mk();{const[x,y]=placeLetter(A,pad.l.ch,S);A.fillStyle='#000';A.fillText(pad.l.ch,x,y)}
+  const Z=mk();{const[x,y]=placeLetter(Z,pad.l.ch,S);Z.fillStyle=Z.strokeStyle='#000';Z.lineWidth=S*.09;Z.lineJoin='round';Z.fillText(pad.l.ch,x,y);Z.strokeText(pad.l.ch,x,y)}
+  const Ut=mk(); drawStrokes(Ut,S,S*.1,'#000');
+  const U=mk(); drawStrokes(U,S,S*.045,'#000');
+  const a=pix(A),z=pix(Z),ut=pix(Ut),u=pix(U);
+  let na=0,cov=0,nu=0,inz=0;
+  for(let i=0;i<a.length;i++){if(a[i]){na++;if(ut[i])cov++}if(u[i]){nu++;if(z[i])inz++}}
+  const c=na?cov/na:0,p=nu?inz/nu:0,sc=Math.round(c+p?200*c*p/(c+p):0);
+  const msg=sc>=80?'Отлично':sc>=60?'Хорошо, ещё немного точности':'Попробуй ещё раз';
+  const el=$('#score'); el.textContent=`${msg} · ${sc}%`; el.style.color=sc>=80?'var(--good)':sc>=60?'var(--accent)':'var(--bad)';
+  if(!pad.guide){pad.reveal=true;drawPad()}
+}
+
+/* ---------- Boot ---------- */
+const start=location.hash.slice(1);
+setTab(['learn','words','alphabet'].includes(start)?start:'learn',false);
+</script>
+
+</body>
+</html>
