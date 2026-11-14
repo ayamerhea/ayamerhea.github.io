@@ -269,7 +269,7 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
   .dir__cards,.why__cards{grid-template-columns:1fr;padding:12px;gap:12px}
   .pcard{min-height:482px}
   .pcard h3{top:322px;bottom:auto}
-  .pcard p{top:373px;opacity:1}
+  .pcard p{top:373px;opacity:1;left:16px;right:16px}
   .pcard__glow{bottom:-120px}
   .wcard{min-height:360px}
 
