@@ -281,7 +281,8 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
   .cases{min-height:0;padding:60px 0}
   .cases__wrap{height:636px;margin-top:48px}
   .case{width:calc(100vw - 25px);border-radius:60px}
-  .case>.ph{background-position:50% 0,0 0;background-size:auto 72%,auto}
+  .case{background:var(--milk)}
+  .case>.ph{background:var(--ph) 50% 0/auto 74% no-repeat;-webkit-mask-image:linear-gradient(#000 48%,transparent 74%);mask-image:linear-gradient(#000 48%,transparent 74%)}
   .case__panel{left:12px;right:12px;top:auto;bottom:12px;width:auto;height:374px;border-radius:54px;padding:40px 12px}
   .case__panel h3{margin-top:40px}
   .case__panel p{font-size:16px}
