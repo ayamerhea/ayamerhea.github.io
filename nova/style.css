@@ -158,7 +158,7 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
 
 /* кейсы */
 .cases{min-height:var(--screen);padding:80px 0;background:var(--paper);overflow:hidden;display:flex;flex-direction:column;justify-content:center}
-.cases__wrap{position:relative;height:522px;margin-top:64px}
+.cases__wrap{position:relative;height:522px;margin-top:64px;touch-action:pan-y}
 .cases__track{position:absolute;left:0;top:0;height:100%;display:flex;gap:20px;will-change:transform;transition:transform .8s cubic-bezier(.65,0,.25,1)}
 .case{position:relative;flex:none;width:min(926px,calc(100vw - 40px));height:100%;border-radius:76px;overflow:hidden;color:var(--milk);text-align:center;isolation:isolate;transition:opacity .6s}
 .case>.ph{position:absolute;inset:0;z-index:-2;background:var(--ph) 50% 50%/cover no-repeat,var(--milk);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}

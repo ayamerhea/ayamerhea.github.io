@@ -75,15 +75,29 @@ const CASES = [
   $('.cases__arr--prev').addEventListener('click', () => go(-1));
   $('.cases__arr--next').addEventListener('click', () => go(1));
   D.forEach((d, k) => d.addEventListener('click', () => { i = N + k; place(true); }));
-  // свайп
-  let x0 = null, y0 = 0;
-  track.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    if (x0 === null) return;
-    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
-    x0 = null;
+  // свайп: направление определяется в начале жеста; горизонтальный — двигает только кейсы
+  let x0 = null, y0 = 0, dx = 0, lock = null, base = 0;
+  const cur = () => { const g = geom(); return g.left - i * (g.w + g.gap); };
+  wrap.addEventListener('touchstart', e => {
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; dx = 0; lock = null; base = cur();
   }, { passive: true });
+  wrap.addEventListener('touchmove', e => {
+    if (x0 === null) return;
+    const mx = e.touches[0].clientX - x0, my = e.touches[0].clientY - y0;
+    if (!lock) { if (Math.abs(mx) < 6 && Math.abs(my) < 6) return; lock = Math.abs(mx) > Math.abs(my) ? 'x' : 'y'; }
+    if (lock !== 'x') return;
+    e.preventDefault();
+    dx = mx;
+    track.style.transition = 'none';
+    track.style.transform = `translate3d(${base + dx}px,0,0)`;
+  }, { passive: false });
+  const end = () => {
+    if (x0 === null) return;
+    if (lock === 'x') { track.style.transition = ''; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); else place(true); }
+    x0 = null; lock = null;
+  };
+  wrap.addEventListener('touchend', end, { passive: true });
+  wrap.addEventListener('touchcancel', end, { passive: true });
   place(false);
   const re = () => place(false); re.always = true; hooks.push(re);
 })();
