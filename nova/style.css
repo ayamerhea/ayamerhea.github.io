@@ -115,25 +115,28 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
 
 /* направления и «почему мы»: заголовок + тёмная панель с карточками на половину ширины */
 .split{display:grid;min-height:max(760px,var(--screen));background:var(--milk)}
-.dir{grid-template-columns:1fr 50.7%}
+.dir{grid-template-columns:50.7% 1fr}
+.dir__cards{order:-1}
 .why{grid-template-columns:50.7% 1fr}
-.dir__head{align-self:center;padding:80px 40px 80px var(--gut)}
+.dir__head{align-self:center;padding:80px var(--gut) 80px 120px}
 .dir__head>*{max-width:570px}
 .why__head{align-self:center;padding:80px var(--gut) 80px 120px}
 .why__head>*{max-width:570px}
 .dir__cards,.why__cards{padding:20px;background:var(--ink);display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;gap:20px}
 
-.pcard{position:relative;min-height:371px;border-radius:60px;overflow:hidden;color:var(--milk);text-align:center;isolation:isolate}
+.pcard{position:relative;min-height:371px;border-radius:60px;overflow:hidden;color:var(--milk);text-align:center;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:40px}
 .pcard>.ph{position:absolute;inset:0;z-index:-2;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
 .pcard__glow{position:absolute;left:-30%;right:-30%;bottom:-200px;height:287px;border-radius:50%;z-index:-1;background:#651F3A;filter:blur(70px);opacity:.95;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .pcard::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:var(--stroke);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.6;pointer-events:none}
 .num{position:absolute;left:40px;top:40px;height:37px;padding:0 20px;border-radius:60px;display:flex;align-items:center;background:rgba(242,238,240,.5);font:500 20px/1.05 var(--text);letter-spacing:-.03em;color:var(--milk)}
-.pcard h3{position:absolute;left:20px;right:20px;bottom:18px;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-.pcard p{position:absolute;left:12%;right:12%;top:calc(100% + 2px);opacity:0;transition:opacity .5s,transform .7s cubic-bezier(.2,.8,.2,1)}
+/* текст карточки: всегда 40px от низа, как у плашки с цифрой сверху; описание раскрывается при наведении */
+.pcard h3{margin:0 20px}
+.pcard__txt{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .6s cubic-bezier(.2,.8,.2,1),opacity .45s}
+.pcard__txt>p{min-height:0;overflow:hidden;padding:0 12%}
+.pcard__txt>p::before{content:"";display:block;height:20px}
 @media (hover:hover){
   .pcard:hover>.ph{transform:scale(1.05)}
-  .pcard:hover h3{transform:translateY(-84px)}
-  .pcard:hover p{opacity:1;transform:translateY(-104px)}
+  .pcard:hover .pcard__txt{grid-template-rows:1fr;opacity:1}
   .pcard:hover .pcard__glow{transform:translateY(-110px) scaleY(1.6)}
 }
 
@@ -228,7 +231,7 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
   .stat{min-height:190px;border-radius:60px;padding:30px 24px;display:flex;flex-direction:column;justify-content:center;align-items:center}
   .split{grid-template-columns:1fr;min-height:0}
   .dir__head,.why__head{padding:100px 20px 48px}
-  .why__head{order:-1}
+  .why__head,.dir__head{order:-1}
   .dir__cards,.why__cards{grid-auto-rows:auto}
   .pcard,.wcard{min-height:420px}
   .how__cards{grid-template-columns:repeat(2,1fr)}
@@ -268,11 +271,8 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
   .dir__head,.why__head{padding:57px 12px 45px}
   .dir__cards,.why__cards{grid-template-columns:1fr;padding:12px;gap:12px}
   .pcard{min-height:482px}
-  .pcard{display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 40px}
-  .pcard h3,.pcard p{position:static;opacity:1;transform:none}
-  .pcard h3{margin:0 20px}
-  .pcard p{margin:20px 12% 0}
-  .pcard:first-child p{margin-left:16px;margin-right:16px}
+  .pcard__txt{grid-template-rows:1fr;opacity:1}
+  .pcard:first-child .pcard__txt>p{padding-left:16px;padding-right:16px}
   .pcard__glow{bottom:-120px}
   .wcard{min-height:360px}
 
