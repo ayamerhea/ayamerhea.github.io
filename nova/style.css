@@ -165,7 +165,7 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
 .cases__wrap{position:relative;height:522px;margin-top:64px;touch-action:pan-y}
 .cases__track{position:absolute;left:0;top:0;height:100%;display:flex;gap:20px;will-change:transform;transition:transform .8s cubic-bezier(.65,0,.25,1)}
 .case{position:relative;flex:none;width:min(926px,calc(100vw - 40px));height:100%;border-radius:76px;overflow:hidden;color:var(--milk);text-align:center;isolation:isolate;transition:opacity .6s}
-.case>.ph{position:absolute;inset:0;z-index:-2;background:var(--ph) 50% 50%/cover no-repeat,var(--milk);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.case>.ph{position:absolute;inset:0;z-index:-2;background:var(--ph) 100% 100%/auto 100% no-repeat,var(--milk);transform-origin:100% 100%;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
 .case:not(.is-on){opacity:.75}
 .case:not(.is-on)>.ph{transform:scale(1.04)}
 .case__panel{position:absolute;left:20px;top:20px;bottom:20px;width:335px;border-radius:60px;overflow:hidden;padding:40px 20px;background:linear-gradient(180deg,rgba(242,238,240,.28),rgba(162,92,118,.55) 45%,rgba(101,31,58,.82))}
