@@ -126,6 +126,7 @@ h3{font:500 30px/1.05 var(--disp);letter-spacing:-.03em}
 
 .pcard{position:relative;min-height:371px;border-radius:60px;overflow:hidden;color:var(--milk);text-align:center;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:40px}
 .pcard>.ph{position:absolute;inset:0;z-index:-2;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.pcard:nth-child(2)>.ph,.pcard:nth-child(4)>.ph{background-position:50% 0,0 0;transform-origin:50% 0}
 .pcard__glow{position:absolute;left:-30%;right:-30%;bottom:-200px;height:287px;border-radius:50%;z-index:-1;background:#651F3A;filter:blur(70px);opacity:.95;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .pcard::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:var(--stroke);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.6;pointer-events:none}
 .num{position:absolute;left:40px;top:40px;height:37px;padding:0 20px;border-radius:60px;display:flex;align-items:center;background:rgba(242,238,240,.5);font:500 20px/1.05 var(--text);letter-spacing:-.03em;color:var(--milk)}
