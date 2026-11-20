@@ -299,41 +299,95 @@ canvas#pad{width:100%;aspect-ratio:1;max-width:100%;background:var(--surface-2);
 
 <script>
 /* ---------- Data ---------- */
+// Transcription follows the school textbook (Mega Language School): ee, aw, er, eu, bp, dt; mid tone unmarked.
+const SEED_VER = 2;
 const SEED = [
+ ['Урок 1',[
  ['ผม / ฉัน','phǒm / chǎn','я, меня','I / me','word','ผม говорят мужчины, ฉัน — женщины'],
  ['คุณ','khun','ты, вы','You','word'],
  ['เขา','khǎo','он, его','He / him','word'],
- ['เธอ','thəə','она, её','She / her','word','В разговоре про женщину тоже часто говорят เขา'],
+ ['เธอ','ther','она, её','She / her','word','В разговоре про женщину тоже часто говорят เขา'],
  ['เรา','rao','мы, нас','We / us','word'],
  ['พวกเขา','phûak-khǎo','они, их','They / them','word'],
  ['มัน','man','оно, это','It','word'],
  ['สบาย','sà-baai','хорошо, комфортно','Fine','word'],
- ['ไม่สบาย','mâi sà-baai','болеть, нездоровится','Sick','word','Дословно «не хорошо». Ещё есть слово ป่วย (pùai)'],
- ['ชื่อ','chûue','имя','Name','word'],
+ ['ไม่สบาย','mâi-sà-baai','болеть, нездоровится','Sick','word','Дословно «не хорошо». Ещё говорят ป่วย (bpùuay)'],
+ ['ชื่อ','chêu','имя','Name','word'],
  ['อะไร','à-rai','что','What','word'],
- ['วันนี้','wan-níi','сегодня','Today','word'],
- ['ของคุณ','khɔ̌ɔng khun','твой, ваш','Your','word','В речи ของ часто опускают: ชื่อคุณ — твоё имя'],
- ['ที่ไหน','thîi-nǎi','где','Where','word'],
- ['มาจาก','maa-jàak','быть родом из, приехать из','Come from','word'],
- ['ประเทศ','prà-thêet','страна','Country','word'],
+ ['วันนี้','wan-née','сегодня','Today','word'],
+ ['ของคุณ','khǎwng khun','твой, ваш','Your','word','В речи ของ часто опускают: ชื่อคุณ — твоё имя'],
+ ['ที่ไหน','thêe-nǎi','где','Where','word'],
+ ['มาจาก','maa jàak','быть родом из, приехать из','Come from','word'],
+ ['ประเทศ','bprà-thâed','страна','Country','word'],
  ['มาก','mâak','очень','Very','word'],
  ['พัก','phák','остановиться, отдыхать','Stay, take a rest','word'],
  ['อยู่','yùu','жить, находиться','Live','word'],
- ['ตอนนี้','dtɔɔn-níi','сейчас','Now','word'],
- ['ที่','thîi','в, на (о месте)','At','word'],
- ['สบายดีไหม','sà-baai dii mǎi','Как дела?','How are you?','phrase'],
- ['สบายดี','sà-baai dii','У меня всё хорошо','I\'m fine','phrase'],
- ['ไม่สบาย','mâi sà-baai','Я болею','I\'m sick','phrase'],
- ['คุณชื่ออะไร','khun chûue à-rai','Как тебя зовут?','What is your name?','phrase'],
- ['ฉันชื่อ …','chǎn chûue …','Меня зовут …','My name is …','phrase'],
- ['ยินดีที่ได้รู้จัก','yin-dii thîi dâai rúu-jàk','Приятно познакомиться','Nice to meet you','phrase'],
- ['คุณมาจากที่ไหน','khun maa-jàak thîi-nǎi','Откуда ты?','Where do you come from?','phrase'],
- ['ฉันมาจาก …','chǎn maa-jàak …','Я из …','I\'m from …','phrase','Россия — รัสเซีย (rát-sia)'],
- ['คุณพักที่ไหน','khun phák thîi-nǎi','Где ты остановилась?','Where do you stay?','phrase'],
- ['ฉันพักที่ฉลอง','chǎn phák thîi chà-lɔ̌ɔng','Я живу в Чалонге','I stay in Chalong','phrase'],
- ['ตอนนี้คุณอยู่ที่ไหน','dtɔɔn-níi khun yùu thîi-nǎi','Где ты сейчас?','Where are you now?','phrase'],
- ['ตอนนี้ฉันอยู่ที่ …','dtɔɔn-níi chǎn yùu thîi …','Сейчас я в …','Now I\'m at …','phrase'],
-].map((r,i)=>({id:'w'+(i+1),th:r[0],tr:r[1],ru:r[2],en:r[3],type:r[4],note:r[5]||'',lesson:'Урок 1'}));
+ ['ตอนนี้','dtawn-née','сейчас','Now','word'],
+ ['ที่','thêe','в, на (о месте)','At','word'],
+ ['สบายดีไหม','sà-baai-dee mái','Как дела?','How are you?','phrase','Полностью: คุณสบายดีไหม (khun sà-baai-dee mái)'],
+ ['สบายดี','sà-baai-dee','У меня всё хорошо','I\'m fine','phrase'],
+ ['ไม่สบาย','mâi-sà-baai','Я болею','I\'m sick','phrase','Или ฉันป่วย (chǎn bpùuay)'],
+ ['คุณชื่ออะไร','khun chêu à-rai','Как тебя зовут?','What is your name?','phrase'],
+ ['ฉันชื่อ …','chǎn chêu …','Меня зовут …','My name is …','phrase'],
+ ['ยินดีที่ได้รู้จัก','yin-dee thêe dâi rúu-jàk','Приятно познакомиться','Nice to meet you','phrase'],
+ ['คุณมาจากที่ไหน','khun maa jàak thêe-nǎi','Откуда ты?','Where do you come from?','phrase'],
+ ['ฉันมาจาก …','chǎn maa jàak …','Я из …','I\'m from …','phrase','Россия — รัสเซีย (rát-sia)'],
+ ['คุณพักอยู่ที่ไหน','khun phák yùu thêe-nǎi','Где ты остановилась?','Where do you stay?','phrase','อยู่ (yùu) можно опустить'],
+ ['ฉันพักอยู่ที่ฉลอง','chǎn phák yùu thêe chà-lǒng','Я живу в Чалонге','I stay in Chalong','phrase'],
+ ['คุณอยู่ที่ไหนตอนนี้','khun yùu thêe-nǎi dtawn-née','Где ты сейчас?','Where are you now?','phrase'],
+ ['ตอนนี้ฉันอยู่ที่ …','dtawn-née chǎn yùu thêe …','Сейчас я в …','Now I\'m at …','phrase'],
+ ]],
+ ['Урок 2',[
+ ['สวัสดี','sà-wàt-dee','привет, здравствуйте','Hello, hi','word','С частицей: สวัสดีค่ะ (sà-wàt-dee khâ)'],
+ ['ขอบคุณ','khàwp-khun','спасибо','Thank you','word'],
+ ['ขอโทษ','khǎw-thôod','извините, простите','Sorry, excuse me','word'],
+ ['เบอร์','ber','номер','Number','word','Разговорное слово'],
+ ['เบอร์โทร','ber-thoo','номер телефона','Phone number','word','Сокращение от เบอร์โทรศัพท์'],
+ ['หมายเลข','mǎai-lâek','номер (официально)','Number (formal)','word','Например, номер в банке'],
+ ['โทรศัพท์','thoo-rá-sàp','телефон','Telephone','word'],
+ ['ไหม','mǎi','частица вопроса «да или нет»','Yes/no question word','word','Ставится в конце: สบายดีไหม. В речи звучит как mái'],
+ ['พรุ่งนี้','phrûng-née','завтра','Tomorrow','word'],
+ ['พบ / เจอ','phób / jer','встречать, видеться','Meet','word','พบ — вежливее, เจอ — разговорное'],
+ ['กัน','gan','друг друга, вместе','Each other','word'],
+ ['ใหม่','mài','снова; новый','Again, new','word'],
+ ['ป่วย','bpùuay','болеть','Be sick','word'],
+ ['ที่นี่','thêe-nêe','здесь','Here','word'],
+ ['ทุกวัน','thúk wan','каждый день','Every day','word'],
+ ['เช่นกัน','chên-gan','Мне тоже приятно','Nice to meet you too','phrase','Дословно «так же»'],
+ ['เจอกัน','jer gan','До встречи!','See you!','phrase','Вежливо: เจอกันค่ะ (jer gan khâ)'],
+ ['เจอกันวันนี้','jer gan wan-née','Увидимся сегодня','See you today','phrase'],
+ ['พบกันพรุ่งนี้','phób gan phrûng-née','Увидимся завтра','See you tomorrow','phrase','Разговорно: เจอกันพรุ่งนี้ (jer gan phrûng-née)'],
+ ['เจอกันใหม่','jer gan mài','Увидимся ещё, до новой встречи','See you later / again','phrase'],
+ ['คุณมีเบอร์โทรศัพท์ไหม','khun mee ber thoo-rá-sàp mǎi','У тебя есть номер телефона?','Do you have a phone number?','phrase'],
+ ['คุณมีเบอร์ไทยไหม','khun mee ber thai mǎi','У тебя есть тайский номер?','Do you have a Thai number?','phrase'],
+ ['เธอมีวอทส์แอปไหม','ther mee WhatsApp mǎi','У неё есть WhatsApp?','Does she have WhatsApp?','phrase'],
+ ['มี','mee','Есть (да)','Yes, I do / Have','phrase','Ответ на вопрос с มี…ไหม: просто повторяешь глагол'],
+ ['ไม่มี','mâi mee','Нет (нету)','No, I don\'t / Don\'t have','phrase'],
+ ]],
+ ['Глаголы',[
+ ['ซื้อ','séuu','покупать','Buy','word'],
+ ['ขาย','khǎai','продавать','Sell','word'],
+ ['ไป','bpai','идти, ехать','Go','word'],
+ ['มา','maa','приходить, приезжать','Come','word'],
+ ['กิน','gin','есть, кушать','Eat','word'],
+ ['ดื่ม','dèuum','пить','Drink','word'],
+ ['ทำอาหาร','tham-aa-hǎan','готовить еду','Cook','word','ทำ (tham) — делать, อาหาร (aa-hǎan) — еда'],
+ ['มี','mee','иметь, есть','Have / has','word'],
+ ['ชอบ','châwp','нравиться, любить','Like','word'],
+ ['รัก','rák','любить','Love','word'],
+ ['นอน','nawn','спать, лежать','Sleep','word'],
+ ['พูด','phûud','говорить','Speak','word'],
+ ['ว่ายน้ำ','wâai-náam','плавать','Swim','word','น้ำ (náam) — вода'],
+ ['นั่ง','nâng','сидеть','Sit','word'],
+ ['รอ','raw','ждать','Wait','word'],
+ ['เข้าใจ','khâo-jai','понимать','Understand','word'],
+ ['ทำงาน','tham-ngaan','работать','Work','word','งาน (ngaan) — работа'],
+ ['ดู','duu','смотреть','Watch / look','word'],
+ ['เห็น','hěn','видеть','See','word'],
+ ['เรียน','riian','учиться, изучать','Study','word'],
+ ]],
+].flatMap(([lesson,rows])=>rows.map(r=>({th:r[0],tr:r[1],ru:r[2],en:r[3],type:r[4],note:r[5]||'',lesson})))
+ .map((w,i)=>({id:'w'+(i+1),...w}));
 
 // letter, name translit, name word, meaning, emoji, class, initial sound, final sound, obsolete
 const LETTERS = [
@@ -389,13 +443,24 @@ const CLS = {mid:'Средний',high:'Высокий',low:'Низкий'};
 const CLS_HINT = {mid:'Без знака тона слог звучит ровно, в среднем тоне',high:'Без знака тона: открытый слог восходящий, закрытый низкий',low:'Без знака тона: открытый слог ровный, закрытый высокий или падающий'};
 
 /* ---------- Storage ---------- */
-const K={words:'thai.v1.words',prog:'thai.v1.progress',prefs:'thai.v1.prefs'};
+const K={meta:'thai.v1.meta',words:'thai.v1.words',prog:'thai.v1.progress',prefs:'thai.v1.prefs'};
 function load(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-let words = load(K.words,null) || SEED.map(w=>({...w}));
+let words = load(K.words,null);
+let meta = Object.assign({seed:1,deleted:[]},load(K.meta,{}));
+function mergeSeed(){
+  // Bring browsers with saved data up to the current word list: refresh built-in words, add new ones, keep own words and progress
+  const have=new Map(words.map(w=>[w.id,w])), out=[];
+  SEED.forEach(sw=>{if(meta.deleted.includes(sw.id))return;const ex=have.get(sw.id);out.push(ex?Object.assign(ex,sw):{...sw});have.delete(sw.id)});
+  have.forEach(w=>{if(w.id[0]!=='w')out.push(w)});
+  words=out; meta.seed=SEED_VER;
+}
+if(!words){words=SEED.map(w=>({...w}));meta.seed=SEED_VER}
+else if(meta.seed<SEED_VER)mergeSeed();
 let prog = load(K.prog,{});
 let prefs = Object.assign({mode:'cards',scope:'due',dir:'th',auto:true,showTr:true,tab:'learn'},load(K.prefs,{}));
-const saveWords=()=>save(K.words,words), saveProg=()=>save(K.prog,prog), savePrefs=()=>save(K.prefs,prefs);
+const saveWords=()=>{save(K.words,words);save(K.meta,meta)}, saveProg=()=>save(K.prog,prog), savePrefs=()=>save(K.prefs,prefs);
+saveWords();
 
 /* ---------- Helpers ---------- */
 const $=(s,r=document)=>r.querySelector(s);
@@ -781,7 +846,7 @@ function openWordForm(w){
   });
   $('#fa').addEventListener('click',e=>{
     if(e.target.closest('[data-del]'))$('#fa').innerHTML=`<span class="confirm">Удалить «${esc(w.th)}» вместе с прогрессом?</span><span style="display:flex;gap:8px"><button type="button" class="btn plain" data-cancel>Отмена</button><button type="button" class="btn bad" data-del-yes>Удалить</button></span>`;
-    if(e.target.closest('[data-del-yes]')){words=words.filter(x=>x!==w);delete prog[w.id];saveWords();saveProg();closeModal();renderWords()}
+    if(e.target.closest('[data-del-yes]')){words=words.filter(x=>x!==w);if(w.id[0]==='w'&&!meta.deleted.includes(w.id))meta.deleted.push(w.id);delete prog[w.id];saveWords();saveProg();closeModal();renderWords()}
     if(e.target.closest('[data-cancel]')){closeModal();openWordForm(w)}
   });
   setTimeout(()=>$('#f-th').focus(),50);
@@ -789,7 +854,7 @@ function openWordForm(w){
 
 /* ---------- Transfer ---------- */
 function openTransfer(){
-  const data=JSON.stringify({v:1,words,prog});
+  const data=JSON.stringify({v:1,seed:meta.seed,deleted:meta.deleted,words,prog});
   openModal(`<div class="sheet narrow" role="dialog" aria-modal="true" aria-label="Перенести данные">
     <div class="sheet-head"><h2>Перенести данные</h2><button class="icon-btn" data-close aria-label="Закрыть">${ICON.close}</button></div>
     <div class="sheet-body form">
@@ -805,7 +870,7 @@ function openTransfer(){
     const m=$('#t-msg');
     try{const d=JSON.parse($('#t-in').value.trim());
       if(!Array.isArray(d.words)||!d.words.length||typeof d.prog!=='object')throw 0;
-      words=d.words;prog=d.prog||{};saveWords();saveProg();
+      words=d.words;prog=d.prog||{};meta.seed=d.seed||1;meta.deleted=d.deleted||[];if(meta.seed<SEED_VER)mergeSeed();saveWords();saveProg();
       m.style.color='var(--good)';m.textContent=`Загружено: ${words.length} ${plural(words.length,'слово','слова','слов')}`;
       renderWords();
     }catch(e){m.style.color='var(--bad)';m.textContent='Код не распознан. Скопируй его целиком.'}
