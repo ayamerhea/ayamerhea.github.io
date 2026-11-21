@@ -1,0 +1,155 @@
+/* Silkway Med — кликабельный прототип (вайрфрейм) */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;color:#1c1c1c;background:#fff;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3,h4,p,ul,ol,dl,dd{margin:0}
+button,input,select{font:inherit}
+:focus-visible{outline:3px solid #1d4ed8;outline-offset:2px}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+.sec{padding:88px 0}
+.alt{background:#f5f5f4}
+.h1{font-size:60px;line-height:1.05;font-weight:700;letter-spacing:-.02em}
+.h2{font-size:40px;line-height:1.15;font-weight:600;letter-spacing:-.01em}
+.h3{font-size:20px;line-height:1.25;font-weight:600}
+.sub{font-size:20px;line-height:1.5;color:#4a4a4a}
+.txt{font-size:15px;line-height:1.5;color:#4a4a4a}
+.muted{color:#555}
+
+/* placeholders */
+.ph{background:#e4e4e1;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;color:#555;font-size:13px;padding:16px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;background:#1c1c1c;color:#fff;text-decoration:none;font-weight:600;font-size:16px;border:0;cursor:pointer;transition:background .15s}
+.btn:hover{background:#000}
+.btn--sm{min-height:44px;padding:0 20px;font-size:14px}
+.btn--ghost{background:transparent;color:#1c1c1c;border:1.5px solid #1c1c1c}
+.btn--ghost:hover{background:#1c1c1c;color:#fff}
+.btn--light{background:#fff;color:#1c1c1c}
+.btn--light:hover{background:#eaeaea}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #e2e2de}
+.hdr__in{display:flex;align-items:center;gap:28px;min-height:72px}
+.logo{font-weight:700;letter-spacing:.12em;font-size:15px;text-decoration:none}
+.nav{display:flex;gap:24px;font-size:15px;flex:1}
+.nav a{text-decoration:none;padding:8px 0}
+.nav a:hover{text-decoration:underline}
+.hdr__right{display:flex;align-items:center;gap:16px;margin-left:auto}
+.phone{font-weight:600;font-size:15px;text-decoration:none}
+.burger{display:none;width:44px;height:44px;border:1px solid #cfcfca;border-radius:12px;background:#fff;cursor:pointer;align-items:center;justify-content:center}
+.burger svg{width:20px;height:20px}
+
+/* cards & grids */
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.grid--3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:#fff;border:1px solid #dcdcd8;border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;text-align:left;width:100%;font:inherit;cursor:pointer;transition:border-color .15s,transform .15s,box-shadow .15s}
+a.card:hover,button.card:hover{border-color:#1c1c1c;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.card--static{cursor:default}
+.card--muted{background:#f5f5f4}
+.go{font-weight:600;font-size:15px;margin-top:auto;padding-top:8px}
+
+/* hero */
+.hero{padding-top:48px}
+.hero__in{display:flex;gap:48px;flex-wrap:wrap;align-items:stretch}
+.hero__text{flex:1 1 500px;min-width:0;display:flex;flex-direction:column;gap:24px;justify-content:center}
+.hero__img{flex:1 1 420px;min-height:460px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.checks{list-style:none;padding:0;display:flex;gap:12px 40px;flex-wrap:wrap;margin-top:40px;font-size:16px;font-weight:600}
+
+/* urgent */
+.urgent{margin-top:16px;background:#1c1c1c;color:#fff;border-radius:20px;padding:22px 28px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;text-decoration:none;border:0;width:100%;font:inherit;cursor:pointer;text-align:left}
+.urgent:hover{background:#000}
+.urgent b{font-size:18px}
+
+/* clinics */
+.row-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid #b9b9b4;background:#fff;font-size:14px;cursor:pointer}
+.tab[aria-selected="true"]{background:#1c1c1c;color:#fff;border-color:#1c1c1c;font-weight:600}
+.clinic-card{padding:0;overflow:hidden;gap:0}
+.clinic-card .ph{border-radius:0;height:140px}
+.clinic-card__body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px}
+
+/* steps */
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:32px}
+.num{font:600 14px 'JetBrains Mono',ui-monospace,monospace;color:#555}
+.money{margin-top:16px;background:#f5f5f4;border-radius:20px;padding:24px 28px;display:flex;gap:12px 48px;flex-wrap:wrap;align-items:center}
+.money b{font-size:18px}
+
+/* faq */
+.faq{max-width:880px}
+.faq details{border-bottom:1px solid #dcdcd8}
+.faq summary{font-size:18px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:22px 0}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:400;font-size:24px;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 0 22px}
+
+/* form */
+.lead-in{display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start}
+.lead-in__text{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.form{flex:1 1 440px;min-width:0;background:#f5f5f4;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:14px}
+.inp{min-height:52px;border:1px solid #b9b9b4;border-radius:12px;padding:12px 14px;font-size:16px;background:#fff;width:100%}
+.inp:focus{border-color:#1c1c1c;outline:none}
+.inp.err{border-color:#c2410c}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:#4a4a4a}
+.consent input{width:20px;height:20px;margin:0;flex:none;accent-color:#1c1c1c}
+.chosen{display:none;font-size:14px;background:#fff;border-radius:12px;padding:10px 14px;justify-content:space-between;gap:12px;align-items:center}
+.chosen.on{display:flex}
+.chosen button{border:0;background:none;cursor:pointer;color:#555;min-height:32px;text-decoration:underline}
+.form-err{display:none;color:#9a3412;font-size:14px}
+.form-err.on{display:block}
+.thanks{display:none;flex-direction:column;gap:12px;align-items:flex-start}
+.form.done .thanks{display:flex}
+.form.done .form-fields{display:none}
+.form-fields{display:flex;flex-direction:column;gap:14px}
+
+/* footer */
+.ftr{background:#1c1c1c;color:#d6d6d6;padding:56px 0 36px}
+.ftr__top{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.ftr a{color:#d6d6d6;text-decoration:none}
+.ftr a:hover{color:#fff}
+.ftr__nav{display:flex;gap:24px;flex-wrap:wrap;font-size:14px}
+.ftr__warn{margin-top:36px;padding:14px 0;border-top:1px solid #3a3a3a;font-size:14px;font-weight:600;color:#fff}
+.ftr__legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#bdbdbd;border-top:1px solid #3a3a3a;padding-top:14px}
+
+/* clinic page */
+.crumbs{font-size:14px;color:#555;margin-bottom:24px}
+.crumbs a{color:#555}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{display:inline-block;font-size:13px;padding:6px 12px;border-radius:999px;background:#efefec;color:#333}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:28px}
+.facts b{font-size:34px;font-weight:700;display:block}
+.about{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
+.about p{flex:1 1 480px;font-size:17px;line-height:1.5;color:#3a3a3a;background:#fff;border-radius:20px;padding:24px;border:1px solid #dcdcd8}
+.about .ph{flex:1 1 360px;min-height:140px}
+.doc .ph{height:200px}
+.cta-band{background:#1c1c1c;color:#fff;border-radius:24px;padding:36px 40px;display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.cta-band b{font-size:28px;font-weight:600}
+
+/* proto badge */
+.proto{position:fixed;left:16px;bottom:16px;z-index:30;background:#1d4ed8;color:#fff;font:600 12px/1 'JetBrains Mono',ui-monospace,monospace;padding:8px 10px;border-radius:8px;letter-spacing:.04em}
+
+@media (max-width:900px){
+  .nav{display:none;position:absolute;left:0;right:0;top:72px;background:#fff;flex-direction:column;gap:0;padding:8px 20px 16px;border-bottom:1px solid #e2e2de}
+  .nav.open{display:flex}
+  .nav a{padding:14px 0;border-bottom:1px solid #eee}
+  .burger{display:inline-flex}
+  .phone{display:none}
+}
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .sec{padding:56px 0}
+  .h1{font-size:38px}
+  .h2{font-size:30px}
+  .sub{font-size:17px}
+  .hero__img{min-height:260px}
+  .hdr .btn--sm{display:none}
+  .form{padding:22px}
+  .cta-band{padding:28px}
+  .cta-band b{font-size:22px}
+  .proto{display:none}
+}

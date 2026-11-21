@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Silkway Med — лечение в Китае (прототип)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a href="#top" class="logo">SILKWAY MED</a>
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      <a href="#directions">Направления</a>
+      <a href="#clinics">Клиники</a>
+      <a href="#how">Как это работает</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="hdr__right">
+      <a href="tel:+79039999134" class="phone">+7 903 999-91-34</a>
+      <a href="#lead" class="btn btn--sm">Оставить заявку</a>
+      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 1. Первый экран -->
+<section id="top" class="sec hero">
+  <div class="wrap">
+    <div class="hero__in">
+      <div class="hero__text">
+        <h1 class="h1">Лечение в лучших клиниках Китая</h1>
+        <p class="sub">Подберём клинику, организуем поездку и будем рядом до возвращения домой.</p>
+        <div class="btns">
+          <a href="#lead" class="btn">Подобрать клинику</a>
+          <a href="#how" class="btn btn--ghost">Как это работает</a>
+        </div>
+      </div>
+      <div class="ph hero__img">Фото: врач и пациент</div>
+    </div>
+    <ul class="checks">
+      <li>✓ 12 клиник-партнёров</li>
+      <li>✓ Оплата напрямую клинике</li>
+      <li>✓ Личный менеджер</li>
+      <li>✓ Переводчик на приёмах</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2. Сегментация -->
+<section class="sec alt">
+  <div class="wrap">
+    <h2 class="h2">Что вам нужно?</h2>
+    <div class="grid grid--3" style="margin-top:32px">
+      <button type="button" class="card" data-dir="Стоматология / эстетика" style="min-height:220px">
+        <span class="h3" style="font-size:24px">Улучшить внешность</span>
+        <span class="txt">Импланты, виниры, пластика</span>
+        <span class="go">Подобрать врача →</span>
+      </button>
+      <button type="button" class="card" data-dir="Чекап" style="min-height:220px">
+        <span class="h3" style="font-size:24px">Проверить здоровье</span>
+        <span class="txt">Чекап за один визит или второе мнение</span>
+        <span class="go">Выбрать чекап →</span>
+      </button>
+      <button type="button" class="card" data-dir="Лечение заболевания" style="min-height:220px">
+        <span class="h3" style="font-size:24px">Вылечить болезнь</span>
+        <span class="txt">Онкология, сердце, позвоночник и другое</span>
+        <span class="go">Подобрать клинику →</span>
+      </button>
+    </div>
+    <button type="button" class="urgent" data-dir="Срочный случай">
+      <b>Срочный случай? Ответим за 2 часа</b>
+      <span>Написать →</span>
+    </button>
+  </div>
+</section>
+
+<!-- 3. Направления -->
+<section id="directions" class="sec">
+  <div class="wrap">
+    <h2 class="h2">Направления</h2>
+    <div class="grid" style="margin-top:32px">
+      <button type="button" class="card" data-dir="Стоматология"><span class="h3">Стоматология</span><span class="txt">Импланты, виниры, брекеты</span></button>
+      <button type="button" class="card" data-dir="Пластическая хирургия"><span class="h3">Пластическая хирургия</span><span class="txt">Нос, веки, контур лица и тела</span></button>
+      <button type="button" class="card" data-dir="Косметология"><span class="h3">Косметология</span><span class="txt">Инъекции, лазер, уход за кожей</span></button>
+      <button type="button" class="card" data-dir="Онкология"><span class="h3">Онкология</span><span class="txt">Иммунотерапия, протонная терапия</span></button>
+      <button type="button" class="card" data-dir="Сердце / мозг"><span class="h3">Кардиология и нейрохирургия</span><span class="txt">Операции на сердце и мозге</span></button>
+      <button type="button" class="card" data-dir="Чекап"><span class="h3">Чекапы</span><span class="txt">МРТ, КТ, анализы за один визит</span></button>
+      <button type="button" class="card" data-dir="Ортопедия"><span class="h3">Ортопедия</span><span class="txt">Суставы и позвоночник</span></button>
+      <button type="button" class="card card--muted" data-dir="Другое"><span class="h3">Другое</span><span class="txt">Расскажите — подберём клинику</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Клиники -->
+<section id="clinics" class="sec alt">
+  <div class="wrap">
+    <div class="row-head">
+      <div>
+        <h2 class="h2">12 ведущих госбольниц</h2>
+        <p class="sub" style="margin-top:8px">Шанхай и Ханчжоу</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Город">
+        <button type="button" class="tab" role="tab" aria-selected="true" data-city="all">Все</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-city="Шанхай">Шанхай</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-city="Ханчжоу">Ханчжоу</button>
+      </div>
+    </div>
+    <div class="grid" id="clinic-grid" style="margin-top:28px"></div>
+  </div>
+</section>
+
+<!-- 5. Как это работает -->
+<section id="how" class="sec">
+  <div class="wrap">
+    <h2 class="h2">Как это работает</h2>
+    <ol class="steps">
+      <li class="card card--static"><span class="num">01</span><span class="h3">Заявка</span><span class="txt">Бесплатно, ответим за день</span></li>
+      <li class="card card--static"><span class="num">02</span><span class="h3">Подбор клиники</span><span class="txt">Переведём документы, получим ответ врачей</span></li>
+      <li class="card card--static"><span class="num">03</span><span class="h3">Поездка</span><span class="txt">Виза, билеты, жильё, трансфер</span></li>
+      <li class="card card--static"><span class="num">04</span><span class="h3">Лечение</span><span class="txt">Переводчик и менеджер рядом</span></li>
+      <li class="card card--static"><span class="num">05</span><span class="h3">Дома</span><span class="txt">Выписка на русском, остаёмся на связи</span></li>
+    </ol>
+    <div class="money">
+      <b>Два договора — честные деньги</b>
+      <span class="txt" style="font-size:16px">Нам — за сервис, по смете</span>
+      <span class="txt" style="font-size:16px">Клинике — за лечение, напрямую</span>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Почему мы -->
+<section id="why" class="sec alt">
+  <div class="wrap">
+    <h2 class="h2">Почему с нами спокойно</h2>
+    <div class="grid" style="margin-top:32px">
+      <div class="card card--static"><span class="h3">Без наценок</span><span class="txt">Лечение оплачиваете клинике</span></div>
+      <div class="card card--static"><span class="h3">Один менеджер</span><span class="txt">От заявки до возвращения</span></div>
+      <div class="card card--static"><span class="h3">Без языка</span><span class="txt">Переводчик на каждом приёме</span></div>
+      <div class="card card--static"><span class="h3">Только топ-клиники</span><span class="txt">Университетские госбольницы</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Новости -->
+<section id="news" class="sec">
+  <div class="wrap">
+    <h2 class="h2">Новости медицины Китая</h2>
+    <div class="grid grid--3" style="margin-top:32px">
+      <article class="card card--static clinic-card"><div class="ph">Обложка</div><div class="clinic-card__body"><span class="txt" style="font-size:13px">4 августа 2026</span><h3 class="h3" style="font-size:18px">Искусственное сердце 90-летнему пациенту</h3></div></article>
+      <article class="card card--static clinic-card"><div class="ph">Обложка</div><div class="clinic-card__body"><span class="txt" style="font-size:13px">31 июля 2026</span><h3 class="h3" style="font-size:18px">Новые препараты доходят до больниц за месяцы</h3></div></article>
+      <article class="card card--static clinic-card"><div class="ph">Обложка</div><div class="clinic-card__body"><span class="txt" style="font-size:13px">31 июля 2026</span><h3 class="h3" style="font-size:18px">Россияне всё чаще едут лечиться в Китай</h3></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 8. FAQ -->
+<section id="faq" class="sec alt">
+  <div class="wrap faq">
+    <h2 class="h2">Вопросы</h2>
+    <div style="margin-top:16px">
+      <details open><summary>Вы клиника?</summary><p class="txt">Нет, мы организуем поездку. Лечит клиника по договору с вами.</p></details>
+      <details><summary>Сколько стоит лечение?</summary><p class="txt">Цену называет клиника после изучения документов. Точная — после осмотра на месте.</p></details>
+      <details><summary>Как платить?</summary><p class="txt">Нам — за сервис по смете. Клинике — за лечение, напрямую.</p></details>
+      <details><summary>Нужен английский или китайский?</summary><p class="txt">Нет, переводчик с вами на всех этапах.</p></details>
+      <details><summary>Как отправить документы?</summary><p class="txt">После заявки пришлём защищённую ссылку.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Форма -->
+<section id="lead" class="sec">
+  <div class="wrap lead-in">
+    <div class="lead-in__text">
+      <h2 class="h2">Оставьте заявку</h2>
+      <p class="sub">Консультация бесплатная. Ответим в течение дня.</p>
+      <a href="tel:+79039999134" class="phone" style="font-size:20px;margin-top:12px;display:inline-flex;min-height:44px;align-items:center">+7 903 999-91-34</a>
+    </div>
+    <form class="form" id="lead-form" novalidate>
+      <div class="form-fields">
+        <div class="chosen" id="chosen"><span>Вы выбрали: <b id="chosen-text"></b></span><button type="button" id="chosen-clear">Сбросить</button></div>
+        <label for="f-name" class="sr">Имя</label>
+        <input id="f-name" class="inp" type="text" placeholder="Имя" autocomplete="given-name">
+        <label for="f-contact" class="sr">Телефон или мессенджер</label>
+        <input id="f-contact" class="inp" type="text" placeholder="Телефон, WhatsApp или Telegram" autocomplete="tel">
+        <label for="f-dir" class="sr">Направление</label>
+        <select id="f-dir" class="inp">
+          <option value="">Направление — не знаю, нужна консультация</option>
+          <option>Стоматология</option>
+          <option>Стоматология / эстетика</option>
+          <option>Пластическая хирургия</option>
+          <option>Косметология</option>
+          <option>Чекап</option>
+          <option>Онкология</option>
+          <option>Сердце / мозг</option>
+          <option>Ортопедия</option>
+          <option>Лечение заболевания</option>
+          <option>Срочный случай</option>
+          <option>Другое</option>
+        </select>
+        <label class="consent"><input type="checkbox" id="f-agree"> <span>Согласен с <a href="#lead">обработкой данных</a> и <a href="#lead">офертой</a></span></label>
+        <p class="form-err" id="form-err" role="alert">Заполните имя, контакт и отметьте согласие</p>
+        <button type="submit" class="btn" style="width:100%;min-height:56px">Отправить</button>
+      </div>
+      <div class="thanks" role="status">
+        <h3 class="h3" style="font-size:26px">Спасибо, заявка отправлена</h3>
+        <p class="txt" style="font-size:16px">Менеджер свяжется с вами в течение рабочего дня.</p>
+        <button type="button" class="btn btn--ghost" id="again">Отправить ещё одну</button>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__top">
+      <span class="logo" style="color:#fff">SILKWAY MED</span>
+      <nav class="ftr__nav" aria-label="Навигация в футере">
+        <a href="#directions">Направления</a><a href="#clinics">Клиники</a><a href="#how">Как это работает</a><a href="#news">Новости</a>
+      </nav>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:14px">
+        <a href="tel:+79039999134" style="color:#fff;font-weight:600;font-size:18px">+7 903 999-91-34</a>
+        <a href="mailto:hello@silkwaymed.ru">hello@silkwaymed.ru</a>
+      </div>
+    </div>
+    <p class="ftr__warn">Имеются противопоказания. Необходима консультация специалиста.</p>
+    <div class="ftr__legal">
+      <p>© 2026 ООО «Глобал Трафик» · ИНН 5403091377 · ОГРН 1265400004726</p>
+      <p style="display:flex;gap:16px"><a href="#top">Политика</a><a href="#top">Согласие</a><a href="#top">Оферта</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="proto" aria-hidden="true">ПРОТОТИП</div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
