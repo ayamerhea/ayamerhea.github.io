@@ -110,7 +110,7 @@ button.card.card--line{border:1px solid var(--line)}
 .slider>*{scroll-snap-align:start}
 .doc{padding:24px;gap:0;min-height:402px}
 .doc .ph{height:240px;margin-bottom:12px}
-.doc .row-meta{margin-top:8px}
+.doc .row-meta{margin-top:8px;font-size:12px}
 .doc .more{padding-top:24px}
 .story{padding:24px;gap:0}
 .story .ph{height:200px;margin-bottom:12px}
@@ -142,11 +142,11 @@ button.card.card--line{border:1px solid var(--line)}
 .faq details p{padding-bottom:24px}
 
 /* ---------- форма ---------- */
-.lead-in{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
-.lead-in__text{flex:0 1 524px;display:flex;flex-direction:column;gap:40px}
+.lead-in{display:grid;grid-template-columns:minmax(0,524px) minmax(0,572px);justify-content:space-between;align-items:start;gap:40px}
+.lead-in__text{display:flex;flex-direction:column;gap:40px}
 .lead-in__text .lead{opacity:1;margin-top:24px;max-width:280px}
 .lead-in__phone{font-size:24px}
-.form{flex:0 1 572px;background:var(--grey);border-radius:var(--r-card);padding:32px 24px 24px;display:flex;flex-direction:column}
+.form{background:var(--grey);border-radius:var(--r-card);padding:32px 24px 24px;display:flex;flex-direction:column}
 .form--flat{background:transparent;padding:0}
 .fields{display:flex;flex-direction:column;gap:12px}
 .inp{width:100%;min-height:54px;border:1px solid transparent;border-radius:var(--r-in);background:var(--white);padding:16px 24px;font-size:16px;outline:none;transition:border-color .15s}
@@ -255,6 +255,7 @@ a.chip:hover{background:var(--black);color:var(--white)}
 
 /* ---------- адаптив ---------- */
 @media (max-width:960px){
+  .lead-in{grid-template-columns:1fr}
   .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
   .slider{grid-auto-columns:calc((100% - 20px)/2)}
   .slider--3,.gal .slider{grid-auto-columns:calc((100% - 20px)/2)}

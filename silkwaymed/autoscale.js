@@ -5,7 +5,8 @@
   var root = document.documentElement;
   var apply = function () {
     var w = root.clientWidth || window.innerWidth;
-    root.style.zoom = w >= MIN ? (w / BASE).toFixed(4) : '';
+    // округляем вниз, чтобы ширина вёрстки никогда не стала меньше 1200 px
+    root.style.zoom = w >= MIN ? String(Math.floor(w / BASE * 10000) / 10000) : '';
   };
   apply();
   window.addEventListener('resize', apply);
