@@ -226,6 +226,30 @@ a.chip:hover{background:var(--black);color:var(--white)}
 .docpage{max-width:760px}
 .docpage p{margin-top:16px}
 
+
+/* ---------- попап с формой ---------- */
+.modal-lock,.modal-lock body{overflow:hidden}
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;visibility:hidden;opacity:0;transition:opacity .2s,visibility 0s .2s}
+.modal.open{visibility:visible;opacity:1;transition:opacity .2s}
+.modal__overlay{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.modal__box{position:relative;width:100%;max-width:572px;max-height:calc(100vh - 48px);overflow-y:auto;background:var(--white);border-radius:var(--r-card);padding:40px 24px 24px;transform:translateY(16px);transition:transform .25s}
+.modal.open .modal__box{transform:none}
+.modal__close{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;border:0;background:var(--grey);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s,color .15s}
+.modal__close:hover{background:var(--black);color:var(--white)}
+.modal__close svg{width:22px;height:22px}
+.modal .h2{font-size:40px;padding-right:56px}
+.modal__lead{margin:16px 0 32px;opacity:1}
+.form--modal{background:transparent;padding:0;flex:none}
+.form--modal .inp{background:var(--grey)}
+.form--modal .inp:focus{background:var(--white)}
+.form--modal .chosen{background:var(--grey)}
+.form--modal .btn--block{margin-top:32px}
+@media (max-width:640px){
+  .modal{padding:0;align-items:flex-end}
+  .modal__box{max-height:92vh;border-radius:var(--r-card) var(--r-card) 0 0;padding:32px 20px 24px;transform:translateY(40px)}
+  .modal .h2{font-size:30px}
+}
+
 /* метка прототипа */
 .proto{position:fixed;left:16px;bottom:16px;z-index:50;background:#2563eb;color:#fff;font:600 11px/1 ui-monospace,monospace;letter-spacing:.06em;padding:7px 9px;border-radius:6px}
 

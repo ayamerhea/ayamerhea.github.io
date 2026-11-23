@@ -96,11 +96,27 @@
     });
   };
 
-  // ---------- форма ----------
-  var initForm = function () {
-    var form = $('#lead-form'); if (!form) return;
+  // ---------- формы ----------
+  var DEFAULT_DIRS = ['Стоматология','Стоматология / эстетика','Пластическая хирургия','Косметология','Онкология','Кардиология и нейрохирургия','Чекап','Ортопедия','Лечение заболевания','Срочный случай','Другое'];
+  var formFields = function (dirs) {
+    return '<div class="chosen"><span>Вы выбрали: <b></b></span><button type="button">Сбросить</button></div>' +
+      '<div class="fields">' +
+      '<input class="inp" type="text" placeholder="Имя" autocomplete="given-name" required aria-label="Имя">' +
+      '<input class="inp" type="text" placeholder="Телефон, Whatsapp или Telegram" autocomplete="tel" required aria-label="Телефон, Whatsapp или Telegram">' +
+      '<div class="sel"><select class="inp" aria-label="Направление"><option value="">Выберите направление</option>' +
+      dirs.map(function (d) { return '<option>' + esc(d) + '</option>'; }).join('') + '</select>' + I.caret + '</div>' +
+      '<label class="agree"><input type="checkbox" required> <span>Согласен с <a href="doc.html?d=policy">обработкой данных</a> и <a href="doc.html?d=offer">офертой</a></span></label>' +
+      '</div><p class="ferr" role="alert">Заполните имя, контакт и отметьте согласие</p>' +
+      '<button type="submit" class="btn btn--block">Отправить заявку</button>' +
+      '<div class="thanks" role="status"><span class="t24">Спасибо, заявка отправлена</span>' +
+      '<span class="body">Менеджер свяжется с вами в течение рабочего дня.</span>' +
+      '<button type="button" class="btn btn--line again">Отправить ещё одну</button></div>';
+  };
+  // подключает поведение к форме, возвращает setChoice
+  var wireForm = function (form) {
     var sel = $('select', form), chosen = $('.chosen', form), chosenText = $('.chosen b', form);
     var setChoice = function (dir, note) {
+      sel.selectedIndex = 0;
       if (dir) {
         var opt = Array.prototype.filter.call(sel.options, function (o) { return o.value === dir || o.text === dir; })[0];
         if (!opt) { opt = new Option(dir, dir); sel.add(opt); }
@@ -109,15 +125,7 @@
       chosenText.textContent = note || '';
       chosen.classList.toggle('on', !!note);
     };
-    $('.chosen button', form).addEventListener('click', function () { setChoice('', ''); sel.selectedIndex = 0; });
-    document.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-dir],[data-note]'); if (!b) return;
-      e.preventDefault();
-      setChoice(b.getAttribute('data-dir') || '', b.getAttribute('data-note') || '');
-      $('#lead').scrollIntoView({ behavior: 'smooth' });
-      setTimeout(function () { $('input', form).focus({ preventScroll: true }); }, 600);
-    });
-    if (params.get('dir') || params.get('note')) setChoice(params.get('dir') || '', params.get('note') || '');
+    $('.chosen button', form).addEventListener('click', function () { setChoice('', ''); });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var ok = true;
@@ -126,6 +134,65 @@
       if (ok) form.classList.add('done');
     });
     $('.again', form).addEventListener('click', function () { form.reset(); setChoice('', ''); form.classList.remove('done'); });
+    return setChoice;
+  };
+
+  var initForms = function (clinicDirs) {
+    // форма внизу страницы
+    var pageForm = $('#lead-form');
+    if (pageForm) {
+      var setPage = wireForm(pageForm);
+      if (params.get('dir') || params.get('note')) setPage(params.get('dir') || '', params.get('note') || '');
+    }
+    // попап
+    var modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML =
+      '<div class="modal__overlay" data-close></div>' +
+      '<div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modal-title">' +
+      '<button type="button" class="modal__close" data-close aria-label="Закрыть">' +
+      '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>' +
+      '<h2 class="h2" id="modal-title">Оставьте заявку</h2>' +
+      '<p class="lead modal__lead">Консультация бесплатная. Ответим в течение дня.</p>' +
+      '<form class="form form--modal" novalidate>' + formFields(clinicDirs || DEFAULT_DIRS) + '</form></div>';
+    document.body.appendChild(modal);
+    var mForm = $('form', modal);
+    var setModal = wireForm(mForm);
+    var lastFocus = null;
+    var open = function (dir, note) {
+      lastFocus = document.activeElement;
+      mForm.reset(); mForm.classList.remove('done'); $('.ferr', mForm).classList.remove('on');
+      $$('.err', mForm).forEach(function (x) { x.classList.remove('err'); });
+      setModal(dir, note);
+      modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('modal-lock');
+      setTimeout(function () { $('input', mForm).focus(); }, 50);
+    };
+    var close = function () {
+      modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('modal-lock');
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
+    };
+    $$('[data-close]', modal).forEach(function (x) { x.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) {
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'Tab') { // держим фокус внутри окна
+        var f = $$('button, input, select, a[href]', $('.modal__box', modal)).filter(function (x) { return x.offsetParent !== null; });
+        if (!f.length) return;
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      }
+    });
+    // всё, что вело к форме, теперь открывает попап
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-dir],[data-note],a[href="#lead"],a[href="index.html#lead"],[data-modal]');
+      if (!b || modal.contains(b)) return;
+      e.preventDefault();
+      if (nav) nav.classList.remove('open');
+      open(b.getAttribute('data-dir') || '', b.getAttribute('data-note') || '');
+    });
   };
 
   // ---------- ГЛАВНАЯ ----------
@@ -152,6 +219,7 @@
     document.title = c.name + ' — Silkway Med';
     $$('[data-f]').forEach(function (el) { el.textContent = c[el.getAttribute('data-f')] || ''; });
     var dirs = (window.CLINIC_DIRS || {})[c.id] || [];
+    window.__clinicDirs = dirs.map(function (d) { return d[0]; }).concat(['Другое']);
     $('#chips').innerHTML = c.tags.map(function (t) { return '<a class="chip" href="#services">' + esc(t) + '</a>'; }).join('');
     $('#facts').innerHTML = c.facts.map(function (f) {
       return '<div class="card fact"><b>' + esc(f[0]) + '</b><span class="meta" style="opacity:.8">' + esc(f[1]) + '</span></div>';
@@ -208,5 +276,5 @@
   }
 
   initArrows();
-  initForm();
+  initForms(window.__clinicDirs);
 })();
