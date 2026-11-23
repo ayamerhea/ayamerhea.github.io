@@ -102,6 +102,7 @@ button.card.card--line{border:1px solid var(--line)}
 .ccard__body{padding:12px 24px 24px;display:flex;flex-direction:column;gap:8px;flex:1}
 .row-meta{display:flex;justify-content:space-between;gap:8px}
 .ccard .more{margin-top:auto}
+.ccard .row-meta{font-size:12px}
 
 /* ---------- слайдеры ---------- */
 .slider{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 60px)/4);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
