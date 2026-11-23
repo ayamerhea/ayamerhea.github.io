@@ -91,7 +91,7 @@
         var track = document.getElementById(btn.getAttribute('data-slider'));
         var item = track && track.firstElementChild; if (!item) return;
         var gap = parseFloat(getComputedStyle(track).columnGap) || 20;
-        track.scrollBy({ left: Number(btn.getAttribute('data-step')) * (item.getBoundingClientRect().width + gap), behavior: 'smooth' });
+        track.scrollBy({ left: Number(btn.getAttribute('data-step')) * (item.offsetWidth + gap), behavior: 'smooth' });
       });
     });
   };

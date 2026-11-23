@@ -254,13 +254,11 @@ a.chip:hover{background:var(--black);color:var(--white)}
 .proto{position:fixed;left:16px;bottom:16px;z-index:50;background:#2563eb;color:#fff;font:600 11px/1 ui-monospace,monospace;letter-spacing:.06em;padding:7px 9px;border-radius:6px}
 
 /* ---------- адаптив ---------- */
-@media (max-width:1100px){
+@media (max-width:960px){
   .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
   .slider{grid-auto-columns:calc((100% - 20px)/2)}
   .slider--3,.gal .slider{grid-auto-columns:calc((100% - 20px)/2)}
   .how2{grid-template-columns:1fr}
-}
-@media (max-width:960px){
   .nav{display:none;position:absolute;top:67px;left:0;right:0;background:var(--white);flex-direction:column;gap:0;padding:8px 32px 20px;border-bottom:1px solid var(--line)}
   .nav.open{display:flex}
   .nav a{padding:14px 0;border-bottom:1px solid var(--line)}
