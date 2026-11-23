@@ -39,6 +39,36 @@
     });
   }
 
+  // ---- ведущие врачи (сквозной блок)
+  var docSlider = $('#doc-slider');
+  if (docSlider && window.STAR_DOCS) {
+    var byId = {};
+    CLINICS.forEach(function (c) { byId[c.id] = c; });
+    docSlider.innerHTML = window.STAR_DOCS.map(function (d) {
+      var c = byId[d[3]] || {};
+      return '<a class="card doc" href="clinic.html?id=' + d[3] + '">' +
+        '<div class="ph">Фото</div>' +
+        '<h3 class="h3" style="margin-top:6px;font-size:19px">' + esc(d[0]) + '</h3>' +
+        '<p class="muted" style="font-size:13px">' + esc(d[1]) + ' · ' + esc(c.name || '') + '</p>' +
+        '<p class="txt">' + esc(d[2]) + '</p>' +
+        '<span class="go">Смотреть клинику →</span></a>';
+    }).join('');
+  }
+
+  // ---- стрелки слайдеров
+  $$('.arrows').forEach(function (box) {
+    var track = document.getElementById(box.getAttribute('data-slider'));
+    if (!track) return;
+    $$('.arrow', box).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var step = Number(btn.getAttribute('data-step'));
+        var item = track.firstElementChild;
+        var w = item ? item.getBoundingClientRect().width + 16 : track.clientWidth;
+        track.scrollBy({ left: step * w, behavior: 'smooth' });
+      });
+    });
+  });
+
   // ---- форма заявки
   var form = $('#lead-form');
   if (form) {

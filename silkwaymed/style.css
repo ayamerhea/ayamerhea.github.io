@@ -153,3 +153,31 @@ a.card:hover,button.card:hover{border-color:#1c1c1c;transform:translateY(-2px);b
   .cta-band b{font-size:22px}
   .proto{display:none}
 }
+
+/* --- доп. блоки: Почему Китай, Врачи, Партнёры, Истории --- */
+.why-cn{min-height:180px;justify-content:space-between}
+.price-ex{display:flex;justify-content:space-between;gap:12px;align-items:baseline;background:#f5f5f4;border-radius:12px;padding:12px 14px;font-size:15px;margin-top:auto}
+.price-ex s{color:#777}
+.price-ex b{font-size:18px}
+
+.arrows{display:flex;gap:8px}
+.arrow{width:48px;height:48px;border-radius:999px;border:1px solid #b9b9b4;background:#fff;font-size:18px;cursor:pointer}
+.arrow:hover{border-color:#1c1c1c}
+.slider{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px)/4);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.slider::-webkit-scrollbar{display:none}
+.slider--3{grid-auto-columns:calc((100% - 32px)/3)}
+.slider > *{scroll-snap-align:start}
+.doc .ph{height:220px}
+
+.partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:32px}
+.partners > div{display:flex;flex-direction:column;gap:10px}
+.partners__cat{font-weight:600;font-size:15px}
+.plogo{height:80px;background:#fff;border:1px solid #dcdcd8}
+
+.story__img{height:200px}
+.story__facts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px;line-height:1.4}
+.story__facts dt{color:#555}
+.story__facts dd{margin:0;font-weight:500}
+
+@media (max-width:900px){.slider,.slider--3{grid-auto-columns:calc((100% - 16px)/2)}}
+@media (max-width:560px){.slider,.slider--3{grid-auto-columns:82%}.arrows{display:none}}

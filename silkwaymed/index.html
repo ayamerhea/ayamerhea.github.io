@@ -18,6 +18,7 @@
     <nav class="nav" id="nav" aria-label="Основное меню">
       <a href="#directions">Направления</a>
       <a href="#clinics">Клиники</a>
+      <a href="#doctors">Врачи</a>
       <a href="#how">Как это работает</a>
       <a href="#faq">Вопросы</a>
     </nav>
@@ -83,8 +84,29 @@
   </div>
 </section>
 
+<!-- Почему Китай -->
+<section id="china" class="sec">
+  <div class="wrap">
+    <h2 class="h2">Почему Китай</h2>
+    <div class="grid grid--3" style="margin-top:32px">
+      <div class="card card--static why-cn">
+        <span class="h3">Дешевле, чем в России</span>
+        <span class="price-ex"><span>Имплантация</span><span><s>[X ₽]</s> → <b>[Y ₽]</b></span></span>
+      </div>
+      <div class="card card--static why-cn">
+        <span class="h3">Врачи мирового уровня</span>
+        <span class="txt">Академики и профессора с именем на всю страну</span>
+      </div>
+      <div class="card card--static why-cn">
+        <span class="h3">Новейшее оборудование</span>
+        <span class="txt">Роботы da Vinci, протонная терапия, ПЭТ/КТ</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 3. Направления -->
-<section id="directions" class="sec">
+<section id="directions" class="sec alt">
   <div class="wrap">
     <h2 class="h2">Направления</h2>
     <div class="grid" style="margin-top:32px">
@@ -101,7 +123,7 @@
 </section>
 
 <!-- 4. Клиники -->
-<section id="clinics" class="sec alt">
+<section id="clinics" class="sec">
   <div class="wrap">
     <div class="row-head">
       <div>
@@ -115,6 +137,20 @@
       </div>
     </div>
     <div class="grid" id="clinic-grid" style="margin-top:28px"></div>
+  </div>
+</section>
+
+<!-- Ведущие врачи -->
+<section id="doctors" class="sec alt">
+  <div class="wrap">
+    <div class="row-head">
+      <h2 class="h2">Ведущие врачи</h2>
+      <div class="arrows" data-slider="doc-slider">
+        <button type="button" class="arrow" data-step="-1" aria-label="Назад">←</button>
+        <button type="button" class="arrow" data-step="1" aria-label="Вперёд">→</button>
+      </div>
+    </div>
+    <div class="slider" id="doc-slider" style="margin-top:28px"></div>
   </div>
 </section>
 
@@ -137,8 +173,22 @@
   </div>
 </section>
 
+<!-- Партнёры -->
+<section id="partners" class="sec alt">
+  <div class="wrap">
+    <h2 class="h2">Партнёры</h2>
+    <p class="sub" style="margin-top:8px">Помогают сделать поездку спокойной</p>
+    <div class="partners">
+      <div><p class="partners__cat">Туроператоры</p><div class="ph plogo">[Логотип]</div><div class="ph plogo">[Логотип]</div></div>
+      <div><p class="partners__cat">Страховые</p><div class="ph plogo">[Логотип]</div><div class="ph plogo">[Логотип]</div></div>
+      <div><p class="partners__cat">Отели</p><div class="ph plogo">[Логотип]</div><div class="ph plogo">[Логотип]</div></div>
+      <div><p class="partners__cat">Визовые агентства</p><div class="ph plogo">[Логотип]</div><div class="ph plogo">[Логотип]</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- 6. Почему мы -->
-<section id="why" class="sec alt">
+<section id="why" class="sec">
   <div class="wrap">
     <h2 class="h2">Почему с нами спокойно</h2>
     <div class="grid" style="margin-top:32px">
@@ -146,6 +196,65 @@
       <div class="card card--static"><span class="h3">Один менеджер</span><span class="txt">От заявки до возвращения</span></div>
       <div class="card card--static"><span class="h3">Без языка</span><span class="txt">Переводчик на каждом приёме</span></div>
       <div class="card card--static"><span class="h3">Только топ-клиники</span><span class="txt">Университетские госбольницы</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Истории клиентов -->
+<section id="stories" class="sec alt">
+  <div class="wrap">
+    <div class="row-head">
+      <h2 class="h2">Истории клиентов</h2>
+      <div class="arrows" data-slider="story-slider">
+        <button type="button" class="arrow" data-step="-1" aria-label="Назад">←</button>
+        <button type="button" class="arrow" data-step="1" aria-label="Вперёд">→</button>
+      </div>
+    </div>
+    <div class="slider slider--3" id="story-slider" style="margin-top:28px">
+      <article class="card card--static story">
+        <div class="ph story__img">Фото / видео клиента</div>
+        <h3 class="h3">[Имя], [город]</h3>
+        <dl class="story__facts">
+          <dt>Диагноз</dt><dd>[…]</dd>
+          <dt>Клиника</dt><dd>[…]</dd>
+          <dt>Лечение</dt><dd>[N дней]</dd>
+          <dt>Потратили</dt><dd>[… ₽]</dd>
+        </dl>
+        <p class="txt">«[Отзыв в 1–2 строки]»</p>
+      </article>
+      <article class="card card--static story">
+        <div class="ph story__img">Фото / видео клиента</div>
+        <h3 class="h3">[Имя], [город]</h3>
+        <dl class="story__facts">
+          <dt>Диагноз</dt><dd>[…]</dd>
+          <dt>Клиника</dt><dd>[…]</dd>
+          <dt>Лечение</dt><dd>[N дней]</dd>
+          <dt>Потратили</dt><dd>[… ₽]</dd>
+        </dl>
+        <p class="txt">«[Отзыв в 1–2 строки]»</p>
+      </article>
+      <article class="card card--static story">
+        <div class="ph story__img">Фото / видео клиента</div>
+        <h3 class="h3">[Имя], [город]</h3>
+        <dl class="story__facts">
+          <dt>Диагноз</dt><dd>[…]</dd>
+          <dt>Клиника</dt><dd>[…]</dd>
+          <dt>Лечение</dt><dd>[N дней]</dd>
+          <dt>Потратили</dt><dd>[… ₽]</dd>
+        </dl>
+        <p class="txt">«[Отзыв в 1–2 строки]»</p>
+      </article>
+      <article class="card card--static story">
+        <div class="ph story__img">Фото / видео клиента</div>
+        <h3 class="h3">[Имя], [город]</h3>
+        <dl class="story__facts">
+          <dt>Диагноз</dt><dd>[…]</dd>
+          <dt>Клиника</dt><dd>[…]</dd>
+          <dt>Лечение</dt><dd>[N дней]</dd>
+          <dt>Потратили</dt><dd>[… ₽]</dd>
+        </dl>
+        <p class="txt">«[Отзыв в 1–2 строки]»</p>
+      </article>
     </div>
   </div>
 </section>
