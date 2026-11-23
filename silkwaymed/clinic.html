@@ -42,7 +42,11 @@
           <h1 class="h1" data-f="name"></h1>
           <p class="sub" data-f="lead"></p>
           <div class="tags" id="tags"></div>
-          <a href="index.html#lead" class="btn" data-cta style="align-self:flex-start;margin-top:8px">Хочу лечиться здесь</a>
+          <div class="btns" style="margin-top:8px">
+            <a href="index.html#lead" class="btn" data-cta>Хочу лечиться здесь</a>
+            <a href="#services" class="btn btn--ghost">Направления и цены</a>
+          </div>
+          <nav class="jump" aria-label="По странице"><a href="#about">О клинике</a><a href="#services">Цены</a><a href="#team">Врачи</a><a href="#place">Где находится</a><a href="#prepare">Что подготовить</a></nav>
         </div>
         <div class="ph hero__img" style="min-height:400px">Фото клиники</div>
       </div>
@@ -50,27 +54,78 @@
   </section>
 
   <!-- 2. О клинике -->
-  <section class="sec alt">
+  <section id="about" class="sec alt">
     <div class="wrap">
       <h2 class="h2">О клинике</h2>
       <div class="facts" id="facts"></div>
       <div class="about">
         <p data-f="about"></p>
-        <div class="ph">Карта</div>
+        <div class="gallery">
+          <div class="ph">Фото: палата</div>
+          <div class="ph">Фото: оборудование</div>
+          <div class="ph">Фото: международный отдел</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. Специалисты -->
-  <section class="sec">
+  <!-- 2.1 Направления и цены -->
+  <section id="services" class="sec">
+    <div class="wrap">
+      <h2 class="h2">Направления и цены</h2>
+      <p class="sub" style="margin-top:8px">Цены ориентировочные — точную назовёт клиника после изучения документов</p>
+      <div class="grid grid--3" id="dirs" style="margin-top:32px"></div>
+    </div>
+  </section>
+
+  <!-- 3. Врачи -->
+  <section id="team" class="sec alt">
     <div class="wrap">
       <h2 class="h2">Врачи</h2>
       <div class="grid" id="docs" style="margin-top:28px"></div>
     </div>
   </section>
 
+  <!-- 2.2 Как всё устроено + где находится -->
+  <section id="place" class="sec">
+    <div class="wrap">
+      <h2 class="h2">Как всё устроено</h2>
+      <div class="split">
+        <ul class="perks">
+          <li><b>Переводчик</b><span class="txt">На всех приёмах и процедурах</span></li>
+          <li><b>Менеджер рядом</b><span class="txt">Решает любые вопросы на месте</span></li>
+          <li><b>Встреча в аэропорту</b><span class="txt">И трансфер до клиники</span></li>
+          <li><b>Жильё рядом</b><span class="txt">Отель или палата — подберём</span></li>
+        </ul>
+        <div class="card card--static place">
+          <div class="ph place__map">Карта: клиника + отели рядом</div>
+          <dl class="kv">
+            <dt>Адрес</dt><dd><span data-f="city"></span>, [район, улица]</dd>
+            <dt>Аэропорт</dt><dd>[N] км · ~[N] мин на машине</dd>
+            <dt>Метро</dt><dd>[станция]</dd>
+            <dt>Палаты</dt><dd>[одноместные / VIP]</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2.3 Что подготовить -->
+  <section id="prepare" class="sec alt">
+    <div class="wrap">
+      <h2 class="h2">Что подготовить</h2>
+      <ol class="prep">
+        <li><span class="num">01</span><b>Выписки и заключения</b><span class="txt">Всё, что есть по диагнозу</span></li>
+        <li><span class="num">02</span><b>Снимки МРТ, КТ</b><span class="txt">Файлы на диске или по ссылке</span></li>
+        <li><span class="num">03</span><b>Свежие анализы</b><span class="txt">Какие нужны — подскажем</span></li>
+        <li><span class="num">04</span><b>Загранпаспорт</b><span class="txt">Визу поможем оформить</span></li>
+      </ol>
+      <p class="txt" style="margin-top:20px;font-size:16px">Документы переведём сами — переводить заранее не нужно.</p>
+    </div>
+  </section>
+
   <!-- CTA + другие клиники -->
-  <section class="sec alt">
+  <section class="sec">
     <div class="wrap">
       <div class="cta-band">
         <b>Хотите сюда? Оставьте заявку</b>

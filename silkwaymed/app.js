@@ -93,8 +93,8 @@
     });
 
     // переход со страницы клиники: index.html?clinic=…&doc=…#lead
-    var pClinic = params.get('clinic'), pDoc = params.get('doc');
-    if (pClinic || pDoc) setChoice('', [pClinic, pDoc ? 'врач: ' + pDoc : ''].filter(Boolean).join(', '));
+    var pClinic = params.get('clinic'), pDoc = params.get('doc'), pDir = params.get('dir');
+    if (pClinic || pDoc || pDir) setChoice('', [pClinic, pDir, pDoc ? 'врач: ' + pDoc : ''].filter(Boolean).join(', '));
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -119,10 +119,20 @@
     $('#facts').innerHTML = c.facts.map(function (f) {
       return '<div class="card card--static"><b>' + esc(f[0]) + '</b><span class="txt">' + esc(f[1]) + '</span></div>';
     }).join('');
-    var leadUrl = function (doc) {
-      var q = '?clinic=' + encodeURIComponent(c.name) + (doc ? '&doc=' + encodeURIComponent(doc) : '');
+    var leadUrl = function (doc, dir) {
+      var q = '?clinic=' + encodeURIComponent(c.name) +
+        (doc ? '&doc=' + encodeURIComponent(doc) : '') +
+        (dir ? '&dir=' + encodeURIComponent(dir) : '');
       return 'index.html' + q + '#lead';
     };
+    var dirs = (window.CLINIC_DIRS || {})[c.id] || [];
+    $('#dirs').innerHTML = dirs.map(function (d) {
+      return '<div class="card card--static dir">' +
+        '<h3 class="h3">' + esc(d[0]) + '</h3>' +
+        '<p class="txt">' + esc(d[1]) + '</p>' +
+        '<div class="dir__price"><div><b>от [X] ₽</b><small>[N] дней в Китае</small></div>' +
+        '<a class="dir__go" href="' + leadUrl('', d[0]) + '">Узнать цену →</a></div></div>';
+    }).join('');
     $$('[data-cta]').forEach(function (a) { a.href = leadUrl(); });
     $('#docs').innerHTML = c.docs.map(function (d) {
       return '<a class="card doc" href="' + leadUrl(d[0]) + '">' +
