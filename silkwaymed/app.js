@@ -241,6 +241,9 @@
     dirs.forEach(function (d) { sel.add(new Option(d[0], d[0])); });
     sel.add(new Option('Другое / не знаю', 'Другое'));
     $('#hero-cta').setAttribute('data-note', c.name);
+    var others = CLINICS.filter(function (x) { return x.id !== c.id; })
+      .sort(function (a, b) { return (b.city === c.city) - (a.city === c.city); });
+    $('#others-slider').innerHTML = others.map(clinicCard).join('');
   }
 
   // ---------- НОВОСТИ: лента ----------
