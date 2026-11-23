@@ -4,159 +4,125 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Клиника — Silkway Med (прототип)</title>
+<title>Клиника — Silkway Med</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700&family=Wix+Madefor+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="clinic">
+<div id="hdr"></div>
 
-<header class="hdr">
-  <div class="wrap hdr__in">
-    <a href="index.html" class="logo">SILKWAY MED</a>
-    <nav class="nav" id="nav" aria-label="Основное меню">
-      <a href="index.html#directions">Направления</a>
-      <a href="index.html#clinics">Клиники</a>
-      <a href="index.html#how">Как это работает</a>
-      <a href="index.html#faq">Вопросы</a>
-    </nav>
-    <div class="hdr__right">
-      <a href="tel:+79039999134" class="phone">+7 903 999-91-34</a>
-      <a href="index.html#lead" class="btn btn--sm" data-cta>Оставить заявку</a>
-      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
+<main>
+<!-- Первый экран -->
+<section class="c-hero">
+  <div class="wrap">
+    <div class="hero__in">
+      <div class="hero__text">
+        <nav class="crumbs" aria-label="Хлебные крошки" style="margin-bottom:0"><a href="index.html">Главная</a><span>/</span><a href="index.html#clinics">Клиники</a><span>/</span><span data-f="name"></span></nav>
+        <div class="chips" id="chips" style="margin-top:40px"></div>
+        <div>
+          <h1 class="h1" data-f="name"></h1>
+          <p class="lead" data-f="lead"></p>
+        </div>
+        <button type="button" class="btn" id="hero-cta" style="align-self:flex-start">Хочу лечиться здесь</button>
+      </div>
+      <div class="ph hero__img">Фото</div>
     </div>
   </div>
-</header>
+</section>
 
-<main id="clinic-page">
-  <!-- 1. Первый экран -->
-  <section class="sec hero" style="padding-top:28px">
-    <div class="wrap">
-      <nav class="crumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a> / <a href="index.html#clinics">Клиники</a> / <span data-f="name"></span></nav>
-      <div class="hero__in">
-        <div class="hero__text" style="gap:20px">
-          <p class="muted" style="font-size:15px"><span data-f="city"></span> · <span data-f="cn"></span></p>
-          <h1 class="h1" data-f="name"></h1>
-          <p class="sub" data-f="lead"></p>
-          <div class="tags" id="tags"></div>
-          <div class="btns" style="margin-top:8px">
-            <a href="index.html#lead" class="btn" data-cta>Хочу лечиться здесь</a>
-            <a href="#services" class="btn btn--ghost">Направления и цены</a>
-          </div>
-          <nav class="jump" aria-label="По странице"><a href="#about">О клинике</a><a href="#services">Цены</a><a href="#team">Врачи</a><a href="#place">Где находится</a><a href="#prepare">Что подготовить</a></nav>
-        </div>
-        <div class="ph hero__img" style="min-height:400px">Фото клиники</div>
+<!-- О клинике -->
+<section class="sec sec--grey" id="about">
+  <div class="wrap">
+    <div class="about-head"><h2 class="h2">О клинике</h2><p class="lead" data-f="about"></p></div>
+    <div class="grid3" id="facts"></div>
+    <div class="gal">
+      <button type="button" class="round round--white gal__btn gal__btn--prev" data-i="left" data-slider="gal" data-step="-1" aria-label="Предыдущее фото"></button>
+      <div class="slider" id="gal">
+        <div class="ph">Фото</div><div class="ph">Фото</div><div class="ph">Фото</div>
+        <div class="ph">Фото</div><div class="ph">Фото</div><div class="ph">Фото</div>
       </div>
+      <button type="button" class="round round--white gal__btn gal__btn--next" data-i="right" data-slider="gal" data-step="1" aria-label="Следующее фото"></button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 2. О клинике -->
-  <section id="about" class="sec alt">
-    <div class="wrap">
-      <h2 class="h2">О клинике</h2>
-      <div class="facts" id="facts"></div>
-      <div class="about">
-        <p data-f="about"></p>
-        <div class="gallery">
-          <div class="ph">Фото: палата</div>
-          <div class="ph">Фото: оборудование</div>
-          <div class="ph">Фото: международный отдел</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- Направления клиники -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <h2 class="h2 sec-head">Направления клиники</h2>
+    <div class="grid3" id="dirs"></div>
+  </div>
+</section>
 
-  <!-- 2.1 Направления и цены -->
-  <section id="services" class="sec">
-    <div class="wrap">
-      <h2 class="h2">Направления и цены</h2>
-      <p class="sub" style="margin-top:8px">Цены ориентировочные — точную назовёт клиника после изучения документов</p>
-      <div class="grid grid--3" id="dirs" style="margin-top:32px"></div>
-    </div>
-  </section>
-
-  <!-- 3. Врачи -->
-  <section id="team" class="sec alt">
-    <div class="wrap">
+<!-- Врачи -->
+<section class="sec sec--grey" id="team">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
       <h2 class="h2">Врачи</h2>
-      <div class="grid" id="docs" style="margin-top:28px"></div>
-    </div>
-  </section>
-
-  <!-- 2.2 Как всё устроено + где находится -->
-  <section id="place" class="sec">
-    <div class="wrap">
-      <h2 class="h2">Как всё устроено</h2>
-      <div class="split">
-        <ul class="perks">
-          <li><b>Переводчик</b><span class="txt">На всех приёмах и процедурах</span></li>
-          <li><b>Менеджер рядом</b><span class="txt">Решает любые вопросы на месте</span></li>
-          <li><b>Встреча в аэропорту</b><span class="txt">И трансфер до клиники</span></li>
-          <li><b>Жильё рядом</b><span class="txt">Отель или палата — подберём</span></li>
-        </ul>
-        <div class="card card--static place">
-          <div class="ph place__map">Карта: клиника + отели рядом</div>
-          <dl class="kv">
-            <dt>Адрес</dt><dd><span data-f="city"></span>, [район, улица]</dd>
-            <dt>Аэропорт</dt><dd>[N] км · ~[N] мин на машине</dd>
-            <dt>Метро</dt><dd>[станция]</dd>
-            <dt>Палаты</dt><dd>[одноместные / VIP]</dd>
-          </dl>
-        </div>
+      <div class="arrows">
+        <button type="button" class="round" data-i="left" data-slider="doc-slider" data-step="-1" aria-label="Назад"></button>
+        <button type="button" class="round" data-i="right" data-slider="doc-slider" data-step="1" aria-label="Вперёд"></button>
       </div>
     </div>
-  </section>
+    <div class="slider" id="doc-slider"></div>
+  </div>
+</section>
 
-  <!-- 2.3 Что подготовить -->
-  <section id="prepare" class="sec alt">
-    <div class="wrap">
-      <h2 class="h2">Что подготовить</h2>
-      <ol class="prep">
-        <li><span class="num">01</span><b>Выписки и заключения</b><span class="txt">Всё, что есть по диагнозу</span></li>
-        <li><span class="num">02</span><b>Снимки МРТ, КТ</b><span class="txt">Файлы на диске или по ссылке</span></li>
-        <li><span class="num">03</span><b>Свежие анализы</b><span class="txt">Какие нужны — подскажем</span></li>
-        <li><span class="num">04</span><b>Загранпаспорт</b><span class="txt">Визу поможем оформить</span></li>
+<!-- Как все устроено -->
+<section class="sec" id="place">
+  <div class="wrap">
+    <h2 class="h2 sec-head">Как все устроено</h2>
+    <div class="how2">
+      <ol class="how2__cards">
+        <li class="card card--line step"><span class="step__n">01</span><span class="t20 step__t">Переводчик</span><span class="body">На всех приёмах и процедурах</span></li>
+        <li class="card card--line step"><span class="step__n">02</span><span class="t20 step__t">Менеджер рядом</span><span class="body">Решает любые вопросы на месте</span></li>
+        <li class="card card--line step"><span class="step__n">03</span><span class="t20 step__t">Встреча в аэропорту</span><span class="body">И трансфер до клиники</span></li>
+        <li class="card card--line step"><span class="step__n">04</span><span class="t20 step__t">Жильё рядом</span><span class="body">Отель или палата — подберём</span></li>
       </ol>
-      <p class="txt" style="margin-top:20px;font-size:16px">Документы переведём сами — переводить заранее не нужно.</p>
-    </div>
-  </section>
-
-  <!-- CTA + другие клиники -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="cta-band">
-        <b>Хотите сюда? Оставьте заявку</b>
-        <a href="index.html#lead" class="btn btn--light" data-cta>Оставить заявку</a>
+      <div class="mapcard">
+        <div class="mapcard__map" id="map"></div>
+        <dl class="kv">
+          <div><dt>Адрес</dt><dd><span data-f="city"></span>, [район, улица]</dd></div>
+          <div><dt>Аэропорт</dt><dd>[N] км · ~[N] мин на машине</dd></div>
+        </dl>
       </div>
-      <h3 class="h3" style="font-size:24px;margin-top:64px">Другие клиники</h3>
-      <div class="grid grid--3" id="others" style="margin-top:20px"></div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- Форма -->
+<section class="sec sec--grey" id="lead">
+  <div class="wrap lead-in">
+    <div class="lead-in__text">
+      <div><h2 class="h2">Оставьте заявку</h2><p class="lead">Консультация бесплатная. Ответим в течение дня.</p></div>
+      <a href="tel:+79039999134" class="lead-in__phone">+7 903 999-91-34</a>
+    </div>
+    <form class="form form--flat" id="lead-form" novalidate>
+      <div class="chosen"><span>Вы выбрали: <b></b></span><button type="button">Сбросить</button></div>
+      <div class="fields">
+        <input class="inp" type="text" placeholder="Имя" autocomplete="given-name" required aria-label="Имя">
+        <input class="inp" type="text" placeholder="Телефон, Whatsapp или Telegram" autocomplete="tel" required aria-label="Телефон, Whatsapp или Telegram">
+        <div class="sel">
+          <select class="inp" id="f-dir" aria-label="Направление"><option value="">Выберите направление</option></select>
+          <span data-i="caret"></span>
+        </div>
+        <label class="agree"><input type="checkbox" required> <span>Согласен с <a href="doc.html?d=policy">обработкой данных</a> и <a href="doc.html?d=offer">офертой</a></span></label>
+      </div>
+      <p class="ferr" role="alert">Заполните имя, контакт и отметьте согласие</p>
+      <button type="submit" class="btn btn--block">Отправить заявку</button>
+      <div class="thanks" role="status">
+        <span class="t24">Спасибо, заявка отправлена</span>
+        <span class="body">Менеджер свяжется с вами в течение рабочего дня.</span>
+        <button type="button" class="btn btn--line again">Отправить ещё одну</button>
+      </div>
+    </form>
+  </div>
+</section>
 </main>
 
-<footer class="ftr">
-  <div class="wrap">
-    <div class="ftr__top">
-      <span class="logo" style="color:#fff">SILKWAY MED</span>
-      <nav class="ftr__nav" aria-label="Навигация в футере">
-        <a href="index.html#directions">Направления</a><a href="index.html#clinics">Клиники</a><a href="index.html#how">Как это работает</a><a href="index.html#news">Новости</a>
-      </nav>
-      <div style="display:flex;flex-direction:column;gap:6px;font-size:14px">
-        <a href="tel:+79039999134" style="color:#fff;font-weight:600;font-size:18px">+7 903 999-91-34</a>
-        <a href="mailto:hello@silkwaymed.ru">hello@silkwaymed.ru</a>
-      </div>
-    </div>
-    <p class="ftr__warn">Имеются противопоказания. Необходима консультация специалиста.</p>
-    <div class="ftr__legal">
-      <p>© 2026 ООО «Глобал Трафик» · ИНН 5403091377 · ОГРН 1265400004726</p>
-      <p style="display:flex;gap:16px"><a href="index.html">Политика</a><a href="index.html">Согласие</a><a href="index.html">Оферта</a></p>
-    </div>
-  </div>
-</footer>
-
+<div id="ftr"></div>
 <div class="proto" aria-hidden="true">ПРОТОТИП</div>
 <script src="data.js"></script>
 <script src="app.js"></script>

@@ -4,351 +4,242 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Silkway Med — лечение в Китае (прототип)</title>
+<title>Silkway Med — лечение в лучших клиниках Китая</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700&family=Wix+Madefor+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-<header class="hdr">
-  <div class="wrap hdr__in">
-    <a href="#top" class="logo">SILKWAY MED</a>
-    <nav class="nav" id="nav" aria-label="Основное меню">
-      <a href="#directions">Направления</a>
-      <a href="#clinics">Клиники</a>
-      <a href="#doctors">Врачи</a>
-      <a href="#how">Как это работает</a>
-      <a href="#faq">Вопросы</a>
-    </nav>
-    <div class="hdr__right">
-      <a href="tel:+79039999134" class="phone">+7 903 999-91-34</a>
-      <a href="#lead" class="btn btn--sm">Оставить заявку</a>
-      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </div>
-  </div>
-</header>
+<body data-page="home">
+<div id="hdr"></div>
 
 <main>
-<!-- 1. Первый экран -->
-<section id="top" class="sec hero">
+<!-- Первый экран -->
+<section class="hero" id="top">
   <div class="wrap">
     <div class="hero__in">
       <div class="hero__text">
-        <h1 class="h1">Лечение в лучших клиниках Китая</h1>
-        <p class="sub">Подберём клинику, организуем поездку и будем рядом до возвращения домой.</p>
+        <div>
+          <h1 class="h1">Лечение в лучших клиниках Китая</h1>
+          <p class="lead">Подберём клинику, организуем поездку и будем рядом до возвращения домой.</p>
+        </div>
         <div class="btns">
           <a href="#lead" class="btn">Подобрать клинику</a>
-          <a href="#how" class="btn btn--ghost">Как это работает</a>
+          <a href="#how" class="btn btn--line">Как это работает</a>
         </div>
       </div>
-      <div class="ph hero__img">Фото: врач и пациент</div>
+      <div class="ph hero__img">Фото</div>
     </div>
     <ul class="checks">
-      <li>✓ 12 клиник-партнёров</li>
-      <li>✓ Оплата напрямую клинике</li>
-      <li>✓ Личный менеджер</li>
-      <li>✓ Переводчик на приёмах</li>
+      <li data-i="check"><span>12 клиник-партнёров</span></li>
+      <li data-i="check"><span>Оплата напрямую клинике</span></li>
+      <li data-i="check"><span>Личный менеджер</span></li>
+      <li data-i="check"><span>Переводчик на приёмах</span></li>
     </ul>
   </div>
 </section>
 
-<!-- 2. Сегментация -->
-<section class="sec alt">
+<!-- Что вам нужно -->
+<section class="sec sec--grey seg">
   <div class="wrap">
-    <h2 class="h2">Что вам нужно?</h2>
-    <div class="grid grid--3" style="margin-top:32px">
-      <button type="button" class="card" data-dir="Стоматология / эстетика" style="min-height:220px">
-        <span class="h3" style="font-size:24px">Улучшить внешность</span>
-        <span class="txt">Импланты, виниры, пластика</span>
-        <span class="go">Подобрать врача →</span>
+    <h2 class="h2 sec-head">Что вам нужно?</h2>
+    <div class="grid3">
+      <button type="button" class="card" data-dir="Стоматология / эстетика" data-note="Улучшить внешность">
+        <span class="t24">Улучшить внешность</span><span class="body">Импланты, виниры, пластика</span>
+        <span class="more" data-i="upright">Подобрать врача</span>
       </button>
-      <button type="button" class="card" data-dir="Чекап" style="min-height:220px">
-        <span class="h3" style="font-size:24px">Проверить здоровье</span>
-        <span class="txt">Чекап за один визит или второе мнение</span>
-        <span class="go">Выбрать чекап →</span>
+      <button type="button" class="card" data-dir="Чекап" data-note="Проверить здоровье">
+        <span class="t24">Проверить здоровье</span><span class="body">Чекап за один визит<br>или второе мнение</span>
+        <span class="more" data-i="upright">Выбрать чекап</span>
       </button>
-      <button type="button" class="card" data-dir="Лечение заболевания" style="min-height:220px">
-        <span class="h3" style="font-size:24px">Вылечить болезнь</span>
-        <span class="txt">Онкология, сердце, позвоночник и другое</span>
-        <span class="go">Подобрать клинику →</span>
+      <button type="button" class="card" data-dir="Лечение заболевания" data-note="Вылечить болезнь">
+        <span class="t24">Вылечить болезнь</span><span class="body">Онкология, сердце, позвоночник и другое</span>
+        <span class="more" data-i="upright">Подобрать клинику</span>
       </button>
     </div>
-    <button type="button" class="urgent" data-dir="Срочный случай">
-      <b>Срочный случай? Ответим за 2 часа</b>
-      <span>Написать →</span>
-    </button>
+    <div class="card urgent">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span class="t24">Срочный случай?</span><span class="body">Ответим за 2 часа</span>
+      </div>
+      <button type="button" class="btn" style="min-width:203px" data-dir="Срочный случай" data-note="Срочный случай — ответим за 2 часа">Написать</button>
+    </div>
   </div>
 </section>
 
-<!-- Почему Китай -->
-<section id="china" class="sec">
+<!-- Направления -->
+<section class="sec" id="directions">
   <div class="wrap">
-    <h2 class="h2">Почему Китай</h2>
-    <div class="grid grid--3" style="margin-top:32px">
-      <div class="card card--static why-cn">
-        <span class="h3">Дешевле, чем в России</span>
-        <span class="price-ex"><span>Имплантация</span><span><s>[X ₽]</s> → <b>[Y ₽]</b></span></span>
-      </div>
-      <div class="card card--static why-cn">
-        <span class="h3">Врачи мирового уровня</span>
-        <span class="txt">Академики и профессора с именем на всю страну</span>
-      </div>
-      <div class="card card--static why-cn">
-        <span class="h3">Новейшее оборудование</span>
-        <span class="txt">Роботы da Vinci, протонная терапия, ПЭТ/КТ</span>
+    <h2 class="h2 sec-head">Направления</h2>
+    <div class="grid4">
+      <button type="button" class="card card--line" style="min-height:241px" data-dir="Стоматология"><span class="t20">Стоматология</span><span class="body">Импланты, виниры, брекеты</span><span class="more" data-i="upright">Подобрать клинику</span></button>
+      <button type="button" class="card card--line" style="min-height:241px" data-dir="Пластическая хирургия"><span class="t20">Пластическая хирургия</span><span class="body">Нос, веки, контур лица и тела</span><span class="more" data-i="upright">Подобрать клинику</span></button>
+      <button type="button" class="card card--line" style="min-height:241px" data-dir="Косметология"><span class="t20">Косметология</span><span class="body">Инъекции, лазер, уход за кожей</span><span class="more" data-i="upright">Подобрать клинику</span></button>
+      <button type="button" class="card card--line" style="min-height:241px" data-dir="Онкология"><span class="t20">Онкология</span><span class="body">Иммунотерапия, протонная терапия</span><span class="more" data-i="upright">Подобрать клинику</span></button>
+      <button type="button" class="card card--line" style="min-height:241px" data-dir="Кардиология и нейрохирургия"><span class="t20">Кардиология и нейрохирургия</span><span class="body">Операция на сердце и мозге</span><span class="more" data-i="upright">Подобрать клинику</span></button>
+      <button type="button" class="card card--line" style="min-height:241px" data-dir="Чекап"><span class="t20">Чекапы</span><span class="body">МРТ, КТ, анализы за один визит</span><span class="more" data-i="upright">Подобрать клинику</span></button>
+      <button type="button" class="card card--line" style="min-height:241px" data-dir="Ортопедия"><span class="t20">Ортопедия</span><span class="body">Суставы и позвоночник</span><span class="more" data-i="upright">Подобрать клинику</span></button>
+      <div class="card card--grey" style="min-height:241px">
+        <span class="t20">Другое</span><span class="body">Расскажите и мы подберем вам клинику</span>
+        <button type="button" class="btn btn--line btn--block" style="margin-top:auto" data-dir="Другое">Написать</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 3. Направления -->
-<section id="directions" class="sec alt">
+<!-- Клиники -->
+<section class="sec sec--grey" id="clinics">
   <div class="wrap">
-    <h2 class="h2">Направления</h2>
-    <div class="grid" style="margin-top:32px">
-      <button type="button" class="card" data-dir="Стоматология"><span class="h3">Стоматология</span><span class="txt">Импланты, виниры, брекеты</span></button>
-      <button type="button" class="card" data-dir="Пластическая хирургия"><span class="h3">Пластическая хирургия</span><span class="txt">Нос, веки, контур лица и тела</span></button>
-      <button type="button" class="card" data-dir="Косметология"><span class="h3">Косметология</span><span class="txt">Инъекции, лазер, уход за кожей</span></button>
-      <button type="button" class="card" data-dir="Онкология"><span class="h3">Онкология</span><span class="txt">Иммунотерапия, протонная терапия</span></button>
-      <button type="button" class="card" data-dir="Сердце / мозг"><span class="h3">Кардиология и нейрохирургия</span><span class="txt">Операции на сердце и мозге</span></button>
-      <button type="button" class="card" data-dir="Чекап"><span class="h3">Чекапы</span><span class="txt">МРТ, КТ, анализы за один визит</span></button>
-      <button type="button" class="card" data-dir="Ортопедия"><span class="h3">Ортопедия</span><span class="txt">Суставы и позвоночник</span></button>
-      <button type="button" class="card card--muted" data-dir="Другое"><span class="h3">Другое</span><span class="txt">Расскажите — подберём клинику</span></button>
-    </div>
-  </div>
-</section>
-
-<!-- 4. Клиники -->
-<section id="clinics" class="sec">
-  <div class="wrap">
-    <div class="row-head">
-      <div>
-        <h2 class="h2">12 ведущих госбольниц</h2>
-        <p class="sub" style="margin-top:8px">Шанхай и Ханчжоу</p>
-      </div>
+    <div class="sec-head sec-head--row">
+      <div><h2 class="h2">12 ведущих госбольниц</h2><p class="lead">Шанхай и Ханчжоу</p></div>
       <div class="tabs" role="tablist" aria-label="Город">
         <button type="button" class="tab" role="tab" aria-selected="true" data-city="all">Все</button>
         <button type="button" class="tab" role="tab" aria-selected="false" data-city="Шанхай">Шанхай</button>
         <button type="button" class="tab" role="tab" aria-selected="false" data-city="Ханчжоу">Ханчжоу</button>
       </div>
     </div>
-    <div class="grid" id="clinic-grid" style="margin-top:28px"></div>
+    <div class="grid4" id="clinic-grid"></div>
   </div>
 </section>
 
 <!-- Ведущие врачи -->
-<section id="doctors" class="sec alt">
+<section class="sec sec--grey sec--tight-top" id="doctors">
   <div class="wrap">
-    <div class="row-head">
+    <div class="sec-head sec-head--row" style="padding-top:80px">
       <h2 class="h2">Ведущие врачи</h2>
-      <div class="arrows" data-slider="doc-slider">
-        <button type="button" class="arrow" data-step="-1" aria-label="Назад">←</button>
-        <button type="button" class="arrow" data-step="1" aria-label="Вперёд">→</button>
+      <div class="arrows">
+        <button type="button" class="round" data-i="left" data-slider="doc-slider" data-step="-1" aria-label="Назад"></button>
+        <button type="button" class="round" data-i="right" data-slider="doc-slider" data-step="1" aria-label="Вперёд"></button>
       </div>
     </div>
-    <div class="slider" id="doc-slider" style="margin-top:28px"></div>
+    <div class="slider" id="doc-slider"></div>
   </div>
 </section>
 
-<!-- 5. Как это работает -->
-<section id="how" class="sec">
+<!-- Как это работает -->
+<section class="sec" id="how">
   <div class="wrap">
-    <h2 class="h2">Как это работает</h2>
-    <ol class="steps">
-      <li class="card card--static"><span class="num">01</span><span class="h3">Заявка</span><span class="txt">Бесплатно, ответим за день</span></li>
-      <li class="card card--static"><span class="num">02</span><span class="h3">Подбор клиники</span><span class="txt">Переведём документы, получим ответ врачей</span></li>
-      <li class="card card--static"><span class="num">03</span><span class="h3">Поездка</span><span class="txt">Виза, билеты, жильё, трансфер</span></li>
-      <li class="card card--static"><span class="num">04</span><span class="h3">Лечение</span><span class="txt">Переводчик и менеджер рядом</span></li>
-      <li class="card card--static"><span class="num">05</span><span class="h3">Дома</span><span class="txt">Выписка на русском, остаёмся на связи</span></li>
+    <h2 class="h2 sec-head">Как это работает</h2>
+    <ol class="grid3">
+      <li class="card card--line step"><span class="step__n">01</span><span class="t24 step__t">Заявка</span><span class="body">Бесплатно, ответим за день</span></li>
+      <li class="card card--line step"><span class="step__n">02</span><span class="t24 step__t">Подбор клиник</span><span class="body">Переведём документы, получим ответ врачей</span></li>
+      <li class="card card--line step"><span class="step__n">03</span><span class="t24 step__t">Поездка</span><span class="body">Визы, билеты, жильё, трансфер</span></li>
+      <li class="card card--line step"><span class="step__n">04</span><span class="t24 step__t">Лечение</span><span class="body">Переводчик и менеджер рядом</span></li>
+      <li class="card card--line step"><span class="step__n">05</span><span class="t24 step__t">Дома</span><span class="body">Выписка на русском, остаёмся на связи</span></li>
+      <li class="card card--grey step step--cta">
+        <span class="t24">Два договора</span><span class="body">Один нам за сервис по смете, второй напрямую с клиникой за лечение</span>
+        <button type="button" class="btn btn--line btn--block" data-note="Вопрос про договоры и оплату">Написать</button>
+      </li>
     </ol>
-    <div class="money">
-      <b>Два договора — честные деньги</b>
-      <span class="txt" style="font-size:16px">Нам — за сервис, по смете</span>
-      <span class="txt" style="font-size:16px">Клинике — за лечение, напрямую</span>
-    </div>
   </div>
 </section>
 
 <!-- Партнёры -->
-<section id="partners" class="sec alt">
+<section class="sec sec--grey" id="partners">
   <div class="wrap">
-    <h2 class="h2">Партнёры</h2>
-    <p class="sub" style="margin-top:8px">Помогают сделать поездку спокойной</p>
-    <div class="partners">
-      <div><p class="partners__cat">Туроператоры</p><div class="ph plogo">[Логотип]</div><div class="ph plogo">[Логотип]</div></div>
-      <div><p class="partners__cat">Страховые</p><div class="ph plogo">[Логотип]</div><div class="ph plogo">[Логотип]</div></div>
-      <div><p class="partners__cat">Отели</p><div class="ph plogo">[Логотип]</div><div class="ph plogo">[Логотип]</div></div>
-      <div><p class="partners__cat">Визовые агентства</p><div class="ph plogo">[Логотип]</div><div class="ph plogo">[Логотип]</div></div>
+    <div class="sec-head"><h2 class="h2">Партнёры</h2><p class="lead">Помогают сделать поездку спокойной</p></div>
+    <div class="grid4">
+      <div class="plogo"><span>логотип</span></div><div class="plogo"><span>логотип</span></div><div class="plogo"><span>логотип</span></div><div class="plogo"><span>логотип</span></div>
+      <div class="plogo"><span>логотип</span></div><div class="plogo"><span>логотип</span></div><div class="plogo"><span>логотип</span></div><div class="plogo"><span>логотип</span></div>
     </div>
   </div>
 </section>
 
-<!-- 6. Почему мы -->
-<section id="why" class="sec">
+<!-- Почему с нами спокойно -->
+<section class="sec" id="why">
   <div class="wrap">
-    <h2 class="h2">Почему с нами спокойно</h2>
-    <div class="grid" style="margin-top:32px">
-      <div class="card card--static"><span class="h3">Без наценок</span><span class="txt">Лечение оплачиваете клинике</span></div>
-      <div class="card card--static"><span class="h3">Один менеджер</span><span class="txt">От заявки до возвращения</span></div>
-      <div class="card card--static"><span class="h3">Без языка</span><span class="txt">Переводчик на каждом приёме</span></div>
-      <div class="card card--static"><span class="h3">Только топ-клиники</span><span class="txt">Университетские госбольницы</span></div>
+    <h2 class="h2 sec-head">Почему с нами спокойно</h2>
+    <div class="grid4">
+      <div class="card card--line" style="min-height:143px"><span class="t20">Без наценок</span><span class="body">Лечение оплачиваете клинике</span></div>
+      <div class="card card--line" style="min-height:143px"><span class="t20">Один менеджер</span><span class="body">От заявки до возвращения</span></div>
+      <div class="card card--line" style="min-height:143px"><span class="t20">Без языка</span><span class="body">Переводчик на каждом приёме</span></div>
+      <div class="card card--line" style="min-height:143px"><span class="t20">Только топ-клиники</span><span class="body">Университетские госбольницы</span></div>
     </div>
   </div>
 </section>
 
 <!-- Истории клиентов -->
-<section id="stories" class="sec alt">
+<section class="sec sec--grey" id="stories">
   <div class="wrap">
-    <div class="row-head">
+    <div class="sec-head sec-head--row">
       <h2 class="h2">Истории клиентов</h2>
-      <div class="arrows" data-slider="story-slider">
-        <button type="button" class="arrow" data-step="-1" aria-label="Назад">←</button>
-        <button type="button" class="arrow" data-step="1" aria-label="Вперёд">→</button>
+      <div class="arrows">
+        <button type="button" class="round" data-i="left" data-slider="story-slider" data-step="-1" aria-label="Назад"></button>
+        <button type="button" class="round" data-i="right" data-slider="story-slider" data-step="1" aria-label="Вперёд"></button>
       </div>
     </div>
-    <div class="slider slider--3" id="story-slider" style="margin-top:28px">
-      <article class="card card--static story">
-        <div class="ph story__img">Фото / видео клиента</div>
-        <h3 class="h3">[Имя], [город]</h3>
-        <dl class="story__facts">
-          <dt>Диагноз</dt><dd>[…]</dd>
-          <dt>Клиника</dt><dd>[…]</dd>
-          <dt>Лечение</dt><dd>[N дней]</dd>
-          <dt>Потратили</dt><dd>[… ₽]</dd>
-        </dl>
-        <p class="txt">«[Отзыв в 1–2 строки]»</p>
-      </article>
-      <article class="card card--static story">
-        <div class="ph story__img">Фото / видео клиента</div>
-        <h3 class="h3">[Имя], [город]</h3>
-        <dl class="story__facts">
-          <dt>Диагноз</dt><dd>[…]</dd>
-          <dt>Клиника</dt><dd>[…]</dd>
-          <dt>Лечение</dt><dd>[N дней]</dd>
-          <dt>Потратили</dt><dd>[… ₽]</dd>
-        </dl>
-        <p class="txt">«[Отзыв в 1–2 строки]»</p>
-      </article>
-      <article class="card card--static story">
-        <div class="ph story__img">Фото / видео клиента</div>
-        <h3 class="h3">[Имя], [город]</h3>
-        <dl class="story__facts">
-          <dt>Диагноз</dt><dd>[…]</dd>
-          <dt>Клиника</dt><dd>[…]</dd>
-          <dt>Лечение</dt><dd>[N дней]</dd>
-          <dt>Потратили</dt><dd>[… ₽]</dd>
-        </dl>
-        <p class="txt">«[Отзыв в 1–2 строки]»</p>
-      </article>
-      <article class="card card--static story">
-        <div class="ph story__img">Фото / видео клиента</div>
-        <h3 class="h3">[Имя], [город]</h3>
-        <dl class="story__facts">
-          <dt>Диагноз</dt><dd>[…]</dd>
-          <dt>Клиника</dt><dd>[…]</dd>
-          <dt>Лечение</dt><dd>[N дней]</dd>
-          <dt>Потратили</dt><dd>[… ₽]</dd>
-        </dl>
-        <p class="txt">«[Отзыв в 1–2 строки]»</p>
-      </article>
+    <div class="slider slider--3" id="story-slider">
+      <article class="card story"><div class="ph ph--in">Фото</div><h3 class="t20m">Иван Иванов</h3><p class="meta">Текст отзыва</p></article>
+      <article class="card story"><div class="ph ph--in">Фото</div><h3 class="t20m">Иван Иванов</h3><p class="meta">Текст отзыва</p></article>
+      <article class="card story"><div class="ph ph--in">Фото</div><h3 class="t20m">Иван Иванов</h3><p class="meta">Текст отзыва</p></article>
+      <article class="card story"><div class="ph ph--in">Фото</div><h3 class="t20m">Иван Иванов</h3><p class="meta">Текст отзыва</p></article>
+      <article class="card story"><div class="ph ph--in">Фото</div><h3 class="t20m">Иван Иванов</h3><p class="meta">Текст отзыва</p></article>
+      <article class="card story"><div class="ph ph--in">Фото</div><h3 class="t20m">Иван Иванов</h3><p class="meta">Текст отзыва</p></article>
     </div>
   </div>
 </section>
 
-<!-- 7. Новости -->
-<section id="news" class="sec">
+<!-- Новости -->
+<section class="sec" id="news">
   <div class="wrap">
-    <h2 class="h2">Новости медицины Китая</h2>
-    <div class="grid grid--3" style="margin-top:32px">
-      <article class="card card--static clinic-card"><div class="ph">Обложка</div><div class="clinic-card__body"><span class="txt" style="font-size:13px">4 августа 2026</span><h3 class="h3" style="font-size:18px">Искусственное сердце 90-летнему пациенту</h3></div></article>
-      <article class="card card--static clinic-card"><div class="ph">Обложка</div><div class="clinic-card__body"><span class="txt" style="font-size:13px">31 июля 2026</span><h3 class="h3" style="font-size:18px">Новые препараты доходят до больниц за месяцы</h3></div></article>
-      <article class="card card--static clinic-card"><div class="ph">Обложка</div><div class="clinic-card__body"><span class="txt" style="font-size:13px">31 июля 2026</span><h3 class="h3" style="font-size:18px">Россияне всё чаще едут лечиться в Китай</h3></div></article>
+    <div class="sec-head sec-head--row" style="align-items:center">
+      <h2 class="h2">Новости</h2>
+      <a href="news.html" class="btn" style="min-width:203px">Все новости</a>
+    </div>
+    <div class="grid3" id="news-grid"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec--grey" id="faq">
+  <div class="wrap">
+    <h2 class="h2 sec-head">Ответы на частые вопросы</h2>
+    <div class="faq">
+      <details open><summary>Вы клиника?<span data-i="plus"></span></summary><p class="meta" style="opacity:.8">Нет, мы организуем поездку. Лечит клиника по договору с вами.</p></details>
+      <details><summary>Сколько стоит лечение?<span data-i="plus"></span></summary><p class="meta" style="opacity:.8">Цену называет клиника после изучения документов. Точная — после осмотра на месте.</p></details>
+      <details><summary>Как платить?<span data-i="plus"></span></summary><p class="meta" style="opacity:.8">Нам — за сервис по смете. Клинике — за лечение, напрямую.</p></details>
+      <details><summary>Нужен английский или китайский?<span data-i="plus"></span></summary><p class="meta" style="opacity:.8">Нет, переводчик с вами на всех этапах.</p></details>
+      <details><summary>Как отправить документы?<span data-i="plus"></span></summary><p class="meta" style="opacity:.8">После заявки пришлём защищённую ссылку.</p></details>
     </div>
   </div>
 </section>
 
-<!-- 8. FAQ -->
-<section id="faq" class="sec alt">
-  <div class="wrap faq">
-    <h2 class="h2">Вопросы</h2>
-    <div style="margin-top:16px">
-      <details open><summary>Вы клиника?</summary><p class="txt">Нет, мы организуем поездку. Лечит клиника по договору с вами.</p></details>
-      <details><summary>Сколько стоит лечение?</summary><p class="txt">Цену называет клиника после изучения документов. Точная — после осмотра на месте.</p></details>
-      <details><summary>Как платить?</summary><p class="txt">Нам — за сервис по смете. Клинике — за лечение, напрямую.</p></details>
-      <details><summary>Нужен английский или китайский?</summary><p class="txt">Нет, переводчик с вами на всех этапах.</p></details>
-      <details><summary>Как отправить документы?</summary><p class="txt">После заявки пришлём защищённую ссылку.</p></details>
-    </div>
-  </div>
-</section>
-
-<!-- 9. Форма -->
-<section id="lead" class="sec">
+<!-- Форма -->
+<section class="sec" id="lead">
   <div class="wrap lead-in">
     <div class="lead-in__text">
-      <h2 class="h2">Оставьте заявку</h2>
-      <p class="sub">Консультация бесплатная. Ответим в течение дня.</p>
-      <a href="tel:+79039999134" class="phone" style="font-size:20px;margin-top:12px;display:inline-flex;min-height:44px;align-items:center">+7 903 999-91-34</a>
+      <div><h2 class="h2">Оставьте заявку</h2><p class="lead">Консультация бесплатная. Ответим в течение дня.</p></div>
+      <a href="tel:+79039999134" class="lead-in__phone">+7 903 999-91-34</a>
     </div>
     <form class="form" id="lead-form" novalidate>
-      <div class="form-fields">
-        <div class="chosen" id="chosen"><span>Вы выбрали: <b id="chosen-text"></b></span><button type="button" id="chosen-clear">Сбросить</button></div>
-        <label for="f-name" class="sr">Имя</label>
-        <input id="f-name" class="inp" type="text" placeholder="Имя" autocomplete="given-name">
-        <label for="f-contact" class="sr">Телефон или мессенджер</label>
-        <input id="f-contact" class="inp" type="text" placeholder="Телефон, WhatsApp или Telegram" autocomplete="tel">
-        <label for="f-dir" class="sr">Направление</label>
-        <select id="f-dir" class="inp">
-          <option value="">Направление — не знаю, нужна консультация</option>
-          <option>Стоматология</option>
-          <option>Стоматология / эстетика</option>
-          <option>Пластическая хирургия</option>
-          <option>Косметология</option>
-          <option>Чекап</option>
-          <option>Онкология</option>
-          <option>Сердце / мозг</option>
-          <option>Ортопедия</option>
-          <option>Лечение заболевания</option>
-          <option>Срочный случай</option>
-          <option>Другое</option>
-        </select>
-        <label class="consent"><input type="checkbox" id="f-agree"> <span>Согласен с <a href="#lead">обработкой данных</a> и <a href="#lead">офертой</a></span></label>
-        <p class="form-err" id="form-err" role="alert">Заполните имя, контакт и отметьте согласие</p>
-        <button type="submit" class="btn" style="width:100%;min-height:56px">Отправить</button>
+      <div class="chosen"><span>Вы выбрали: <b></b></span><button type="button">Сбросить</button></div>
+      <div class="fields">
+        <label class="sr-only" for="f-name" hidden>Имя</label>
+        <input class="inp" id="f-name" type="text" placeholder="Имя" autocomplete="given-name" required aria-label="Имя">
+        <input class="inp" id="f-contact" type="text" placeholder="Телефон, Whatsapp или Telegram" autocomplete="tel" required aria-label="Телефон, Whatsapp или Telegram">
+        <div class="sel">
+          <select class="inp" id="f-dir" aria-label="Направление">
+            <option value="">Выберите направление</option>
+            <option>Стоматология</option><option>Стоматология / эстетика</option><option>Пластическая хирургия</option><option>Косметология</option>
+            <option>Онкология</option><option>Кардиология и нейрохирургия</option><option>Чекап</option><option>Ортопедия</option>
+            <option>Лечение заболевания</option><option>Срочный случай</option><option>Другое</option>
+          </select>
+          <span data-i="caret"></span>
+        </div>
+        <label class="agree"><input type="checkbox" required> <span>Согласен с <a href="doc.html?d=policy">обработкой данных</a> и <a href="doc.html?d=offer">офертой</a></span></label>
       </div>
+      <p class="ferr" role="alert">Заполните имя, контакт и отметьте согласие</p>
+      <button type="submit" class="btn btn--block">Отправить заявку</button>
       <div class="thanks" role="status">
-        <h3 class="h3" style="font-size:26px">Спасибо, заявка отправлена</h3>
-        <p class="txt" style="font-size:16px">Менеджер свяжется с вами в течение рабочего дня.</p>
-        <button type="button" class="btn btn--ghost" id="again">Отправить ещё одну</button>
+        <span class="t24">Спасибо, заявка отправлена</span>
+        <span class="body">Менеджер свяжется с вами в течение рабочего дня.</span>
+        <button type="button" class="btn btn--line again">Отправить ещё одну</button>
       </div>
     </form>
   </div>
 </section>
 </main>
 
-<footer class="ftr">
-  <div class="wrap">
-    <div class="ftr__top">
-      <span class="logo" style="color:#fff">SILKWAY MED</span>
-      <nav class="ftr__nav" aria-label="Навигация в футере">
-        <a href="#directions">Направления</a><a href="#clinics">Клиники</a><a href="#how">Как это работает</a><a href="#news">Новости</a>
-      </nav>
-      <div style="display:flex;flex-direction:column;gap:6px;font-size:14px">
-        <a href="tel:+79039999134" style="color:#fff;font-weight:600;font-size:18px">+7 903 999-91-34</a>
-        <a href="mailto:hello@silkwaymed.ru">hello@silkwaymed.ru</a>
-      </div>
-    </div>
-    <p class="ftr__warn">Имеются противопоказания. Необходима консультация специалиста.</p>
-    <div class="ftr__legal">
-      <p>© 2026 ООО «Глобал Трафик» · ИНН 5403091377 · ОГРН 1265400004726</p>
-      <p style="display:flex;gap:16px"><a href="#top">Политика</a><a href="#top">Согласие</a><a href="#top">Оферта</a></p>
-    </div>
-  </div>
-</footer>
-
+<div id="ftr"></div>
 <div class="proto" aria-hidden="true">ПРОТОТИП</div>
 <script src="data.js"></script>
 <script src="app.js"></script>
