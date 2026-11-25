@@ -300,7 +300,7 @@ canvas#pad{width:100%;aspect-ratio:1;max-width:100%;background:var(--surface-2);
 <script>
 /* ---------- Data ---------- */
 // Transcription follows the school textbook (Mega Language School): ee, aw, er, eu, bp, dt; mid tone unmarked.
-const SEED_VER = 2;
+const SEED_VER = 3;
 const SEED = [
  ['Урок 1',[
  ['ผม / ฉัน','phǒm / chǎn','я, меня','I / me','word','ผม говорят мужчины, ฉัน — женщины'],
@@ -308,7 +308,7 @@ const SEED = [
  ['เขา','khǎo','он, его','He / him','word'],
  ['เธอ','ther','она, её','She / her','word','В разговоре про женщину тоже часто говорят เขา'],
  ['เรา','rao','мы, нас','We / us','word'],
- ['พวกเขา','phûak-khǎo','они, их','They / them','word'],
+ ['พวกเขา','phûuak-khǎo','они, их','They / them','word'],
  ['มัน','man','оно, это','It','word'],
  ['สบาย','sà-baai','хорошо, комфортно','Fine','word'],
  ['ไม่สบาย','mâi-sà-baai','болеть, нездоровится','Sick','word','Дословно «не хорошо». Ещё говорят ป่วย (bpùuay)'],
@@ -377,7 +377,7 @@ const SEED = [
  ['รัก','rák','любить','Love','word'],
  ['นอน','nawn','спать, лежать','Sleep','word'],
  ['พูด','phûud','говорить','Speak','word'],
- ['ว่ายน้ำ','wâai-náam','плавать','Swim','word','น้ำ (náam) — вода'],
+ ['ว่ายน้ำ','wâai-nám','плавать','Swim','word','น้ำ (nám) — вода'],
  ['นั่ง','nâng','сидеть','Sit','word'],
  ['รอ','raw','ждать','Wait','word'],
  ['เข้าใจ','khâo-jai','понимать','Understand','word'],
@@ -385,6 +385,51 @@ const SEED = [
  ['ดู','duu','смотреть','Watch / look','word'],
  ['เห็น','hěn','видеть','See','word'],
  ['เรียน','riian','учиться, изучать','Study','word'],
+ ]],
+ ['Предметы и места',[
+ ['หนังสือ','nǎng-sěuu','книга','Book','word'],
+ ['มอเตอร์ไซค์','maw-dter-sai','мотобайк','Motorbike','word'],
+ ['รถ / รถยนต์','rót / rót-yon','машина','Car','word','В речи обычно просто รถ'],
+ ['ขับ','khàb','водить, вести (машину)','Drive','word','ขับรถ (khàb rót) — водить машину'],
+ ['ขี่','khèe','ездить верхом (на байке, слоне)','Ride','word','ขี่มอเตอร์ไซค์ — ездить на байке'],
+ ['อาหาร','aa-hǎan','еда','Food','word'],
+ ['กาแฟ','gaa-faae','кофе','Coffee','word'],
+ ['ชา','chaa','чай','Tea','word'],
+ ['น้ำ','nám','вода','Water','word'],
+ ['ภาษา','phaa-sǎa','язык','Language','word'],
+ ['ภาษาไทย','phaa-sǎa thai','тайский язык','Thai language','word'],
+ ['ภาษาอังกฤษ','phaa-sǎa ang-grìd','английский язык','English language','word'],
+ ['ประเทศไทย','bprà-thâed thai','Таиланд','Thailand','word'],
+ ['ประเทศอังกฤษ','bprà-thâed ang-grìd','Англия','England','word'],
+ ['ที่นั่น','thêe-nân','там','There','word'],
+ ['กับ','gàb','с, вместе с','With','word'],
+ ['และ','láe','и','And','word'],
+ ['รู้','rúu','знать (факт)','Know (fact, knowledge)','word'],
+ ['รู้จัก','rúu-jàk','знать, быть знакомым (с человеком, местом)','Know (person, place)','word'],
+ ['อ่าน','àan','читать','Read','word'],
+ ['คนเดียว','khon-diiao','одна, в одиночку','Alone','word'],
+ ['ด้วยกัน','dûuai-gan','вместе','Together','word'],
+ ['พวกเขากินพิซซ่า','phûuak-khǎo gin pizza','Они едят пиццу','They eat pizza','phrase','Порядок как в английском: кто + действие + что'],
+ ['ฉันดื่มน้ำ','chǎn dèuum nám','Я пью воду','I drink some water','phrase'],
+ ['เธอทำอาหาร','ther tham-aa-hǎan','Она готовит','She cooks','phrase'],
+ ['คุณมาภูเก็ต','khun maa phuu-gèd','Ты приезжаешь на Пхукет','You come to Phuket','phrase'],
+ ['ฉันอยู่ที่ภูเก็ต','chǎn yùu thêe phuu-gèd','Я живу на Пхукете','I stay in Phuket','phrase'],
+ ['ฉันชอบคุณ','chǎn châwp khun','Ты мне нравишься','I like you','phrase'],
+ ['ฉันเข้าใจคุณ','chǎn khâo-jai khun','Я тебя понимаю','I understand you','phrase'],
+ ['พวกเขารอคุณที่นี่','phûuak-khǎo raw khun thêe-nêe','Они ждут тебя здесь','They wait for you here','phrase'],
+ ['คุณชอบทำอาหาร','khun châwp tham-aa-hǎan','Ты любишь готовить','You like to cook','phrase'],
+ ['เธอขับรถไปทำงาน','ther khàb rót bpai tham-ngaan','Она ездит на работу на машине','She drives to work','phrase'],
+ ['เขาขี่ช้างที่กะตะ','khǎo khèe cháang thêe gà-dtà','Он катается на слоне в Кате','He rides an elephant in Kata','phrase','ช้าง (cháang) — слон'],
+ ]],
+ ['Хочу и могу',[
+ ['อยาก (จะ)','yàak (jà)','хотеть + глагол','Would like to + verb','word','อยากกิน — хочу есть'],
+ ['อยากได้','yàak-dâi','хотеть + предмет','Would like + noun','word','อยากได้กาแฟ — хочу кофе'],
+ ['ต้องการ','dtâwng-gaan','хотеть, нуждаться (+ глагол или предмет)','Want + verb / noun','word','Звучит официальнее, чем อยาก'],
+ ['เอา','ao','брать, «буду» (+ предмет)','Want + noun (I\'ll take)','word','เอากาแฟ — мне кофе'],
+ ['ได้','dâi','мочь (ставится после глагола)','Can','word','ไปได้ — могу пойти'],
+ ['ฉันไปได้','chǎn bpai dâi','Я могу пойти','I can go','phrase'],
+ ['พวกเราดื่มกาแฟได้','phûuak-rao dèuum gaa-faae dâi','Мы можем выпить кофе','We can drink coffee','phrase'],
+ ['คุณทำมันได้','khun tham man dâi','У тебя получится','You can do it','phrase'],
  ]],
 ].flatMap(([lesson,rows])=>rows.map(r=>({th:r[0],tr:r[1],ru:r[2],en:r[3],type:r[4],note:r[5]||'',lesson})))
  .map((w,i)=>({id:'w'+(i+1),...w}));
